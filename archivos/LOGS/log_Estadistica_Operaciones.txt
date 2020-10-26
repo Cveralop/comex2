@@ -1,0 +1,2 @@
+Table	Op	Msg_type	Msg_text
+comercioexterior.estadistica_operaciones	optimize	status	OK
