@@ -72,6 +72,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_entdoc = 10;
+$pageNum_entdoc = 0;
+if (isset($_GET['pageNum_entdoc'])) {
+  $pageNum_entdoc = $_GET['pageNum_entdoc'];
+}
+$startRow_entdoc = $pageNum_entdoc * $maxRows_entdoc;
 
 $colname_entdoc = "1";
 if (isset($_GET['nro_operacion'])) {
@@ -87,9 +94,36 @@ if (isset($_GET['estado_doc'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_entdoc = sprintf("SELECT * FROM opcci nolock WHERE nro_operacion = %s and evento = %s and estado_doc = %s ORDER BY id DESC", GetSQLValueString($colname_entdoc, "text"),GetSQLValueString($colname1_entdoc, "text"),GetSQLValueString($colname2_entdoc, "text"));
-$entdoc = mysqli_query($comercioexterior, $query_entdoc) or die(mysqli_error($comercioexterior));
+$query_limit_altadocdis = sprintf("%s LIMIT %d, %d", $query_entdoc, $startRow_entdoc, $maxRows_entdoc);
+$entdoc = mysqli_query($comercioexterior, $query_limit_altadocdis) or die(mysqli_error($comercioexterior));
 $row_entdoc = mysqli_fetch_assoc($entdoc);
 $totalRows_entdoc = mysqli_num_rows($entdoc);
+
+//AGREGADO 1.2 para total de registros
+if (isset($_GET['totalRows_entdoc'])) {
+  $totalRows_entdoc = $_GET['totalRows_entdoc'];
+} else {
+  $all_entdoc = mysqli_query($comercioexterior, $query_entdoc);
+  $totalRows_entdoc = mysqli_num_rows($all_entdoc);
+}
+$totalPages_entdoc = ceil($totalRows_entdoc/$maxRows_entdoc)-1;
+
+$queryString_entdoc = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_entdoc") == false && 
+        stristr($param, "totalRows_entdoc") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_altadocdis = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_entdoc = sprintf("&totalRows_entdoc=%d%s", $totalRows_entdoc, $queryString_entdoc);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
