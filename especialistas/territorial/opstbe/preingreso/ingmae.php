@@ -56,6 +56,7 @@ $query_ingape = sprintf("SELECT * FROM cliente nolock WHERE rut_cliente LIKE '%s
 $query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
 $ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
+
 if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = $_GET['totalRows_ingape'];
 } else {
@@ -78,6 +79,7 @@ $query_ingste = sprintf("SELECT * FROM opste nolock WHERE nro_operacion LIKE '%%
 $query_limit_ingste = sprintf("%s LIMIT %d, %d", $query_ingste, $startRow_ingste, $maxRows_ingste);
 $ingste = mysqli_query($comercioexterior, $query_limit_ingste) or die(mysqli_error($comercioexterior));
 $row_ingste = mysqli_fetch_assoc($ingste);
+
 if (isset($_GET['totalRows_ingste'])) {
   $totalRows_ingste = $_GET['totalRows_ingste'];
 } else {
@@ -100,6 +102,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_ingste = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -115,7 +118,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingste = sprintf("&totalRows_ingste=%d%s", $totalRows_ingste, $queryString_ingste);
-$queryString_ingvarios = "";
+
+//No se Utiliza
+/*$queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
   $newParams = array();
@@ -129,7 +134,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);*/
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

@@ -244,7 +244,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Auto. Espe.:</td>
-    <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['autorizacion_especilista']); ?></td>
+    <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['autorizacion_especialista']); ?></td>
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Resp. Excepci&oacute;n:</td>

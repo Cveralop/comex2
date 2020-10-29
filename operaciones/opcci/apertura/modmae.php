@@ -81,6 +81,7 @@ if (isset($_GET['pageNum_modificacion'])) {
   $pageNum_modificacion = $_GET['pageNum_modificacion'];
 }
 $startRow_modificacion = $pageNum_modificacion * $maxRows_modificacion;
+
 $colname2_modificacion = "1";
 if (isset($_GET['nro_operacion'])) {
   $colname2_modificacion = $_GET['nro_operacion'];
@@ -98,6 +99,7 @@ $query_modificacion = sprintf("SELECT * FROM opcci WHERE rut_cliente LIKE %s and
 $query_limit_modificacion = sprintf("%s LIMIT %d, %d", $query_modificacion, $startRow_modificacion, $maxRows_modificacion);
 $modificacion = mysqli_query($comercioexterior, $query_limit_modificacion) or die(mysqli_error());
 $row_modificacion = mysqli_fetch_assoc($modificacion);
+
 if (isset($_GET['totalRows_modificacion'])) {
   $totalRows_modificacion = $_GET['totalRows_modificacion'];
 } else {
@@ -105,6 +107,7 @@ if (isset($_GET['totalRows_modificacion'])) {
   $totalRows_modificacion = mysqli_num_rows($all_modificacion);
 }
 $totalPages_modificacion = ceil($totalRows_modificacion/$maxRows_modificacion)-1;
+
 $queryString_modificacion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);

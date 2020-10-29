@@ -77,6 +77,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+
+$maxRows_pagareparagua = 10;
+$pageNum_opcce = 0;
+if (isset($_GET['pageNum_pagareparagua'])) {
+  $pageNum_opcce = $_GET['pageNum_pagareparagua'];
+}
+$startRow_pagareparagua = $pageNum_opcce * $maxRows_pagareparagua;
 
 $colname_pagareparagua = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -84,7 +92,8 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_pagareparagua = sprintf("SELECT * FROM convenioweb nolock WHERE rut_cliente = %s ORDER BY id DESC", GetSQLValueString($colname_pagareparagua, "text"));
-$pagareparagua = mysql_query($query_pagareparagua, $comercioexterior) or die(mysqli_error());
+$query_limit_opcce = sprintf("%s LIMIT %d, %d", $query_pagareparagua, $startRow_pagareparagua, $maxRows_pagareparagua);
+$pagareparagua = mysqli_query($comercioexterior, $query_pagareparagua) or die(mysqli_error($comercioexterior));
 $row_pagareparagua = mysqli_fetch_assoc($pagareparagua);
 $totalRows_pagareparagua = mysqli_num_rows($pagareparagua);
 ?>
@@ -205,12 +214,12 @@ Registros del <strong><?php echo ($startRow_pagareparagua + 1) ?></strong> al <s
 <br>
 <table width="95%"  border="0" align="center">
   <tr>
-    <td align="right" valign="middle"><a href="../../gerenciaregional.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Imagen4','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen4" width="80" height="25" border="0"></a></td>
+    <td align="right" valign="middle"><a href="../../redsuc/redsuc.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Imagen4','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen4" width="80" height="25" border="0"></a></td>
   </tr>
 </table>
 </body>
 </html>
 <?php
 mysqli_free_result($pagareparagua);
-mysqli_free_result($pagareconvenio);
+//mysqli_free_result($pagareconvenio);
 ?>

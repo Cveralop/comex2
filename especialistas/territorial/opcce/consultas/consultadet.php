@@ -52,7 +52,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcce  WHERE id = $recordID", $colname_conrut);
+$query_DetailRS1 = sprintf("SELECT * FROM opcce  WHERE id = $recordID",$colname_DetailRS1); //$colname_conrut
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -63,7 +63,8 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -223,7 +224,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right" valign="middle">Banco Destino: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['banco_destino']; ?> </td>
     <td align="right" valign="middle">Forward:</td>
-    <td align="center" valign="middle"><?php echo $row_DetailRS1['forward']; ?></td>
+    <td align="center" valign="middle"><?php // echo $row_DetailRS1['forward']; //No aparece en Tabla opcce ?></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Currier:</td>

@@ -174,7 +174,7 @@ $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($
 $row_colores = mysqli_fetch_assoc($colores);
 $totalRows_colores = mysqli_num_rows($colores);
 ?>
-<?php $_SESSION['espe_curse']=$row_DetailRS1['especialista_curse']; //Error de Session ?>
+<?php //$_SESSION['espe_curse']=$row_DetailRS1['especialista_curse']; //Error de Session ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

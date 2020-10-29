@@ -103,11 +103,13 @@ $colname_DetailRS1 = "-1";
 if (isset($_GET['recordID'])) {
   $colname_DetailRS1 = $_GET['recordID'];
 }
-mysql_select_db($database_basecomercial, $basecomercial);
+mysqli_select_db($basecomercial, $database_basecomercial);
 $query_DetailRS1 = sprintf("SELECT * FROM base_comercial  WHERE rut_cliente = %s", GetSQLValueString($colname_DetailRS1, "text"));
 $DetailRS1 = mysqli_query($basecomercial, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
+//var_dump($row_DetailRS1); die();
 ?>
 <style type="text/css">
 <!--
@@ -219,7 +221,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Subgerente:</td>
-      <td colspan="3" align="left" valign="middle"><input name="subgerente" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['subgerente']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
+      <td colspan="3" align="left" valign="middle"><input name="subgerente" type="text" class="etiqueta12" value="<?php //echo $row_DetailRS1['subgerente']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Oficina:</td>

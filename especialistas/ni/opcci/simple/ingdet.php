@@ -113,11 +113,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['date_espe'], "date"),
                        GetSQLValueString($_POST['estado_visacion'], "text"),
                        GetSQLValueString($_POST['mandato'], "text"),
-					   GetSQLValueString($_POST['impedido_operar'], "text"),
+					             GetSQLValueString($_POST['impedido_operar'], "text"),
                        GetSQLValueString($_POST['urgente'], "text"),
                        GetSQLValueString($_POST['campana_comex'], "text"),
                        GetSQLValueString($_POST['via_web'], "text"),
-					   GetSQLValueString($_POST['cliente_passport'], "text"));
+					             GetSQLValueString($_POST['cliente_passport'], "text"));
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $Result1 = mysqli_query($comercioexterior, $insertSQL) or die(mysqli_error($comercioexterior));
   $insertGoTo = "impresionsimple.php";
@@ -127,6 +127,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   }
   header(sprintf("Location: %s", $insertGoTo));
 }
+//var_dump($row_DetailRS1); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -243,7 +244,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <tr valign="middle">
       <td align="right">Observaci&oacute;n:</td>
       <td colspan="3" align="left"><span id="sprytextarea1">
-        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo $row_DetailRS1['obs']; ?></textarea>
+        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php //echo $row_DetailRS1['obs']; ?></textarea>
       <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">

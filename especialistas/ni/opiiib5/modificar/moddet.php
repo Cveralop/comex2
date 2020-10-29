@@ -89,7 +89,7 @@ if (isset($_GET['recordID'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_mandato = sprintf("SELECT cliente.* FROM optbc INNER JOIN cliente on optbc.rut_cliente = cliente.rut_cliente WHERE optbc.id = %s", GetSQLValueString($colname_mandato, "text"));
-$mandato = mysql_query($query_mandato, $comercioexterior) or die(mysqli_error());
+$mandato = mysqli_query($comercioexterior, $query_mandato) or die(mysqli_error($comercioexterior));
 $row_mandato = mysqli_fetch_assoc($mandato);
 $totalRows_mandato = mysqli_num_rows($mandato);
 

@@ -217,31 +217,17 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <tr bgcolor="#999999">
     <td align="center" valign="middle"><span class="titulocolumnas">Ver Operaci&oacute;n</span></div></td>
-    <td align="center" valign="middle" class="titulocolumnas">Rut Cliente 
-      </div>
+    <td align="center" valign="middle" class="titulocolumnas">Rut Cliente </div></td>
+    <td align="center" valign="middle" class="titulocolumnas">Nombre Cliente </div></td>
+    <td align="center" valign="middle" class="titulocolumnas">Fecha Ingreso</div></td>
+    <td align="center" valign="middle" class="titulocolumnas">Evento </div></td>
+    <td align="center" valign="middle" class="titulocolumnas">Estado </div></td>
+    <td align="center" valign="middle" class="titulocolumnas">Fecha Curse </div>   
     </td>
-    <td align="center" valign="middle" class="titulocolumnas">Nombre Cliente 
-      </div>
-    </td>
-    <td align="center" valign="middle" class="titulocolumnas">Fecha Ingreso
-      </div>
-    </td>
-    <td align="center" valign="middle" class="titulocolumnas">Evento
-      </div>
-    </td>
-    <td align="center" valign="middle" class="titulocolumnas">Estado
-      </div>
-    </td>
-    <td align="center" valign="middle" class="titulocolumnas">Fecha Curse 
-      </div>      
-      </div>      
-      </div>
-    </td>
-    <td align="center" valign="middle" class="titulocolumnas">Nro Operaci&oacute;n </div>
-    </td>
+
+    <td align="center" valign="middle" class="titulocolumnas">Nro Operaci&oacute;n </div></td>
     <td align="center" valign="middle" class="titulocolumnas">Valuta</td>
-    <td align="center" valign="middle" class="titulocolumnas">Moneda / Monto Apertura 
-      </div>
+    <td align="center" valign="middle" class="titulocolumnas">Moneda / Monto Apertura </div>
     </td>
   </tr>
   <?php do { ?>
@@ -254,7 +240,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="center" valign="middle"><?php echo $row_conrut['estado']; ?></div></td>
     <td align="center" valign="middle"><?php echo $row_conrut['fecha_curse']; ?></div>      </div></td>
     <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['nro_operacion']); ?></span>      </div></td>
-    <td align="center" valign="middle"><?php echo $row_conrut['valuta']; ?></div></td>
+    <td align="center" valign="middle"><?php //echo $row_conrut['valuta']; ?></div></td>
     <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_conrut['monto_operacion'], 2, ',', '.'); ?></strong> </div></td>
   </tr>
   <?php } while ($row_conrut = mysqli_fetch_assoc($conrut)); ?>

@@ -91,7 +91,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM oppre WHERE rut_cliente LIKE %s and (estado_visacion = %s or estado_visacion = %s) and nro_operacion LIKE %s ORDER BY id DESC", GetSQLValueString("%" . $colname_ingape . "%", "text"),GetSQLValueString($colname1_ingape, "text"),GetSQLValueString($colname2_ingape, "text"),GetSQLValueString("%" . $colname3_ingape . "%", "text"));
-$ingape = mysql_query($query_ingape, $comercioexterior) or die(mysqli_error());
+$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);$colname_ingape = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -111,7 +111,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM oppre WHERE rut_cliente LIKE %s and (estado_visacion = %s or estado_visacion = %s) and nro_operacion LIKE %s ORDER BY id DESC", GetSQLValueString($colname_ingape . "%", "text"),GetSQLValueString($colname1_ingape, "text"),GetSQLValueString($colname2_ingape, "text"),GetSQLValueString($colname3_ingape . "%", "text"));
-$ingape = mysql_query($query_ingape, $comercioexterior) or die(mysqli_error());
+$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
 ?>

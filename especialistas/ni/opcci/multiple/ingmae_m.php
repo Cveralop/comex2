@@ -72,6 +72,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+//AGREGADO 1 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingape = 10;
+$pageNum_ingape = 0;
+if (isset($_GET['pageNum_ingape'])) {
+  $pageNum_ingape = $_GET['pageNum_ingape'];
+}
+$startRow_ingape = $pageNum_ingape * $maxRows_ingape;
 
 $colname_ingape = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -79,9 +87,43 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM cliente WHERE rut_cliente = %s", GetSQLValueString($colname_ingape, "text"));
-$ingape = mysql_query($query_ingape, $comercioexterior) or die(mysqli_error());
+$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
+
+//AGREGADO 1.2 para total de registros
+if (isset($_GET['totalRows_ingape'])) {
+  $totalRows_ingape = $_GET['totalRows_ingape'];
+} else {
+  $all_ingape = mysqli_query($comercioexterior, $query_ingape);
+  $totalRows_ingape = mysqli_num_rows($all_ingape);
+}
+$totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
+
+$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRows_opcci=%d%s", $totalRows_ingape, $queryString_ingape);
+
+//AGREGADO 2 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_nrooperacion = 10;
+$pageNum_nrooperacion = 0;
+if (isset($_GET['pageNum_nrooperacion'])) {
+  $pageNum_nrooperacion = $_GET['pageNum_nrooperacion'];
+}
+$startRow_nrooperacion = $pageNum_nrooperacion * $maxRows_nrooperacion;
 
 $colname_nrooperacion = "-1";
 if (isset($_GET['nro_operacion'])) {
@@ -93,9 +135,35 @@ if (isset($_GET['colname1'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_nrooperacion = sprintf("SELECT * FROM opcci nolock WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_nrooperacion, "text"),GetSQLValueString($colname1_nrooperacion, "text"));
-$nrooperacion = mysql_query($query_nrooperacion, $comercioexterior) or die(mysqli_error());
+$nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion) or die(mysqli_error($comercioexterior));
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
 $totalRows_nrooperacion = mysqli_num_rows($nrooperacion);
+
+//AGREGADO 2.2 para total de registros
+if (isset($_GET['totalRows_nrooperacion'])) {
+  $totalRows_nrooperacion = $_GET['totalRows_nrooperacion'];
+} else {
+  $all_nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion);
+  $totalRows_nrooperacion = mysqli_num_rows($all_nrooperacion);
+}
+$totalPages_nrooperacion = ceil($totalRows_nrooperacion/$maxRows_nrooperacion)-1;
+
+$queryString_nrooperacion = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_nrooperacion") == false && 
+        stristr($param, "totalRows_nrooperacion") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_nrooperacion = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_nrooperacion = sprintf("&totalRows_opcci=%d%s", $totalRows_nrooperacion, $queryString_nrooperacion);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -261,15 +329,12 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr valign="middle" bgcolor="#999999">
     <td align="center" class="titulocolumnas">Ingreso Operaciones </div></td>
-    <td align="center" class="titulocolumnas">Nro Operaci&oacute;n </div>
-    </td>
+    <td align="center" class="titulocolumnas">Nro Operaci&oacute;n </div></td>
     <td align="center" class="titulocolumnas">Rut Cliente 
       </div>
     </td>
-    <td align="center" class="titulocolumnas">Nombre Cliente 
-      </div>
-    </td>
-  </tr>
+    <td align="center" class="titulocolumnas">Nombre Cliente</div></td>
+  </tr>  
   <?php do { ?>
     <tr valign="middle">
       <td align="center"><a href="ingdet2.php?recordID=<?php echo $row_nrooperacion['id']; ?>"> <img src="../../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></div></td>
@@ -311,6 +376,7 @@ Registros del <strong><?php echo ($startRow_nrooperacion + 1) ?></strong> al <st
 </table>
 </body>
 </html>
+
 <?php
 mysqli_free_result($ingape);
 mysqli_free_result($nrooperacion);

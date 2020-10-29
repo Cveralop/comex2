@@ -205,10 +205,6 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['especialista']); ?></td>
   </tr>
   <tr valign="middle">
-    <td align="right" valign="middle">Observaciones:</td>
-    <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
-  </tr>
-  <tr valign="middle">
     <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n:</td>
     <td colspan="3" align="left" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_DetailRS1['moneda_operacion']); ?></span> <span class="rojopequeno">/</span> <strong class="respuestacolumna_azul"><?php echo number_format($row_DetailRS1['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
   </tr>
@@ -239,6 +235,13 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <tr valign="middle">
     <td align="right" valign="middle">Motivo Reparo: </td>
     <td colspan="3" align="left" valign="middle"><?php echo strtoupper($row_DetailRS1['reparo_obs']); ?> </td>
+  </tr>
+
+    <tr valign="middle">
+    <td align="right" valign="middle">Observaciones:</td>
+    <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
+    </tr>
+
   </tr>
 </table>
 <br>

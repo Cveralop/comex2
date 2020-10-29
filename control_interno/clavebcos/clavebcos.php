@@ -93,7 +93,7 @@ if (isset($_GET['pais'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_clavebcos = sprintf("SELECT * FROM claves_banco nolock WHERE nombre_banco LIKE %s and codigo_swift LIKE %s and pais LIKE %s ORDER BY nombre_banco ASC", GetSQLValueString($colname_clavebcos . "%", "text"), GetSQLValueString($colname1_clavebcos . "%", "text"), GetSQLValueString($colname2_clavebcos . "%", "text"));
-$query_limit_clavebcos = sprintf("%s LIMIT %d, %d", $query_clavebcos, $startRow_clavebcos, $maxRows_clavebcos);
+$query_limit_clavebcos = sprintf("%s LIMIT %d, %d", $query_clavebcos,$colname2_clavebcos,$colname1_clavebcos,$colname_clavebcos); //$startRow_clavebcos, $maxRows_clavebcos
 $clavebcos = mysqli_query($comercioexterior, $query_limit_clavebcos) or die(mysqli_error($comercioexterior));
 $row_clavebcos = mysqli_fetch_assoc($clavebcos);
 $totalRows_clavebcos = mysqli_num_rows($clavebcos);
@@ -295,7 +295,8 @@ $totalRows_clavebcos = mysqli_num_rows($clavebcos);
       </tr>
     </table>
     <br>
-    Registros del <strong><?php echo ($startRow_clavebcos + 1) ?></strong> al <strong><?php echo min($startRow_clavebcos + $maxRows_clavebcos, $totalRows_clavebcos) ?></strong> de un total de <strong><?php echo $totalRows_clavebcos ?></strong>
+    Registros del <strong><?php //echo ($startRow_clavebcos + 1) ?></strong> al <strong><?php //echo min($startRow_clavebcos + $maxRows_clavebcos, $totalRows_clavebcos) ?></strong> de un total de <strong><?php echo $totalRows_clavebcos ?></strong>
+    Registros del <strong><?php echo ($colname1_clavebcos + 1) ?></strong> al <strong><?php echo min($colname1_clavebcos + $colname2_clavebcos, $totalRows_clavebcos) ?></strong> de un total de <strong><?php echo $totalRows_clavebcos ?></strong>
   <?php } // Show if recordset not empty 
   ?> <br>
   <br>

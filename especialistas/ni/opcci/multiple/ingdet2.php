@@ -89,7 +89,7 @@ if (isset($_GET['recordID'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_mandato = sprintf("SELECT cliente.* FROM opcci INNER JOIN cliente on opcci.rut_cliente = cliente.rut_cliente WHERE opcci.id = %s", GetSQLValueString($colname_mandato, "text"));
-$mandato = mysql_query($query_mandato, $comercioexterior) or die(mysqli_error());
+$mandato = mysqli_query($comercioexterior, $query_mandato) or die(mysqli_error($comercioexterior));
 $row_mandato = mysqli_fetch_assoc($mandato);
 $totalRows_mandato = mysqli_num_rows($mandato);
 
@@ -100,7 +100,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO opcci (nro_folio, id, rut_cliente, nombre_cliente, ejecutivo_cuenta, ejecutivo_ni, especialista_ni, nombre_oficina, fecha_ingreso, date_ingreso, evento, nro_operacion, obs, especialista_curse, territorial, moneda_operacion, monto_operacion, date_preingreso, date_espe, estado_visacion, mandato, urgente, cliente_passport) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['nro_folio'], "text"),
-					   GetSQLValueString($_POST['id'], "int"),
+					             GetSQLValueString($_POST['id'], "int"),
                        GetSQLValueString($_POST['rut_cliente'], "text"),
                        GetSQLValueString($_POST['nombre_cliente'], "text"),
                        GetSQLValueString($_POST['ejecutivo_cuenta'], "text"),
@@ -121,14 +121,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['estado_visacion'], "text"),
                        GetSQLValueString($_POST['mandato'], "text"),
                        GetSQLValueString($_POST['urgente'], "text"),
-					   GetSQLValueString($_POST['cliente_passport'], "text"));
+					             GetSQLValueString($_POST['cliente_passport'], "text"));
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $Result1 = mysqli_query($comercioexterior, $insertSQL) or die(mysqli_error($comercioexterior));
   $insertGoTo = "ingdet2.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
-  }
+  }  
   header(sprintf("Location: %s", $insertGoTo));
 }
 ?>
@@ -258,6 +258,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo $row_DetailRS1['obs']; ?></textarea>
       <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
     </tr>
+
     <tr valign="middle">
       <td align="right">Moneda / <br> 
       Monto Operaci&oacute;n:</td>
@@ -278,19 +279,16 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
             <option value="JPY">JPY</option>
         </select> 
           <span class="rojopequeno">/</span>        
-          <input name="monto_operacion" type="text" class="etiqueta12" value="0.00" size="20" maxlength="20">
-      </div></td>
+          <input name="monto_operacion" type="text" class="etiqueta12" value="0.00" size="20" maxlength="20"></div></td>
       <td align="right">Urgente:</div></td>
       <td align="center">
         <label>
-        <input type="radio" name="urgente" value="Si">
-  Si</label>
-          <label>
-          <input name="urgente" type="radio" value="No" checked>
-    No</label>
-          <br>
-        </td>
+          <input type="radio" name="urgente" value="Si" checked>Si</label>
+        <label>
+          <input name="urgente" type="radio" value="No" checked>No</label><br>
+      </td>
     </tr>
+    
     <tr valign="middle">
       <td align="right">Especialista Curse:</td>
       <td align="center"><span id="sprytextfield1">
@@ -319,7 +317,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <input name="ejecutivo_ni" type="hidden" id="ejecutivo_ni" value="<?php echo $row_mandato['ejecutivo']; ?>">
   <input name="especialista_ni" type="hidden" id="especialista_ni" value="<?php echo $row_mandato['especialista']; ?>">
   <input name="nombre_oficina" type="hidden" id="nombre_oficina" value="<?php echo $row_mandato['oficina']; ?>">
-</form>
+ </form>
 <br>
 <table width="95%"  border="0" align="center">
   <tr>

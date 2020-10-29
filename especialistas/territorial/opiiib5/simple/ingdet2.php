@@ -77,7 +77,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
-  $insertSQL = sprintf("INSERT INTO optbc (rut_cliente, nombre_cliente, ejecutivo_cuenta, ejecutivo_ni, especialista_ni, nombre_oficina, fecha_ingreso, date_ingreso, evento, nro_operacion, obs, especialista_curse, territorial, moneda_operacion, monto_operacion, date_preingreso, date_espe, mandato, urgente, nro_folio, client_passport) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO optbc (rut_cliente, nombre_cliente, ejecutivo_cuenta, ejecutivo_ni, especialista_ni, nombre_oficina, fecha_ingreso, date_ingreso, evento, nro_operacion, obs, especialista_curse, territorial, moneda_operacion, monto_operacion, date_preingreso, date_espe, mandato, urgente, nro_folio, cliente_passport) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['rut_cliente'], "text"),
                        GetSQLValueString($_POST['nombre_cliente'], "text"),
                        GetSQLValueString($_POST['ejecutivo_cuenta'], "text"),
@@ -98,7 +98,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
                        GetSQLValueString($_POST['mandato'], "text"),
                        GetSQLValueString($_POST['urgente'], "text"),
                        GetSQLValueString($_POST['nro_folio'], "int"),
-					   GetSQLValueString($_POST['cliente_passport'], "text"));
+					             GetSQLValueString($_POST['cliente_passport'], "text"));
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $Result1 = mysqli_query($comercioexterior, $insertSQL) or die(mysqli_error($comercioexterior));
   $insertGoTo = "impresionsimple.php";
@@ -131,6 +131,7 @@ if (isset($_GET['totalRows_DetailRS1'])) {
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM optbc INNER JOIN cliente ON optbc.rut_cliente=cliente.rut_cliente WHERE optbc.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);

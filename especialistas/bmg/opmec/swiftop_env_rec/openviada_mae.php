@@ -92,8 +92,9 @@ if (isset($_GET¨['date_fin'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_swift_openviada = sprintf("SELECT * FROM swift_openviada WHERE date_ingreso between %s and %s and rut_ordenante = %s ORDER BY date_ingreso ASC", GetSQLValueString($colname_swift_openviada, "date"),GetSQLValueString($colname1_swift_openviada, "date"),GetSQLValueString($colname2_swift_openviada, "text"));
-$swift_openviada = mysql_query($query_swift_openviada, $comercioexterior) or die(mysqli_error());
+$swift_openviada = mysqli_query($comercioexterior, $query_swift_openviada) or die(mysqli_error($comercioexterior));
 $row_swift_openviada = mysqli_fetch_assoc($swift_openviada);
+$totalRows_swift_openviada = mysqli_num_rows($swift_openviada);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

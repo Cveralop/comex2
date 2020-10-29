@@ -82,7 +82,7 @@ $colname_impoperar = "-1";
 if (isset($_GET['rut_cliente'])) {
   $colname_impoperar = $_GET['rut_cliente'];
 }
-mysql_select_db($database_basecomercial, $basecomercial);
+mysqli_select_db($basecomercial, $database_basecomercial);
 $query_impoperar = sprintf("SELECT * FROM negativefile WHERE rut_cliente = %s", GetSQLValueString($colname_impoperar, "text"));
 $impoperar = mysqli_query($basecomercial, $query_impoperar) or die(mysqli_error());
 $row_impoperar = mysqli_fetch_assoc($impoperar);

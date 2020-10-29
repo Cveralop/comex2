@@ -111,7 +111,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcci WHERE id = $recordID", $colname_ingape);
+$query_DetailRS1 = sprintf("SELECT * FROM opcci WHERE id = $recordID",$colname_DetailRS1); //$colname_ingape
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);

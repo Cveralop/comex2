@@ -133,7 +133,9 @@ $query_DetailRS1 = sprintf("SELECT * FROM carteraopera WHERE id = %s", GetSQLVal
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM carteraopera INNER JOIN cliente ON carteraopera.rut_cliente=cliente.rut_cliente WHERE carteraopera.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
@@ -154,7 +156,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM carteraopera WHERE id = $recordID", $colname_ingcci,$colname1_ingcci);
+$query_DetailRS1 = sprintf("SELECT * FROM carteraopera WHERE id = $recordID",$colname_DetailRS1,$colname1_DetailRS1); //$colname_ingcci,$colname1_ingcci
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);

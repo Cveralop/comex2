@@ -179,9 +179,9 @@ Operacion Ingresada FUERA DE HORARIO
     </td>
   </tr>
   <tr>
-    <td align="center" valign="middle" class="FueraHorario"><?php if ($row_excepciones['plazo'] > 0) { // Show if not first page ?>
+    <td align="center" valign="middle" class="FueraHorario"><?php //if ($row_excepciones['plazo'] > 0) { // Show if not first page ?>
       <span class="FueraHorario">Usted tiene Excepcion(es) Vencida(s) </span>
-    <?php } // Show if not first page ?></td>
+    <?php //} // Show if not first page ?></td>
   </tr>
 </table>
 <br>

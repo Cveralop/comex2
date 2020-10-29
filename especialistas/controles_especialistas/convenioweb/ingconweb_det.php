@@ -82,8 +82,8 @@ if (isset($_SERVER['QUERY_STRING'])) {
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO convenioweb (especialista_curse, date_ingreso, rut_cliente, nombre_cliente, moneda_pagare, monto_pagare, moneda_convenio, monto_convenio, doc_1, doc_2, doc_3, doc_6,  aval_rut_1, aval_nom_1, aval_rut_2, aval_nom_2, aval_rut_3, aval_nom_3, aval_rut_4, aval_nom_4, observacion, obs_reparo, estado, fecha_ingreso, registro_ingreso, sucursal, ultimafecha, producto_cci, producto_cce, producto_pre, producto_mec, producto_cbi, producto_cbe, producto_ste, producto_str, producto_bga, producto_tbc, producto_cex, apo_rut1, apo_rut2, apo_rut3, apo_rut4, apo_nom1, apo_nom2, apo_nom3, apo_nom4, ope_rut1, ope_rut2, ope_rut3, ope_rut4, ope_rut5, ope_rut6, ope_nom1, ope_nom2, ope_nom3, ope_nom4, ope_nom5, ope_nom6, rol1, rol2, rol3, rol4, rol5, rol6) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['especialista_curse'], "text"),
-					   GetSQLValueString($_POST['date_ingreso'], "text"),
-					   GetSQLValueString($_POST['rut_cliente'], "text"),
+					             GetSQLValueString($_POST['date_ingreso'], "text"),
+					             GetSQLValueString($_POST['rut_cliente'], "text"),
                        GetSQLValueString($_POST['nombre_cliente'], "text"),
                        GetSQLValueString($_POST['moneda_pagare'], "text"),
                        GetSQLValueString($_POST['monto_pagare'], "double"),

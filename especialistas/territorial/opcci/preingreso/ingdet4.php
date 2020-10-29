@@ -124,7 +124,9 @@ $query_DetailRS1 = "SELECT * FROM carteraopera";
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM carteraopera INNER JOIN cliente ON carteraopera.rut_cliente=cliente.rut_cliente WHERE carteraopera.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
@@ -142,12 +144,12 @@ if (isset($_GET['recordID'])) {
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_DetailRS3 = sprintf("SELECT * FROM carteraopera  WHERE id = %s", GetSQLValueString($colname_DetailRS3, "int"));
 $query_limit_DetailRS3 = sprintf("%s LIMIT %d, %d", $query_DetailRS3, $startRow_DetailRS3, $maxRows_DetailRS3);
-$DetailRS3 = mysql_query($query_limit_DetailRS3, $comercioexterior) or die(mysqli_error());
+$DetailRS3 = mysqli_query($comercioexterior, $query_limit_DetailRS3) or die(mysqli_error());
 $row_DetailRS3 = mysqli_fetch_assoc($DetailRS3);
 if (isset($_GET['totalRows_DetailRS3'])) {
   $totalRows_DetailRS3 = $_GET['totalRows_DetailRS3'];
 } else {
-  $all_DetailRS3 = mysql_query($query_DetailRS3);
+  $all_DetailRS3 = mysqli_query($comercioexterior, $query_DetailRS3);
   $totalRows_DetailRS3 = mysqli_num_rows($all_DetailRS3);
 }
 $totalPages_DetailRS3 = ceil($totalRows_DetailRS3/$maxRows_DetailRS3)-1;
@@ -167,7 +169,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM carteraopera  WHERE id = $recordID", $colname_opcci,$colname1_opcci,$colname2_opcci);
+$query_DetailRS1 = sprintf("SELECT * FROM carteraopera  WHERE id = $recordID",$colname_DetailRS1, $colname2_DetailRS1); //$colname_opcci,$colname2_opcci
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);

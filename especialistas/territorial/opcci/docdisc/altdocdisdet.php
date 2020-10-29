@@ -94,7 +94,7 @@ if (isset($_GET['id'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['id'] : addslashes($_GET['id']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_DetailRS1 = sprintf("SELECT * FROM opcci WHERE id = %s", $colname_DetailRS1);
+$query_DetailRS1 = sprintf("SELECT * FROM opcci WHERE id = %s", $colname_DetailRS1); //Original
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
@@ -103,6 +103,7 @@ $pageNum_DetailRS1 = 0;
 if (isset($_GET['pageNum_DetailRS1'])) {
   $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
 }
+
 $startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
 $colname_DetailRS1 = "1";
 if (isset($_GET['nro_operacion'])) {
@@ -110,7 +111,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcci  WHERE id = $recordID", $colname_altadocdis);
+$query_DetailRS1 = sprintf("SELECT * FROM opcci  WHERE id = $recordID",$colname_DetailRS1); //$colname_altadocdis
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -121,7 +122,9 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">

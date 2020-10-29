@@ -102,6 +102,7 @@ $query_fuerahorario = sprintf("SELECT * FROM fuerahorario_territorial WHERE dept
 $fuerahorario = mysqli_query($comercioexterior, $query_fuerahorario) or die(mysqli_error($comercioexterior));
 $row_fuerahorario = mysqli_fetch_assoc($fuerahorario);
 $totalRows_fuerahorario = mysqli_num_rows($fuerahorario);
+
 $colname_excepciones = "-1";
 if (isset($_SESSION['login'])) {
   $colname_excepciones = $_SESSION['login'];
@@ -123,6 +124,7 @@ $query_excepciones = sprintf("SELECT * FROM excepciones WHERE especialista_curse
 $excepciones = mysqli_query($comercioexterior, $query_excepciones) or die(mysqli_error($comercioexterior));
 $row_excepciones = mysqli_fetch_assoc($excepciones);
 $totalRows_excepciones = mysqli_num_rows($excepciones);
+
 $queryString_DetailRS1 = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -138,6 +140,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_DetailRS1 = sprintf("&totalRows_DetailRS1=%d%s", $totalRows_DetailRS1, $queryString_DetailRS1);
+//var_dump($row_fuerahorario); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script>

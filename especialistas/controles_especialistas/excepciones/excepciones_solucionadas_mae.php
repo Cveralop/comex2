@@ -82,9 +82,10 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_excepciones_solucionadas = sprintf("SELECT * FROM excepciones WHERE rut_cliente = %s and evento = %s ORDER BY date_ingreso DESC", GetSQLValueString($colname_excepciones_solucionadas, "text"),GetSQLValueString($colname1_excepciones_solucionadas, "text"));
-$excepciones_solucionadas = mysql_query($query_excepciones_solucionadas, $comercioexterior) or die(mysqli_error());
+$excepciones_solucionadas = mysqli_query($comercioexterior,$query_excepciones_solucionadas, ) or die(mysqli_error($comercioexterior));
 $row_excepciones_solucionadas = mysqli_fetch_assoc($excepciones_solucionadas);
 $totalRows_excepciones_solucionadas = mysqli_num_rows($excepciones_solucionadas);
+//var_dump($row_excepciones_solucionadas); die();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -195,6 +196,7 @@ function MM_swapImage() { //v3.0
     <td align="center" valign="middle" class="titulocolumnas">No Operación Relacionada</td>
     <td align="center" valign="middle" class="titulocolumnas">Moneda / Monto Operación</td>
   </tr>
+  <?php if($row_excepciones_solucionadas !=0 ) { ?>
   <?php do { ?>
     <tr>
       <td align="center" valign="middle"><a href="excepciones_solucionadas_det.php?recordID=<?php echo $row_excepciones_solucionadas['id']; ?>"><img src="../../../imagenes/ICONOS/ver_registro_2.jpg" width="22" height="19" border="0" align="middle" /></a></td>
@@ -210,7 +212,9 @@ function MM_swapImage() { //v3.0
       <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo $row_excepciones_solucionadas['moneda_operacion']; ?></span> <span class="respuestacolumna_azul"><?php echo number_format($row_excepciones_solucionadas['monto_operacion'], 2, ',', '.'); ?></span></td>
     </tr>
     <?php } while ($row_excepciones_solucionadas = mysqli_fetch_assoc($excepciones_solucionadas)); ?>
+    <?php } ?>
 </table>
+  
 <br />
 <?php echo $totalRows_excepciones_solucionadas ?> Registros Total
 </body>

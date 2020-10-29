@@ -58,6 +58,7 @@ $query_ingape = sprintf("SELECT * FROM cliente nolock WHERE rut_cliente LIKE '%s
 $query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
 $ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
+
 if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = $_GET['totalRows_ingape'];
 } else {
@@ -80,6 +81,7 @@ $query_ingsbte = sprintf("SELECT * FROM opste nolock WHERE nro_operacion LIKE '%
 $query_limit_ingsbte = sprintf("%s LIMIT %d, %d", $query_ingsbte, $startRow_ingsbte, $maxRows_ingsbte);
 $ingsbte = mysqli_query($comercioexterior, $query_limit_ingsbte) or die(mysqli_error($comercioexterior));
 $row_ingsbte = mysqli_fetch_assoc($ingsbte);
+
 if (isset($_GET['totalRows_ingsbte'])) {
   $totalRows_ingsbte = $_GET['totalRows_ingsbte'];
 } else {
@@ -87,6 +89,7 @@ if (isset($_GET['totalRows_ingsbte'])) {
   $totalRows_ingsbte = mysqli_num_rows($all_ingsbte);
 }
 $totalPages_ingsbte = ceil($totalRows_ingsbte/$maxRows_ingsbte)-1;
+
 $queryString_ingape = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -102,6 +105,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_ingsbte = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -117,7 +121,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingsbte = sprintf("&totalRows_ingsbte=%d%s", $totalRows_ingsbte, $queryString_ingsbte);
-$queryString_ingvarios = "";
+
+//No se Ocupa
+/*$queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
   $newParams = array();
@@ -131,7 +137,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);*/
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

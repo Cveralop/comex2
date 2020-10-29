@@ -116,7 +116,9 @@ $query_DetailRS1 = sprintf("SELECT * FROM optbc WHERE id = %s", GetSQLValueStrin
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM optbc INNER JOIN cliente ON optbc.rut_cliente=cliente.rut_cliente WHERE optbc.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
@@ -145,7 +147,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM optbc  WHERE id = $recordID", $colname_modificacion,$colname1_modificacion,$colname2_modificacion,$colname3_modificacion);
+$query_DetailRS1 = sprintf("SELECT * FROM optbc  WHERE id = $recordID",$colname_DetailRS1,$colname1_DetailRS1,$colname2_DetailRS1,$colname3_DetailRS1); //$colname_modificacion,$colname1_modificacion,$colname2_modificacion,$colname3_modificacion
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -156,7 +158,9 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+//var_dump($row_DetailRS2); die();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -347,10 +351,8 @@ No<br>
     <tr valign="middle">
       <td align="right" bgcolor="#CCCCCC">Fuera Horario:</td>
       <td colspan="3" align="left" bgcolor="#CCCCCC"><label>
-        <input <?php if (!(strcmp($row_DetailRS1['fuera_horario'],"Si"))) {echo "checked=\"checked\"";} ?> name="fuera_horario" type="radio" class="etiqueta12" id="campana_comex_1" value="Si">
-        Si</label>
-        <input <?php if (!(strcmp($row_DetailRS1['fuera_horario'],"No"))) {echo "checked=\"checked\"";} ?> name="fuera_horario" type="radio" class="etiqueta12" id="campana_comex_0" value="No">
-No</td>
+        <input <?php //if (!(strcmp($row_DetailRS1['fuera_horario'],"Si"))) {echo "checked=\"checked\"";} ?> name="fuera_horario" type="radio" class="etiqueta12" id="campana_comex_1" value="Si">Si</label>
+        <input <?php //if (!(strcmp($row_DetailRS1['fuera_horario'],"No"))) {echo "checked=\"checked\"";} ?> name="fuera_horario" type="radio" class="etiqueta12" id="campana_comex_0" value="No">No</td>
     </tr>
     <tr valign="middle">
       <td colspan="4" align="left" bgcolor="#999999"><img src="../../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21" border="0"><span class="titulodetalle">Excepci&oacute;n</span></td>

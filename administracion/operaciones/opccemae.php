@@ -59,13 +59,13 @@ if (isset($_GET['nro_operacion'])) {
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_opcce = sprintf("SELECT * FROM opcce WHERE nro_operacion = '%s' ORDER BY id DESC", $colname_opcce);
 $query_limit_opcce = sprintf("%s LIMIT %d, %d", $query_opcce, $startRow_opcce, $maxRows_opcce);
-$opcce = mysql_query($query_limit_opcce, $comercioexterior) or die(mysqli_error());
+$opcce = mysqli_query($query_limit_opcce, $comercioexterior) or die(mysqli_error());
 $row_opcce = mysqli_fetch_assoc($opcce);
 
 if (isset($_GET['totalRows_opcce'])) {
   $totalRows_opcce = $_GET['totalRows_opcce'];
 } else {
-  $all_opcce = mysql_query($query_opcce);
+  $all_opcce = mysqli_query($comercioexterior, $query_opcce);
   $totalRows_opcce = mysqli_num_rows($all_opcce);
 }
 $totalPages_opcce = ceil($totalRows_opcce/$maxRows_opcce)-1;

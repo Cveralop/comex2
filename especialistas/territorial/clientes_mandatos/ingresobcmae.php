@@ -76,7 +76,7 @@ $colname_ingreso_cliente = "-1";
 if (isset($_GET['rut_cliente'])) {
   $colname_ingreso_cliente = $_GET['rut_cliente'];
 }
-mysql_select_db($database_basecomercial, $basecomercial);
+mysqli_select_db($basecomercial, $database_basecomercial);
 $query_ingreso_cliente = sprintf("SELECT * FROM base_comercial WHERE rut_cliente = %s", GetSQLValueString($colname_ingreso_cliente, "text"));
 $ingreso_cliente = mysqli_query($basecomercial, $query_ingreso_cliente) or die(mysqli_error());
 $row_ingreso_cliente = mysqli_fetch_assoc($ingreso_cliente);

@@ -74,6 +74,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+
+$maxRows_avisocuotas = 100;
+$pageNum_avisocuotas = 0;
+if (isset($_GET['pageNum_opcce'])) {
+  $pageNum_avisocuotas = $_GET['pageNum_opcce'];
+}
+$startRow_avisocuotas = $pageNum_avisocuotas * $maxRows_avisocuotas;
 
 $colname_avisocuotas = "1";
 if (isset($_GET['nro_operacion'])) {
@@ -85,9 +93,36 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_avisocuotas = sprintf("SELECT * FROM oppre nolock WHERE nro_operacion = %s and evento = %s ORDER BY id DESC", GetSQLValueString($colname_avisocuotas, "text"),GetSQLValueString($colname1_avisocuotas, "text"));
-$avisocuotas = mysql_query($query_avisocuotas, $comercioexterior) or die(mysqli_error());
+$query_limit_avisocuotas = sprintf("%s LIMIT %d, %d", $query_avisocuotas, $startRow_avisocuotas, $maxRows_avisocuotas);
+$avisocuotas = mysqli_query($comercioexterior, $query_avisocuotas) or die(mysqli_error($comercioexterior));
 $row_avisocuotas = mysqli_fetch_assoc($avisocuotas);
 $totalRows_avisocuotas = mysqli_num_rows($avisocuotas);
+
+if (isset($_GET['totalRows_avisocuotas'])) {
+  $totalRows_avisocuotas = $_GET['totalRows_avisocuotas'];
+} else {
+  $all_avisocuotas = mysqli_query($comercioexterior, $query_avisocuotas);
+  $totalRows_avisocuotas = mysqli_num_rows($all_avisocuotas);
+}
+$totalPages_avisocuotas = ceil($totalRows_avisocuotas/$maxRows_avisocuotas)-1;
+
+$queryString_avisocuotas = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_opcce") == false && 
+        stristr($param, "totalRows_opcce") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_avisocuotas = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+
+$queryString_avisocuotas = sprintf("&totalRows_opcce=%d%s", $totalRows_avisocuotas, $queryString_avisocuotas);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -183,21 +218,16 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <br>
   <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
     <tr valign="middle" bgcolor="#999999">
-      <td align="center" class="titulocolumnas">Imprimir
-        </div></td>
-      <td align="center" class="titulocolumnas">Nro Operaci&oacute;n
-        </div></td>
-      <td align="center" class="titulocolumnas">Fecha Ingreso
-        </div></td>
-      <td align="center" class="titulocolumnas">Rut Cliente
-        </div></td>
-      <td align="center" class="titulocolumnas">Nombre Cliente
-        </div></td>
-      <td align="center" class="titulocolumnas">Evento
-        </div></td>
+      <td align="center" class="titulocolumnas">Imprimir</div></td>
+      <td align="center" class="titulocolumnas">Nro Operaci&oacute;n</div></td>
+      <td align="center" class="titulocolumnas">Fecha Ingreso</div></td>
+      <td align="center" class="titulocolumnas">Rut Cliente</div></td>
+      <td align="center" class="titulocolumnas">Nombre Cliente</div></td>
+      <td align="center" class="titulocolumnas">Evento</div></td>
     </tr>
-    <tr valign="middle">
-      <?php do { ?>
+    <?php do { ?>
+
+    <tr valign="middle">      
         <td align="center"><a href="impavicuodet.php?recordID=<?php echo $row_avisocuotas['id']; ?>"> <img src="../../../../imagenes/ICONOS/impresora_2.jpg" width="27" height="21" border="0"></a>
           </div></td>
         <td align="center"><span class="respuestacolumna_rojo"><?php echo $row_avisocuotas['nro_operacion']; ?></span>
@@ -222,10 +252,10 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           Anterior<a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, max(0, $pageNum_avisocuotas - 1), $queryString_avisocuotas); ?>">Anterior</a>
           <?php } // Show if not first page ?></td>
       <td width="23%" align="center"><?php if ($pageNum_avisocuotas < $totalPages_avisocuotas) { // Show if not last page ?>
-          Siguiente<a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, min($totalPages_avisocuotas, $pageNum_avisocuotas + 1), $queryString_avisocuotas); ?>">Siguiente</a>
+          <a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, min($totalPages_avisocuotas, $pageNum_avisocuotas + 1), $queryString_avisocuotas); ?>">Siguiente</a>
           <?php } // Show if not last page ?></td>
       <td width="23%" align="center"><?php if ($pageNum_avisocuotas < $totalPages_avisocuotas) { // Show if not last page ?>
-          �<a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, $totalPages_avisocuotas, $queryString_avisocuotas); ?>">�ltimo</a>
+          <a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, $totalPages_avisocuotas, $queryString_avisocuotas); ?>">Último</a>
           <?php } // Show if not last page ?></td>
     </tr>
   </table>

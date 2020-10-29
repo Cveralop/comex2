@@ -75,6 +75,7 @@ if (isset($_GET['totalRows_impresion'])) {
   $totalRows_impresion = mysqli_num_rows($all_impresion);
 }
 $totalPages_impresion = ceil($totalRows_impresion/$maxRows_impresion)-1;
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_colores = "SELECT * FROM parametrocolores";
 $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($comercioexterior));
@@ -95,6 +96,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_impresion = sprintf("&totalRows_impresion=%d%s", $totalRows_impresion, $queryString_impresion);
+//var_dump($totalRows_impresion); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -207,7 +209,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <tr>
       <td width="21%" align="right" valign="middle">Especialista / Territorial:</div></td>
       <td width="79%" align="left" valign="middle"><input name="especialista_curse" type="text" class="etiqueta12" id="especialista_curse" value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20" readonly="readonly">
-      <span class="rojopequeno">/</span>      <input name="territorial" type="text" class="etiqueta12" id="territorial" value="<?php echo strtoupper($row_impresion['territorial']); ?>" size="50" maxlength="50" readonly="readonly"></td>
+      <span class="rojopequeno">/</span><input name="territorial" type="text" class="etiqueta12" id="territorial" value="<?php echo strtoupper($row_impresion['territorial']); ?>" size="50" maxlength="50" readonly="readonly"></td>
     </tr>
     <tr>
       <td align="right" valign="middle">Fecha Ingreso:</div></td>

@@ -150,7 +150,7 @@ if (isset($_GET['recordID'])) {
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_DetailRS3 = sprintf("SELECT * FROM carteraopera  WHERE id = %s", GetSQLValueString($colname_DetailRS3, "int"));
 $query_limit_DetailRS3 = sprintf("%s LIMIT %d, %d", $query_DetailRS3, $startRow_DetailRS3, $maxRows_DetailRS3);
-$DetailRS3 = mysql_query($query_limit_DetailRS3, $comercioexterior) or die(mysqli_error());
+$DetailRS3 = mysqli_query($comercioexterior, $query_limit_DetailRS3) or die(mysqli_error());
 $row_DetailRS3 = mysqli_fetch_assoc($DetailRS3);
 if (isset($_GET['totalRows_DetailRS3'])) {
   $totalRows_DetailRS3 = $_GET['totalRows_DetailRS3'];

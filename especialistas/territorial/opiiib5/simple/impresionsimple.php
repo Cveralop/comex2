@@ -194,9 +194,9 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <?php } // Show if not first page ?></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" valign="middle"><?php if ($row_excepciones['plazo'] > 0) { // Show if not first page ?>
+    <td colspan="2" align="center" valign="middle"><?php //if ($row_excepciones['plazo'] > 0) { // Show if not first page ?>
       <span class="FueraHorario"><span class="Estilo13" >Usted tiene Excepcion(es) Vencida(s) </span></span>
-    <?php } // Show if not first page ?></td>
+    <?php //} // Show if not first page ?></td>
   </tr>
 </table>
 <br>

@@ -80,7 +80,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
-$queryString_ingvarios = "";
+
+//No se utiliza
+/*$queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
   $newParams = array();
@@ -94,7 +96,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);*/
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

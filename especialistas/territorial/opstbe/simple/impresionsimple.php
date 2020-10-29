@@ -86,6 +86,7 @@ $query_DetailRS1 = sprintf("SELECT opste.*,(usuarios.nombre)as ne, time(date_esp
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
+
 if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = $_GET['totalRows_DetailRS1'];
 } else {
@@ -103,6 +104,7 @@ $fuerahorario = mysqli_query($comercioexterior, $query_fuerahorario) or die(mysq
 $row_fuerahorario = mysqli_fetch_assoc($fuerahorario);
 $totalRows_fuerahorario = mysqli_num_rows($fuerahorario);
 $colname_excepciones = "-1";
+
 if (isset($_SESSION['login'])) {
   $colname_excepciones = $_SESSION['login'];
 }
@@ -123,6 +125,7 @@ $query_excepciones = sprintf("SELECT * FROM excepciones nolock WHERE especialist
 $excepciones = mysqli_query($comercioexterior, $query_excepciones) or die(mysqli_error($comercioexterior));
 $row_excepciones = mysqli_fetch_assoc($excepciones);
 $totalRows_excepciones = mysqli_num_rows($excepciones);
+
 $queryString_DetailRS1 = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -138,6 +141,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_DetailRS1 = sprintf("&totalRows_DetailRS1=%d%s", $totalRows_DetailRS1, $queryString_DetailRS1);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script> 
@@ -195,7 +199,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <?php } // Show if not first page ?></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" valign="middle"><?php if ($row_excepciones['plazo'] > 0) { // Show if not first page ?>
+    <td colspan="2" align="center" valign="middle"><?php if ($row_DetailRS1['plazo'] > 0) { // Show if not first page - $totalRows_excepciones ?>
       <span class="FueraHorario"><span class="Estilo13" >Usted tiene Excepcion(es) Vencida(s) </span></span>
     <?php } // Show if not first page ?></td>
   </tr>

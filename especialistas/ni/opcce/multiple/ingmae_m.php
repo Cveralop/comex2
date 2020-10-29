@@ -87,7 +87,7 @@ if (isset($_GET['referencia'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_nrooperacion = sprintf("SELECT * FROM opcce nolock WHERE nro_operacion LIKE %s and evento = %s and referencia LIKE %s ORDER BY date_ingreso DESC", GetSQLValueString("%" . $colname_nrooperacion . "%", "text"),GetSQLValueString($colname1_nrooperacion, "text"),GetSQLValueString("%" . $colname2_nrooperacion . "%", "text"));
-$nrooperacion = mysql_query($query_nrooperacion, $comercioexterior) or die(mysqli_error());
+$nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion) or die(mysqli_error($comercioexterior));
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
 $totalRows_nrooperacion = mysqli_num_rows($nrooperacion);
 ?>

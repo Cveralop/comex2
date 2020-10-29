@@ -215,7 +215,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right" valign="middle">Banco Destino: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['banco_destino']; ?> </td>
     <td align="right" valign="middle">Forward:</td>
-    <td align="center" valign="middle"><?php echo $row_DetailRS1['forward']; ?></td>
+    <td align="center" valign="middle"><?php //echo $row_DetailRS1['forward']; ?></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Currier:</td>

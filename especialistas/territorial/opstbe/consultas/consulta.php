@@ -69,6 +69,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_conrut = sprintf("&totalRows_conrut=%d%s", $totalRows_conrut, $queryString_conrut);
+//var_dump($row_conrut); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -262,7 +263,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="center" valign="middle"><?php echo $row_conrut['estado']; ?></div></td>
     <td align="center" valign="middle"><?php echo $row_conrut['fecha_curse']; ?></div>      </div></td>
     <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['nro_operacion']); ?></span>      </div></td>
-    <td align="center" valign="middle"><?php echo $row_conrut['valuta']; ?></div></td>
+    <td align="center" valign="middle"><?php //echo $row_conrut['valuta']; ?></div></td>
     <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_conrut['monto_operacion'], 2, ',', '.'); ?></strong> </div></td>
   </tr>
   <?php } while ($row_conrut = mysqli_fetch_assoc($conrut)); ?>

@@ -87,7 +87,7 @@ if (isset($_GET['estado_visacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM optbc nolock WHERE rut_cliente = %s and (estado_visacion = %s or estado_visacion = %s) ORDER BY id DESC", GetSQLValueString($colname_ingape, "text"),GetSQLValueString($colname1_ingape, "text"),GetSQLValueString($colname2_ingape, "text"));
-$ingape = mysql_query($query_ingape, $comercioexterior) or die(mysqli_error());
+$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
 ?>

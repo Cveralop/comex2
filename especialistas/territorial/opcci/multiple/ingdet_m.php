@@ -153,6 +153,7 @@ if (isset($_GET['producto'])) {
   $colname1_envioop = $_GET['producto'];
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_envioop = sprintf("SELECT envioop.* FROM cliente INNER JOIN envioop ON cliente.rut_cliente=envioop.rut_cliente WHERE cliente.id = $recordID and evento = %s and producto = %s ORDER BY monto_operacion DESC", GetSQLValueString($colname_envioop, "text"),GetSQLValueString($colname1_envioop, "text"));
 $envioop = mysqli_query($comercioexterior, $query_envioop) or die(mysqli_error($comercioexterior));
 $row_envioop = mysqli_fetch_assoc($envioop);
@@ -169,7 +170,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM cliente nolock WHERE id = $recordID", $colname_ingape);
+$query_DetailRS1 = sprintf("SELECT * FROM cliente nolock WHERE id = $recordID");//$colname_ingape
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);

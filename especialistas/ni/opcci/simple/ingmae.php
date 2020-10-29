@@ -72,6 +72,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+//AGREGADO 1 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingape = 10;
+$pageNum_ingape = 0;
+if (isset($_GET['pageNum_ingape'])) {
+  $pageNum_ingape = $_GET['pageNum_ingape'];
+}
+$startRow_ingape = $pageNum_ingape * $maxRows_ingape;
 
 $colname_ingape = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -79,9 +87,44 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM cliente nolock  WHERE rut_cliente = %s", GetSQLValueString($colname_ingape, "text"));
-$ingape = mysql_query($query_ingape, $comercioexterior) or die(mysqli_error());
+$query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
+$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
+
+//AGREGADO 1.2 para total de registros
+if (isset($_GET['totalRows_ingape'])) {
+  $totalRows_ingape = $_GET['totalRows_ingape'];
+} else {
+  $all_ingape = mysqli_query($comercioexterior, $query_ingape);
+  $totalRows_ingape = mysqli_num_rows($all_ingape);
+}
+$totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
+
+$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRowsingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
+//AGREGADO 2 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingvarios = 10;
+$pageNum_ingvarios = 0;
+if (isset($_GET['pageNum_ingvarios'])) {
+  $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
+}
+$startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
 
 $colname_ingvarios = "-1";
 if (isset($_GET['nro_operacion'])) {
@@ -91,11 +134,48 @@ $colname1_ingvarios = "Apertura.";
 if (isset($_GET['evento'])) {
   $colname1_ingvarios = $_GET['evento'];
 }
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingvarios = sprintf("SELECT * FROM opcci nolock WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_ingvarios, "text"),GetSQLValueString($colname1_ingvarios, "text"));
+$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
 $ingvarios = mysqli_query($comercioexterior, $query_ingvarios) or die(mysqli_error());
 $row_ingvarios = mysqli_fetch_assoc($ingvarios);
 $totalRows_ingvarios = mysqli_num_rows($ingvarios);
+
+//AGREGADO 2.2 para total de registros
+if (isset($_GET['totalRows_ingvarios'])) {
+  $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
+} else {
+  $all_ingvarios = mysqli_query($comercioexterior, $query_ingvarios);
+  $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
+}
+$totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
+
+$queryString_ingvarios = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingvarios") == false && 
+        stristr($param, "totalRows_ingvarios") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingvarios = sprintf("&totalRowsingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+
+
+//AGREGADO 3 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingcci = 10;
+$pageNum_ingcci = 0;
+if (isset($_GET['pageNum_ingape'])) {
+  $pageNum_inglci = $_GET['pageNum_ingape'];
+}
+$startRow_ingcci = $pageNum_ingcci * $maxRows_ingcci;
 
 $colname_ingcci = "K";
 if (isset($_GET['nro_operacion_relacionada_car'])) {
@@ -103,9 +183,44 @@ if (isset($_GET['nro_operacion_relacionada_car'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingcci = sprintf("SELECT * FROM carteraopera nolock WHERE nro_operacion_relacionada_car = %s ORDER BY nro_operacion_car DESC", GetSQLValueString($colname_ingcci, "text"));
+$query_limit_ingcci = sprintf("%s LIMIT %d, %d", $query_ingcci, $startRow_ingcci, $maxRows_ingcci);
 $ingcci = mysqli_query($comercioexterior, $query_ingcci) or die(mysqli_error());
 $row_ingcci = mysqli_fetch_assoc($ingcci);
 $totalRows_ingcci = mysqli_num_rows($ingcci);
+
+//AGREGADO 3.2 para total de registros
+if (isset($_GET['totalRows_ingcci'])) {
+  $totalRows_ingcci = $_GET['totalRows_ingcci'];
+} else {
+  $all_ingcci = mysqli_query($comercioexterior, $query_ingcci);
+  $totalRows_ingcci = mysqli_num_rows($all_ingcci);
+}
+$totalPages_ingcci = ceil($totalRows_ingcci/$maxRows_ingcci)-1;
+
+$queryString_ingcci = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingcci") == false && 
+        stristr($param, "totalRows_ingcci") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingcci = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingcci = sprintf("&totalRows_ingcci=%d%s", $totalRows_ingcci, $queryString_ingcci);
+
+//AGREGADO 4 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_inglci = 10;
+$pageNum_inglci = 0;
+if (isset($_GET['pageNum_ingape'])) {
+  $pageNum_inglci = $_GET['pageNum_ingape'];
+}
+$startRow_inglci = $pageNum_inglci * $maxRows_inglci;
 
 $colname_inglci = "L";
 if (isset($_GET['nro_operacion_car'])) {
@@ -113,9 +228,20 @@ if (isset($_GET['nro_operacion_car'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_inglci = sprintf("SELECT * FROM carteraopera nolock WHERE nro_operacion_car = %s", GetSQLValueString($colname_inglci, "text"));
+$query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_inglci, $startRow_inglci, $maxRows_inglci);
 $inglci = mysqli_query($comercioexterior, $query_inglci) or die(mysqli_error());
 $row_inglci = mysqli_fetch_assoc($inglci);
-$totalRows_inglci = mysqli_num_rows($inglci);
+
+
+//AGREGADO 4.2 para total de registros
+if (isset($_GET['totalRows_inglci'])) {
+  $totalRows_inglci = $_GET['totalRows_inglci'];
+} else {
+  $all_inglci = mysqli_query($comercioexterior, $query_inglci);
+  $totalRows_inglci = mysqli_num_rows($all_inglci);
+}
+$totalPages_inglci = ceil($totalRows_inglci/$maxRows_inglci)-1;
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -266,10 +392,8 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
 <?php if ($totalRows_ingape > 0) { // Show if recordset not empty ?>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr valign="middle" bgcolor="#999999">
-    <td align="center" class="titulocolumnas">Ingresar Apertura </div></td>
-    <td align="center" class="titulocolumnas">Rut Cliente 
-      </div>
-    </td>
+    <td align="center" class="titulocolumnas">Ingresar Apertura</div></td>
+    <td align="center" class="titulocolumnas">Rut Cliente</div></td>
     <td align="center" class="titulocolumnas">Nombre Cliente</td>
     <td align="center" class="titulocolumnas">Impedido de Operar / Passport</td>
   </tr>
@@ -303,22 +427,17 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     </td>
   </tr>
 </table>
-<br>
+
 Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><?php echo min($startRow_ingape + $maxRows_ingape, $totalRows_ingape) ?></strong> de un total de <strong><?php echo $totalRows_ingape ?></strong>
 <?php } // Show if recordset not empty ?>
-<br>
+
 <?php if ($totalRows_ingvarios > 0) { // Show if recordset not empty ?>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr valign="middle" bgcolor="#999999">
     <td align="center" class="titulocolumnas">Ingresar Instrucci&oacute;n</div></td>
-    <td align="center" class="titulocolumnas">Nro Operaci&oacute;n </div>
-    </td>
-    <td align="center" class="titulocolumnas">Rut Cliente 
-      </div>
-    </td>
-    <td align="center" class="titulocolumnas">Nombre Cliente 
-      </div>
-    </td>
+    <td align="center" class="titulocolumnas">Nro Operaci&oacute;n </div></td>
+    <td align="center" class="titulocolumnas">Rut Cliente</div></td>
+    <td align="center" class="titulocolumnas">Nombre Cliente</div></td>
   </tr>
   <?php do { ?>
   <tr valign="middle">
@@ -332,28 +451,27 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
 <br>
 <table border="0" width="50%" align="center">
   <tr>
-    <td width="23%" align="center"><?php if ($pageNum_ingvarios > 0) { // Show if not first page ?>
+    <td width="23%" align="center"><?php if ($pageNum_ingape > 0) { // Show if not first page ?>
         <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, 0, $queryString_ingvarios); ?>">Primero</a>
         <?php } // Show if not first page ?>
     </td>
-    <td width="31%" align="center"><?php if ($pageNum_ingvarios > 0) { // Show if not first page ?>
-        <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, max(0, $pageNum_ingvarios - 1), $queryString_ingvarios); ?>">Anterior</a>
+    <td width="31%" align="center"><?php if ($pageNum_ingape > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, max(0, $pageNum_ingape - 1), $queryString_ingvarios); ?>">Anterior</a>
         <?php } // Show if not first page ?>
     </td>
-    <td width="23%" align="center"><?php if ($pageNum_ingvarios < $totalPages_ingvarios) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, min($totalPages_ingvarios, $pageNum_ingvarios + 1), $queryString_ingvarios); ?>">Siguiente</a>
+    <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingvarios) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, min($totalPages_ingvarios, $pageNum_ingape + 1), $queryString_ingvarios); ?>">Siguiente</a>
         <?php } // Show if not last page ?>
     </td>
-    <td width="23%" align="center"><?php if ($pageNum_ingvarios < $totalPages_ingvarios) { // Show if not last page ?>
+    <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingvarios) { // Show if not last page ?>
         <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, $totalPages_ingvarios, $queryString_ingvarios); ?>">�ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>
 </table>
-<br>
 Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <strong><?php echo min($startRow_ingvarios + $maxRows_ingvarios, $totalRows_ingvarios) ?></strong> de un total de <strong><?php echo $totalRows_ingvarios ?></strong>
 <?php } // Show if recordset not empty ?>
-<br>
+
 <?php if ($totalRows_ingcci > 0) { // Show if recordset not empty ?>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr>
@@ -378,9 +496,9 @@ Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <stron
   <?php } while ($row_ingcci = mysqli_fetch_assoc($ingcci)); ?>
 </table>
 <br>
-<span class="respuestacolumna_azul"><?php echo $totalRows_ingcci ?></span> Registro(s) en Total
+Registros del <strong><?php echo ($startRow_ingcci + 1) ?></strong> al <strong><?php echo min($startRow_ingcci + $maxRows_ingcci, $totalRows_ingcci) ?></strong> de un total de <strong><?php echo $totalRows_ingcci ?></strong>
 <?php } // Show if recordset not empty ?>
-<br>
+
 <?php if ($totalRows_inglci > 0) { // Show if recordset not empty ?>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr>
@@ -421,7 +539,6 @@ Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <stron
       <?php } // Show if not last page ?></td>
   </tr>
 </table>
-<br>
 Registros del <span class="respuestacolumna_azul"><?php echo ($startRow_inglci + 1) ?></span> al <span class="respuestacolumna_azul"><?php echo min($startRow_inglci + $maxRows_inglci, $totalRows_inglci) ?></span> de un total de <span class="respuestacolumna_azul"><?php echo $totalRows_inglci ?></span>
 <?php } // Show if recordset not empty ?>
 <br>

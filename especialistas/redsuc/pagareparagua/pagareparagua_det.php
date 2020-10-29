@@ -81,10 +81,19 @@ if (isset($_GET['recordID'])) {
   $colname_DetailRS1 = $_GET['recordID'];
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_DetailRS1 = sprintf("SELECT * FROM pagareparagua nolock WHERE id = %s", GetSQLValueString($colname_DetailRS1, "text"));
+$query_DetailRS1 = sprintf("SELECT * FROM pagareparagua nolock WHERE id = %s", GetSQLValueString($colname_DetailRS1, "int"));
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
-$row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
+$row_DetailRS2 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
+//lineas agregadas
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_DetailRS2 = sprintf("SELECT * FROM pagareparagua");
+$DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
+$row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
+$totalRows_DetailRS2 = mysqli_num_rows($DetailRS2);
+
+//var_dump($row_DetailRS2); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -168,132 +177,132 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Nro Registro: </td>
-      <td align="center" valign="middle"><span class="nroregistro"><?php echo $row_DetailRS1['id']; ?></span>        </div></td>
+      <td align="center" valign="middle"><span class="nroregistro"><?php echo $row_DetailRS2['id']; ?></span>        </div></td>
       <td align="right" valign="middle">Rut Cliente:</td>
-      <td align="center" valign="middle"><input name="rut_cliente" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="15">
+      <td align="center" valign="middle"><input name="rut_cliente" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS2['rut_cliente']; ?>" size="17" maxlength="15">
         <span class="rojopequeno">Sin puntos ni Guion</span></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Nombre Cliente:</td>
-      <td colspan="3" align="left" valign="middle"><input name="nombre_cliente" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="122" maxlength="120"></td>
+      <td colspan="3" align="left" valign="middle"><input name="nombre_cliente" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS2['nombre_cliente']; ?>" size="122" maxlength="120"></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Fecha Suscripci&oacute;n Pagar&eacute;:</td>
       <td align="center" valign="middle"><span id="sprytextfield3">
-      <input name="fecha_suscripcion_pagare" type="text" disabled class="etiqueta12" id="fecha_suscripcion_pagare" value="<?php echo $row_DetailRS1['fecha_suscripcion_pagare']; ?>" size="12" maxlength="10">
+      <input name="fecha_suscripcion_pagare" type="text" disabled class="etiqueta12" id="fecha_suscripcion_pagare" value="<?php echo $row_DetailRS2['fecha_suscripcion_pagare']; ?>" size="12" maxlength="10">
       <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v�lido.</span></span><span class="rojopequeno">(aaaa-mm-dd)</span></td>
       <td align="right" valign="middle">Fecha Suscripci&oacute;n Convenio:</td>
       <td align="center" valign="middle"><span id="sprytextfield1">
-      <input name="fecha_suscripcion_convenio" type="text" disabled class="etiqueta12" id="fecha_suscripcion_convenio" value="<?php echo $row_DetailRS1['fecha_suscripcion_convenio']; ?>" size="12" maxlength="10">
+      <input name="fecha_suscripcion_convenio" type="text" disabled class="etiqueta12" id="fecha_suscripcion_convenio" value="<?php echo $row_DetailRS2['fecha_suscripcion_convenio']; ?>" size="12" maxlength="10">
       <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v�lido.</span></span><span class="rojopequeno">(aaaa-mm-dd)</span></td>
     </tr>
     <tr align="left" valign="middle" bgcolor="#999999">
       <td align="right" valign="middle" bgcolor="#CCCCCC">Moneda / Monto Pagar&eacute;:</td>
       <td align="center" valign="middle" bgcolor="#CCCCCC"><select name="moneda_pagare" class="etiqueta12" id="moneda_pagare">
-        <option value="CLP" <?php if (!(strcmp("CLP", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>CLP</option>
-        <option value="DKK" <?php if (!(strcmp("DKK", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>DKK</option>
-        <option value="NOK" <?php if (!(strcmp("NOK", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>NOK</option>
-        <option value="SEK" <?php if (!(strcmp("SEK", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>SEK</option>
-        <option value="USD" <?php if (!(strcmp("USD", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>USD</option>
-        <option value="CAD" <?php if (!(strcmp("CAD", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>CAD</option>
-        <option value="AUD" <?php if (!(strcmp("AUD", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>AUD</option>
-        <option value="HKD" <?php if (!(strcmp("HKD", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>HKD</option>
-        <option value="EUR" <?php if (!(strcmp("EUR", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>EUR</option>
-        <option value="CHF" <?php if (!(strcmp("CHF", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>CHF</option>
-        <option value="GBP" <?php if (!(strcmp("GBP", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>GBP</option>
-        <option value="ZAR" <?php if (!(strcmp("ZAR", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>ZAR</option>
-        <option value="JPY" <?php if (!(strcmp("JPY", $row_DetailRS1['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>JPY</option>
+        <option value="CLP" <?php if (!(strcmp("CLP", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>CLP</option>
+        <option value="DKK" <?php if (!(strcmp("DKK", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>DKK</option>
+        <option value="NOK" <?php if (!(strcmp("NOK", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>NOK</option>
+        <option value="SEK" <?php if (!(strcmp("SEK", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>SEK</option>
+        <option value="USD" <?php if (!(strcmp("USD", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>USD</option>
+        <option value="CAD" <?php if (!(strcmp("CAD", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>CAD</option>
+        <option value="AUD" <?php if (!(strcmp("AUD", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>AUD</option>
+        <option value="HKD" <?php if (!(strcmp("HKD", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>HKD</option>
+        <option value="EUR" <?php if (!(strcmp("EUR", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>EUR</option>
+        <option value="CHF" <?php if (!(strcmp("CHF", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>CHF</option>
+        <option value="GBP" <?php if (!(strcmp("GBP", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>GBP</option>
+        <option value="ZAR" <?php if (!(strcmp("ZAR", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>ZAR</option>
+        <option value="JPY" <?php if (!(strcmp("JPY", $row_DetailRS2['moneda_pagare']))) {echo "selected=\"selected\"";} ?>>JPY</option>
       </select>
         <span class="rojopequeno">/</span>
-      <input name="monto_pagare" type="text" disabled class="etiqueta12" id="monto_pagare" value="<?php echo $row_DetailRS1['monto_pagare']; ?>" size="20" maxlength="20"></td>
+      <input name="monto_pagare" type="text" disabled class="etiqueta12" id="monto_pagare" value="<?php echo $row_DetailRS2['monto_pagare']; ?>" size="20" maxlength="20"></td>
       <td align="right" valign="middle" bgcolor="#CCCCCC">Moneda / Monto Convenio:</td>
       <td align="center" valign="middle" bgcolor="#CCCCCC"><select name="moneda_convenio" class="etiqueta12" id="moneda_convenio">
-        <option value="CLP" <?php if (!(strcmp("CLP", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>CLP</option>
-        <option value="DKK" <?php if (!(strcmp("DKK", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>DKK</option>
-        <option value="NOK" <?php if (!(strcmp("NOK", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>NOK</option>
-        <option value="SEK" <?php if (!(strcmp("SEK", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>SEK</option>
-        <option value="USD" <?php if (!(strcmp("USD", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>USD</option>
-        <option value="CAD" <?php if (!(strcmp("CAD", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>CAD</option>
-        <option value="AUD" <?php if (!(strcmp("AUD", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>AUD</option>
-        <option value="HKD" <?php if (!(strcmp("HKD", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>HKD</option>
-        <option value="EUR" <?php if (!(strcmp("EUR", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>EUR</option>
-        <option value="CHF" <?php if (!(strcmp("CHF", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>CHF</option>
-        <option value="GBP" <?php if (!(strcmp("GBP", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>GBP</option>
-        <option value="ZAR" <?php if (!(strcmp("ZAR", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>ZAR</option>
-        <option value="JPY" <?php if (!(strcmp("JPY", $row_DetailRS1['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>JPY</option>
+        <option value="CLP" <?php if (!(strcmp("CLP", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>CLP</option>
+        <option value="DKK" <?php if (!(strcmp("DKK", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>DKK</option>
+        <option value="NOK" <?php if (!(strcmp("NOK", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>NOK</option>
+        <option value="SEK" <?php if (!(strcmp("SEK", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>SEK</option>
+        <option value="USD" <?php if (!(strcmp("USD", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>USD</option>
+        <option value="CAD" <?php if (!(strcmp("CAD", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>CAD</option>
+        <option value="AUD" <?php if (!(strcmp("AUD", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>AUD</option>
+        <option value="HKD" <?php if (!(strcmp("HKD", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>HKD</option>
+        <option value="EUR" <?php if (!(strcmp("EUR", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>EUR</option>
+        <option value="CHF" <?php if (!(strcmp("CHF", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>CHF</option>
+        <option value="GBP" <?php if (!(strcmp("GBP", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>GBP</option>
+        <option value="ZAR" <?php if (!(strcmp("ZAR", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>ZAR</option>
+        <option value="JPY" <?php if (!(strcmp("JPY", $row_DetailRS2['moneda_convenio']))) {echo "selected=\"selected\"";} ?>>JPY</option>
       </select>
         <span class="respuestacolumna_rojo">/</span>
-      <input name="monto_convenio" type="text" disabled class="etiqueta12" id="monto_convenio" value="<?php echo $row_DetailRS1['monto_convenio']; ?>" size="20" maxlength="20"></td>
+      <input name="monto_convenio" type="text" disabled class="etiqueta12" id="monto_convenio" value="<?php echo $row_DetailRS2['monto_convenio']; ?>" size="20" maxlength="20"></td>
     </tr>
     <tr align="left" valign="middle" bgcolor="#999999">
       <td align="right" valign="middle" bgcolor="#CCCCCC">Parag&eacute; / Convenio:</td>
-      <td colspan="3" align="left" valign="middle" bgcolor="#CCCCCC"><input name="doc_1" type="checkbox" id="doc_1" value="Pagare." <?php if (!(strcmp($row_DetailRS1['doc_1'],"Pagare."))) {echo "checked=\"checked\"";} ?> <?php if (!(strcmp($row_DetailRS1['pagare'],"Pagare."))) {echo "checked=\"checked\"";} ?>>
-        Pagare
-        <input name="doc_2" type="checkbox" id="doc_2" value="Convenio." <?php if (!(strcmp($row_DetailRS1['doc_2'],"Convenio."))) {echo "checked=\"checked\"";} ?>>
+      <td colspan="3" align="left" valign="middle" bgcolor="#CCCCCC"><input name="doc_1" type="checkbox" id="doc_1" value="Pagare." <?php if (!(strcmp($row_DetailRS2['doc_1'],"Pagare."))) {echo "checked=\"checked\"";} ?>> 
+      Pagare
+      <input name="doc_2" type="checkbox" id="doc_2" value="Convenio." <?php if (!(strcmp($row_DetailRS2['doc_2'],"Convenio."))) {echo "checked=\"checked\"";} ?>>
       Convenio
-      <input name="doc_3" type="checkbox" id="doc_3" value="Anexo." <?php if (!(strcmp($row_DetailRS1['doc_3'],"Anexo."))) {echo "checked=\"checked\"";} ?>>
-Anexo
-<input name="doc_4" type="checkbox" id="doc_4" value="Anexo WEB." <?php if (!(strcmp($row_DetailRS1['doc_4'],"Anexo WEB."))) {echo "checked=\"checked\"";} ?>>
-Anexo WEB
-<label>
-<input name="doc_5" type="checkbox" id="doc_5" value="Reconocimiento Deuda." <?php if (!(strcmp($row_DetailRS1['doc_5'],"Reconocimiento Deuda."))) {echo "checked=\"checked\"";} ?>>
-Reconocimiento Deuda</label></td>
+      <input name="doc_3" type="checkbox" id="doc_3" value="Anexo." <?php if (!(strcmp($row_DetailRS2['doc_3'],"Anexo."))) {echo "checked=\"checked\"";} ?>>
+      Anexo
+      <input name="doc_4" type="checkbox" id="doc_4" value="Anexo WEB." <?php if (!(strcmp($row_DetailRS2['doc_4'],"Anexo WEB."))) {echo "checked=\"checked\"";} ?>>
+      Anexo WEB
+      <label>
+      <input name="doc_5" type="checkbox" id="doc_5" value="Reconocimiento Deuda." <?php if (!(strcmp($row_DetailRS2['doc_5'],"Reconocimiento Deuda."))) {echo "checked=\"checked\"";} ?>>
+      Reconocimiento Deuda</label></td>
     </tr>
     <tr align="left" valign="middle" bgcolor="#999999">
       <td align="right" valign="middle" bgcolor="#CCCCCC">Observaciones:</td>
-      <td colspan="3" align="left" valign="middle" bgcolor="#CCCCCC"><textarea name="observacion" cols="80" rows="4" disabled class="etiqueta12" id="observacion"><?php echo $row_DetailRS1['observacion']; ?></textarea></td>
+      <td colspan="3" align="left" valign="middle" bgcolor="#CCCCCC"><textarea name="observacion" cols="80" rows="4" disabled class="etiqueta12" id="observacion"><?php echo $row_DetailRS2['observacion']; ?></textarea></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Aval 1:</td>
-      <td colspan="3" align="left" valign="middle"><input name="aval_rut_1" type="text" disabled class="etiqueta12" id="aval_rut_1" value="<?php echo $row_DetailRS1['aval_rut_1']; ?>" size="15" maxlength="18"> 
+      <td colspan="3" align="left" valign="middle"><input name="aval_rut_1" type="text" disabled class="etiqueta12" id="aval_rut_1" value="<?php echo $row_DetailRS2['aval_rut_1']; ?>" size="15" maxlength="18"> 
         / 
           <label>
-            <input name="aval_nom_1" type="text" disabled class="etiqueta12" id="aval_nom_1" value="<?php echo $row_DetailRS1['aval_nom_1']; ?>" size="80" maxlength="80">
+            <input name="aval_nom_1" type="text" disabled class="etiqueta12" id="aval_nom_1" value="<?php echo $row_DetailRS2['aval_nom_1']; ?>" size="80" maxlength="80">
       </label></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Aval 2:</td>
-      <td colspan="3" align="left" valign="middle"><input name="aval_rut_2" type="text" disabled class="etiqueta12" id="aval_rut_2" value="<?php echo $row_DetailRS1['aval_rut_2']; ?>" size="15" maxlength="18"> 
+      <td colspan="3" align="left" valign="middle"><input name="aval_rut_2" type="text" disabled class="etiqueta12" id="aval_rut_2" value="<?php echo $row_DetailRS2['aval_rut_2']; ?>" size="15" maxlength="18"> 
         / 
-      <input name="aval_nom_2" type="text" disabled class="etiqueta12" id="aval_nom_2" value="<?php echo $row_DetailRS1['aval_nom_2']; ?>" size="80" maxlength="80"></td>
+      <input name="aval_nom_2" type="text" disabled class="etiqueta12" id="aval_nom_2" value="<?php echo $row_DetailRS2['aval_nom_2']; ?>" size="80" maxlength="80"></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Aval 3:</td>
-      <td colspan="3" align="left" valign="middle"><input name="aval_rut_3" type="text" disabled class="etiqueta12" id="aval_rut_3" value="<?php echo $row_DetailRS1['aval_rut_3']; ?>" size="15" maxlength="18"> 
+      <td colspan="3" align="left" valign="middle"><input name="aval_rut_3" type="text" disabled class="etiqueta12" id="aval_rut_3" value="<?php echo $row_DetailRS2['aval_rut_3']; ?>" size="15" maxlength="18"> 
         / 
-      <input name="aval_nom_3" type="text" disabled class="etiqueta12" id="aval_nom_3" value="<?php echo $row_DetailRS1['aval_nom_3']; ?>" size="80" maxlength="80"></td>
+      <input name="aval_nom_3" type="text" disabled class="etiqueta12" id="aval_nom_3" value="<?php echo $row_DetailRS2['aval_nom_3']; ?>" size="80" maxlength="80"></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Aval 4:</td>
-      <td colspan="3" align="left" valign="middle"><input name="aval_rut_4" type="text" disabled class="etiqueta12" id="aval_rut_4" value="<?php echo $row_DetailRS1['aval_rut_4']; ?>" size="15" maxlength="18"> 
+      <td colspan="3" align="left" valign="middle"><input name="aval_rut_4" type="text" disabled class="etiqueta12" id="aval_rut_4" value="<?php echo $row_DetailRS2['aval_rut_4']; ?>" size="15" maxlength="18"> 
         / 
-      <input name="aval_nom_4" type="text" disabled class="etiqueta12" id="aval_nom_4" value="<?php echo $row_DetailRS1['aval_nom_4']; ?>" size="80" maxlength="80"></td>
+      <input name="aval_nom_4" type="text" disabled class="etiqueta12" id="aval_nom_4" value="<?php echo $row_DetailRS2['aval_nom_4']; ?>" size="80" maxlength="80"></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Estado:</td>
       <td align="center" valign="middle"><label>
         <select name="estado" class="etiqueta12" id="estado">
-          <option value="Vigente." <?php if (!(strcmp("Vigente.", $row_DetailRS1['estado']))) {echo "selected=\"selected\"";} ?>>Vigente</option>
-          <option value="Cerrado." <?php if (!(strcmp("Cerrado.", $row_DetailRS1['estado']))) {echo "selected=\"selected\"";} ?>>Cerrado</option>
-          <option value="Sin Cupo." <?php if (!(strcmp("Sin Cupo.", $row_DetailRS1['estado']))) {echo "selected=\"selected\"";} ?>>Sin Cupo</option>
+          <option value="Vigente." <?php if (!(strcmp("Vigente.", $row_DetailRS2['estado']))) {echo "selected=\"selected\"";} ?>>Vigente</option>
+          <option value="Cerrado." <?php if (!(strcmp("Cerrado.", $row_DetailRS2['estado']))) {echo "selected=\"selected\"";} ?>>Cerrado</option>
+          <option value="Sin Cupo." <?php if (!(strcmp("Sin Cupo.", $row_DetailRS2['estado']))) {echo "selected=\"selected\"";} ?>>Sin Cupo</option>
         </select>
       </label></td>
       <td align="right" valign="middle">Producto:</td>
       <td align="center" valign="middle"><select name="producto" class="etiqueta12" id="producto">
-        <option value="N/A" <?php if (!(strcmp("N/A", $row_DetailRS1['producto']))) {echo "selected=\"selected\"";} ?>>Seleccione Una Opcion</option>
-        <option value="Cartas de Credito Import." <?php if (!(strcmp("Cartas de Credito Import.", $row_DetailRS1['producto']))) {echo "selected=\"selected\"";} ?>>Cartas de Credito Import</option>
-        <option value="Op Contado." <?php if (!(strcmp("Op Contado.", $row_DetailRS1['producto']))) {echo "selected=\"selected\"";} ?>>Op Contado</option>
-        <option value="Prestamo." <?php if (!(strcmp("Prestamo.", $row_DetailRS1['producto']))) {echo "selected=\"selected\"";} ?>>Prestamo</option>
+        <option value="N/A" <?php if (!(strcmp("N/A", $row_DetailRS2['producto']))) {echo "selected=\"selected\"";} ?>>Seleccione Una Opcion</option>
+        <option value="Cartas de Credito Import." <?php if (!(strcmp("Cartas de Credito Import.", $row_DetailRS2['producto']))) {echo "selected=\"selected\"";} ?>>Cartas de Credito Import</option>
+        <option value="Op Contado." <?php if (!(strcmp("Op Contado.", $row_DetailRS2['producto']))) {echo "selected=\"selected\"";} ?>>Op Contado</option>
+        <option value="Prestamo." <?php if (!(strcmp("Prestamo.", $row_DetailRS2['producto']))) {echo "selected=\"selected\"";} ?>>Prestamo</option>
       </select></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Fecha Ingreso:</td>
-      <td align="center" valign="middle"><input name="fecha_ingreso" type="text" disabled class="etiqueta12" id="fecha_ingreso" value="<?php echo $row_DetailRS1['fecha_ingreso']; ?>" size="12" maxlength="10"></td>
+      <td align="center" valign="middle"><input name="fecha_ingreso" type="text" disabled class="etiqueta12" id="fecha_ingreso" value="<?php echo $row_DetailRS2['fecha_ingreso']; ?>" size="12" maxlength="10"></td>
       <td align="right" valign="middle">Sucursal:</td>
 <td align="center" valign="middle"><label>
   <select name="sucursal" class="etiqueta12" id="sucursal">
-    <option value="Casa Matriz" <?php if (!(strcmp("Casa Matriz", $row_DetailRS1['sucursal']))) {echo "selected=\"selected\"";} ?>>Casa Matriz</option>
-          <option value="Oficina" <?php if (!(strcmp("Oficina", $row_DetailRS1['sucursal']))) {echo "selected=\"selected\"";} ?>>Oficina</option>
+    <option value="Casa Matriz" <?php if (!(strcmp("Casa Matriz", $row_DetailRS2['sucursal']))) {echo "selected=\"selected\"";} ?>>Casa Matriz</option>
+          <option value="Oficina" <?php if (!(strcmp("Oficina", $row_DetailRS2['sucursal']))) {echo "selected=\"selected\"";} ?>>Oficina</option>
         </select>
 </label></td>
     </tr>

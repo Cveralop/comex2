@@ -80,7 +80,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM cliente nolock WHERE rut_cliente = %s", GetSQLValueString($colname_ingape, "text"));
-$ingape = mysql_query($query_ingape, $comercioexterior) or die(mysqli_error());
+$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
 
@@ -90,7 +90,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_nrooperacion = sprintf("SELECT * FROM opcbe nolock WHERE nro_operacion = %s ORDER BY id DESC", GetSQLValueString($colname_nrooperacion, "text"));
-$nrooperacion = mysql_query($query_nrooperacion, $comercioexterior) or die(mysqli_error());
+$nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion) or die(mysqli_error($comercioexterior));
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
 $totalRows_nrooperacion = mysqli_num_rows($nrooperacion);
 ?>

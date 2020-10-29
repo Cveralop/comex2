@@ -94,6 +94,7 @@ $query_nrooperacion = sprintf("SELECT * FROM opcce WHERE nro_operacion LIKE %s a
 $query_limit_nrooperacion = sprintf("%s LIMIT %d, %d", $query_nrooperacion, $startRow_nrooperacion, $maxRows_nrooperacion);
 $nrooperacion = mysqli_query($comercioexterior, $query_limit_nrooperacion) or die(mysqli_error());
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
+
 if (isset($_GET['totalRows_nrooperacion'])) {
   $totalRows_nrooperacion = $_GET['totalRows_nrooperacion'];
 } else {
@@ -101,21 +102,7 @@ if (isset($_GET['totalRows_nrooperacion'])) {
   $totalRows_nrooperacion = mysqli_num_rows($all_nrooperacion);
 }
 $totalPages_nrooperacion = ceil($totalRows_nrooperacion/$maxRows_nrooperacion)-1;
-$queryString_ingape = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingape") == false && 
-        stristr($param, "totalRows_ingape") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_nrooperacion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -131,6 +118,40 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_nrooperacion = sprintf("&totalRows_nrooperacion=%d%s", $totalRows_nrooperacion, $queryString_nrooperacion);
+
+if (isset($_GET['totalRows_nrooperacion'])) {
+  $totalRows_ingape = $_GET['totalRows_nrooperacion'];
+} else {
+  $all_nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion);
+  $totalRows_ingape = mysqli_num_rows($all_nrooperacion);
+}
+$totalPages_nrooperacion = ceil($totalRows_ingape/$maxRows_nrooperacion)-1;
+
+$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
+
+if (isset($_GET['totalRows_nrooperacion'])) {
+  $totalRows_ingvarios = $_GET['totalRows_nrooperacion'];
+} else {
+  $all_nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion);
+  $totalRows_ingvarios = mysqli_num_rows($all_nrooperacion);
+}
+$totalPages_nrooperacion = ceil($totalRows_ingvarios/$maxRows_nrooperacion)-1;
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -293,7 +314,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="left" valign="middle"><?php echo strtoupper($row_nrooperacion['nombre_cliente']); ?> </td>
       <td align="center" valign="middle"><?php echo $row_nrooperacion['fecha_ingreso']; ?> </td>
       <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_nrooperacion['nro_operacion']); ?></span></td>
-      <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_nrooperacion['moneda_operacion']); ?></span><span class="respuestacolumna_azul"><?php echo number_format($row_ingvarios['monto_operacion'], 2, ',', '.'); ?></span></td>
+      <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_nrooperacion['moneda_operacion']); ?></span><span class="respuestacolumna_azul"><?php echo number_format($row_nrooperacion['monto_operacion'], 2, ',', '.'); ?></span></td>
     </tr>
     <?php } while ($row_nrooperacion = mysqli_fetch_assoc($nrooperacion)); ?>
 </table>

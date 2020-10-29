@@ -101,21 +101,7 @@ if (isset($_GET['totalRows_ingvarios'])) {
   $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
 }
 $totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
-$queryString_ingape = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingape") == false && 
-        stristr($param, "totalRows_ingape") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -131,6 +117,25 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+
+//No se Utiliza
+/*$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);*/ //No se Utiliza
+
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -274,7 +279,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="center" valign="middle"><a href="ingdet2.php?recordID=<?php echo $row_ingvarios['id']; ?>"> <img src="../../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></div></td>
     <td align="center" valign="middle"><?php echo $row_ingvarios['rut_cliente']; ?> </div></td>
     <td align="left" valign="middle"><?php echo $row_ingvarios['nombre_cliente']; ?> </td>
-    <td align="center" valign="middle"><?php echo $row_ingvarios['fecha_ingeso']; ?></td>
+    <td align="center" valign="middle"><?php echo $row_ingvarios['fecha_ingreso']; ?></td>
     <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_ingvarios['nro_operacion']); ?></span></td>
     <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo $row_ingvarios['moneda_operacion']; ?></span> <span class="respuestacolumna_azul"><?php echo number_format($row_ingvarios['monto_operacion'], 2, ',', '.'); ?></span></td>
   </tr>

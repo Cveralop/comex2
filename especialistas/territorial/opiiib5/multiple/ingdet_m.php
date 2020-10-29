@@ -107,10 +107,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['tipo_excepcion'], "text"),
                        GetSQLValueString($_POST['solucion_excepcion'], "date"),
                        GetSQLValueString($_POST['urgente'], "text"),
-					   GetSQLValueString($_POST['impedido_operar'], "text"),
+					             GetSQLValueString($_POST['impedido_operar'], "text"),
                        GetSQLValueString($_POST['fuera_horario'], "text"),
                        GetSQLValueString($_POST['nro_folio'], "int"),
-					   GetSQLValueString($_POST['cliente_passport'], "text"));
+					             GetSQLValueString($_POST['cliente_passport'], "text"));
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $Result1 = mysqli_query($comercioexterior, $insertSQL) or die(mysqli_error($comercioexterior));
   $insertGoTo = "ingdet_m.php";
@@ -125,7 +125,7 @@ if (isset($_GET['rut_cliente'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_DetailRS1 = sprintf("SELECT * FROM optbc nolock WHERE rut_cliente = '%s'", $colname_DetailRS1);
+$query_DetailRS1 = sprintf("SELECT * FROM optbc WHERE rut_cliente = '%s'",$colname_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
@@ -135,13 +135,15 @@ if (isset($_GET['pageNum_DetailRS1'])) {
   $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
 }
 $startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
+
 $colname_DetailRS1 = "1";
 if (isset($_GET['rut_cliente'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM cliente nolock WHERE id = $recordID", $colname_ingape);
+$query_DetailRS1 = sprintf("SELECT * FROM cliente nolock WHERE id = $recordID",$colname_DetailRS1); //$colname_ingape
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -152,7 +154,10 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -391,7 +396,7 @@ No<br>
       <span class="rojopequeno">Max 50 Caracteres</span></td>
       <td align="right">Soluci&oacute;n Excepci&oacute;n:</td>
       <td align="center"><span id="sprytextfield"><span id="sprytextfield2">
-      <input name="solucion_excepcion" type="text" class="etiqueta12" id="solucion_excepcion" value="<?php echo $row_DetailRS1['solucion_excepcion']; ?>" size="12" maxlength="10">
+      <input name="solucion_excepcion" type="text" class="etiqueta12" id="solucion_excepcion" value="<?php //echo $row_DetailRS1['solucion_excepcion']; ?>" size="12" maxlength="10">
       <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v&aacute;lido.</span></span><span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v&aacute;lido.</span></span><span class="rojopequeno">(aaaa-mm-dd)</span></td>
     </tr>
     <tr valign="middle">

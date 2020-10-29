@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_acuserecibo = sprintf("SELECT * FROM openvpro WHERE id LIKE %s and estado = %s and territorial LIKE %s", GetSQLValueString("%" . $colname_acuserecibo . "%", "text"),GetSQLValueString($colname1_acuserecibo, "text"),GetSQLValueString("%" . $colname2_acuserecibo . "%", "text"));
-$acuserecibo = mysql_query($query_acuserecibo, $comercioexterior) or die(mysqli_error());
+$acuserecibo = mysqli_query($comercioexterior,$query_acuserecibo) or die(mysqli_error($comercioexterior));
 $row_acuserecibo = mysqli_fetch_assoc($acuserecibo);
 $totalRows_acuserecibo = mysqli_num_rows($acuserecibo);
 mysqli_select_db($comercioexterior, $database_comercioexterior);

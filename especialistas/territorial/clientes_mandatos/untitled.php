@@ -36,7 +36,7 @@ $colname_DetailRS1 = "-1";
 if (isset($_GET['recordID'])) {
   $colname_DetailRS1 = $_GET['recordID'];
 }
-mysql_select_db($database_basecomercial, $basecomercial);
+mysqli_select_db($basecomercial, $database_basecomercial);
 $query_DetailRS1 = sprintf("SELECT * FROM negativefile  WHERE id = %s", GetSQLValueString($colname_DetailRS1, "int"));
 $DetailRS1 = mysqli_query($basecomercial, $query_DetailRS1) or die(mysqli_error());
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);

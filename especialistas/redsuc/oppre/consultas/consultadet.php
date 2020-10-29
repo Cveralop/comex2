@@ -209,7 +209,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right">Moneda / Monto Operaci&oacute;n:</td>
     <td align="center"><span class="respuestacolumna_rojo"><?php echo $row_DetailRS1['moneda_operacion']; ?></span> <span class="rojopequeno">/</span> <strong class="respuestacolumna_azul"><?php echo number_format($row_DetailRS1['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
     <td align="right">Forward:</td>
-    <td align="center"><?php echo $row_DetailRS1['forward']; ?></td>
+    <td align="center"><?php //echo $row_DetailRS1['forward']; ?></td>
   </tr>
   <tr valign="middle">
     <td align="right">Tipo Operaci&oacute;n:</td>

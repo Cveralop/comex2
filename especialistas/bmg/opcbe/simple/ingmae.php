@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_ingape'])) {
   $pageNum_ingape = $_GET['pageNum_ingape'];
 }
 $startRow_ingape = $pageNum_ingape * $maxRows_ingape;
+
 $colname_ingape = "zzz";
 if (isset($_GET['rut_cliente'])) {
   $colname_ingape = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
@@ -88,6 +89,7 @@ $query_ingape = sprintf("SELECT * FROM cliente WHERE rut_cliente LIKE '%s%%' ORD
 $query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
 $ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
+
 if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = $_GET['totalRows_ingape'];
 } else {
@@ -101,6 +103,7 @@ if (isset($_GET['pageNum_ingvarios'])) {
   $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
 }
 $startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
+
 $colname1_ingvarios = "Apertura.";
 if (isset($_GET['evento'])) {
   $colname1_ingvarios = $_GET['evento'];
@@ -109,11 +112,13 @@ $colname_ingvarios = "zzz";
 if (isset($_GET['nro_operacion'])) {
   $colname_ingvarios = $_GET['nro_operacion'];
 }
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingvarios = sprintf("SELECT id, rut_cliente, nombre_cliente, nro_operacion FROM opcbe WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_ingvarios, "text"),GetSQLValueString($colname1_ingvarios, "text"));
 $query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
 $ingvarios = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
 $row_ingvarios = mysqli_fetch_assoc($ingvarios);
+
 if (isset($_GET['totalRows_ingvarios'])) {
   $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
 } else {
@@ -121,6 +126,7 @@ if (isset($_GET['totalRows_ingvarios'])) {
   $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
 }
 $totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
+
 $queryString_ingape = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -136,6 +142,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);

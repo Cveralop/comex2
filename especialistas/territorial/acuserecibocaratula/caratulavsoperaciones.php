@@ -186,7 +186,7 @@ if (isset($_GET['nro_folio'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_caratulavsoperaciones = sprintf("SELECT * FROM opbga WHERE nro_folio = %s", GetSQLValueString($colname_caratulavsoperaciones, "int"));
-$caratulavsoperaciones = mysql_query($query_caratulavsoperaciones, $comercioexterior) or die(mysqli_error());
+$caratulavsoperaciones = mysqli_query($comercioexterior, $query_caratulavsoperaciones) or die(mysqli_error($comercioexterior));
 $row_opbga = mysqli_fetch_assoc($caratulavsoperaciones);
 $totalRows_caratulavsoperaciones = mysqli_num_rows($caratulavsoperaciones);$colname_caratulavsoperaciones = "-1";
 ?>

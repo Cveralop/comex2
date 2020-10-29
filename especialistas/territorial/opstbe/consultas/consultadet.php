@@ -52,7 +52,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opste  WHERE id = $recordID", $colname_conrut);
+$query_DetailRS1 = sprintf("SELECT * FROM opste  WHERE id = $recordID",$colname_DetailRS1); // $colname_conrut
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -63,7 +63,9 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -175,105 +177,107 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <tr bgcolor="#999999">
     <td colspan="4" align="left" valign="middle"><img src="../../../../imagenes/GIF/notepad.gif" width="19" height="21"><span class="Estilo5">Detalle Operaci&oacute;n</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td width="22%" align="right" valign="middle">Nro Registro: </td>
     <td width="34%" align="center" valign="middle"><span class="nroregistro"><?php echo $row_DetailRS1['id']; ?> </span></td>
     <td width="19%" align="right" valign="middle">Rut Cliente:</div></td>
     <td width="25%" align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['rut_cliente']); ?> <span class="rojopequeno">Sin puntos ni Guion</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Nombre Cliente: </td>
     <td colspan="3" align="left" valign="middle"><?php echo strtoupper($row_DetailRS1['nombre_cliente']); ?> </td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Feche Cliente: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['fecha_ingreso']; ?> <span class="rojopequeno">(dd-mm-aaaa)</span></td>
     <td align="right" valign="middle">Fecha Curse: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['fecha_curse']; ?> <span class="rojopequeno">(dd-mm-aaaa)</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Estado:</td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['estado']; ?> </td>
     <td align="right" valign="middle">Evento:</td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['evento']; ?></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Nro Operaci&oacute;n:</td>
     <td align="left" valign="middle" class="respuestacolumna_rojo"><?php echo $row_DetailRS1['nro_operacion']; ?> </td>
     <td align="right" valign="middle" class="respuestacolumna_rojo">Moneda / Monto Operaci&oacute;n:</td>
     <td align="right" valign="middle" class="respuestacolumna_rojo"><?php echo strtoupper($row_DetailRS1['moneda_operacion']); ?> <span class="rojopequeno">/</span> <strong class="respuestacolumna_azul"><?php echo number_format($row_DetailRS1['monto_operacion'], 2, ',', '.'); ?></strong></td>
   </tr>
-  <tr valign="middle">
+  
+  <tr>
     <td align="right" valign="middle">Observaciones:</td>
     <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
-  </tr>
-  <tr valign="middle">
+  </tr>  
+  <tr>
     <td align="right" valign="middle">Fecha Pre Ingreso: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['date_preingreso']; ?></td>
     <td align="right" valign="middle">Fecha Ingreso Especialista: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['date_espe']; ?></td>
   </tr>
-  <tr valign="middle">
+  
+  <tr>
     <td align="right" valign="middle">Fecha Visaci&oacute;n:</td>
     <td align="center" valign="middle"><span class="etiqueta12"><?php echo $row_DetailRS1['date_visa']; ?> </span></td>
     <td align="right" valign="middle">Fecha  Asignaci&oacute;n: </td>
     <td align="center" valign="middle"><span class="etiqueta12"><?php echo $row_DetailRS1['date_asig']; ?></span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Fecha  Curse Operador:</td>
     <td align="center" valign="middle"><span class="etiqueta12"><?php echo $row_DetailRS1['date_oper']; ?> </span></td>
     <td align="right" valign="middle">Fecha Curse  Supervisor: </td>
     <td align="center" valign="middle"><span class="etiqueta12"><?php echo $row_DetailRS1['date_supe']; ?></span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Especialista:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['especialista_curse']); ?></td>
     <td align="right" valign="middle">Visador:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['visador']); ?></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Asignador:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['asignador']); ?></td>
     <td align="right" valign="middle">Operador:</td>
     <td align="center" valign="middle">Sin Dato.</td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Autorizador:</td>
     <td colspan="3" align="left" valign="middle"><?php echo strtoupper($row_DetailRS1['autorizador']); ?></td>
   </tr>
   <tr align="left" valign="middle">
     <td colspan="4" valign="middle" bgcolor="#999999"><img src="../../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21" border="0"><span class="titulodetalle">Excepci&oacute;n</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td rowspan="3" align="right" valign="middle">Excepci&oacute;n:</td>
     <td rowspan="3" align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['excepcion']); ?></td>
     <td align="right" valign="middle">Auto. Opera.:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['autorizacion_operaciones']); ?></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Auto. Espe.:</td>
-    <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['autorizacion_especilista']); ?></td>
+    <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['autorizacion_especialista']); ?></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Resp. Excepci&oacute;n:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['responsable_excepcion']); ?></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Tipo Excepci&oacute;n:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['tipo_excepcion']); ?></td>
     <td align="right" valign="middle">Soluci&oacute;n Excepci&oacute;n:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['solucion_excepcion']); ?><span class="rojopequeno">(aaaa-mm-dd)</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Estado Excepci&oacute;n:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['estado_excepcion']); ?></td>
     <td align="right" valign="middle">Solucionado:</td>
     <td align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['solucionado']); ?><span class="rojopequeno">(aaaa-mm-dd)</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td colspan="4" align="left" valign="middle" bgcolor="#999999"><img src="../../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21" border="0"><span class="titulodetalle">Reparo</span></td>
   </tr>
-  <tr valign="middle">
+  <tr>
     <td align="right" valign="middle">Motivo Reparo:</td>
     <td colspan="3" align="left" valign="middle"><?php echo strtoupper($row_DetailRS1['reparo_obs']); ?></td>
   </tr>

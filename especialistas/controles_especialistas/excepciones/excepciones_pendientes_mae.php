@@ -86,7 +86,7 @@ if (isset($_GET['excepcion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_excepciones_pendientes = sprintf("SELECT * FROM excepciones WHERE estado = %s and estado_excepcion = %s and excepcion  = %s ORDER BY vcto_excepcion ASC", GetSQLValueString($colname_excepciones_pendientes, "text"),GetSQLValueString($colname1_excepciones_pendientes, "text"),GetSQLValueString($colname2_excepciones_pendientes, "text"));
-$excepciones_pendientes = mysql_query($query_excepciones_pendientes, $comercioexterior) or die(mysqli_error());
+$excepciones_pendientes = mysqli_query($comercioexterior, $query_excepciones_pendientes) or die(mysqli_error($comercioexterior));
 $row_excepciones_pendientes = mysqli_fetch_assoc($excepciones_pendientes);
 $totalRows_excepciones_pendientes = mysqli_num_rows($excepciones_pendientes);
 ?>

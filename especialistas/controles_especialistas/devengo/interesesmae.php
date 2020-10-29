@@ -156,6 +156,7 @@ $query_proyecint = sprintf("SELECT *, sum(saldo_vigente) as saldo_insoluto, (cas
 $proyecint = mysqli_query($comercioexterior, $query_proyecint) or die(mysqli_error($comercioexterior));
 $row_proyecint = mysqli_fetch_assoc($proyecint);
 $totalRows_proyecint = mysqli_num_rows($proyecint);
+//var_dump($row_proyecint); die();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -254,6 +255,7 @@ a:active {
 </form>
 <br />
 <form id="form3" name="form3" method="POST" action="<?php echo $editFormAction; ?>">
+
   <?php if ($totalRows_proyecint > 0) { // Show if recordset not empty ?>
   <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
     <tr>
@@ -328,11 +330,20 @@ a:active {
   <input name="saldo_insoluto" type="hidden" id="saldo_insoluto" value="<?php echo $row_proyecint['saldo_insoluto']; ?>" />
     <input name="dife" type="hidden" id="dife" value="<?php echo $row_proyecint['factor_calculo']; ?>" />
     <input name="fecha_vcto" type="hidden" id="fecha_vcto" value="<?php echo $row_proyecint['fecha_vcto']; ?>" />
-    <?php } // Show if recordset not empty ?>
+    
   <input name="sistema" type="hidden" id="sistema" value="<?php echo $_SESSION['login'];?>" />
   <input name="oficina" type="hidden" id="oficina" value="<?php echo $row_proyecint['oficina']; ?>" />
 </form>
+<?php } // Show if recordset not empty ?>
 <br />
+
+<table width="95%"  border="0" align="center">
+  <tr>
+    <td align="right" valign="middle"><a href="../../redsuc/redsuc.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Imagen4','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen4" width="80" height="25" border="0"></a></td>
+  </tr>
+</table>
+</br>
+
 <table width="95%" border="0" align="center">
   <tr>
     <td align="right"><a href="../../ac_bei/ac_bei.php">Volver a BMG</a> / <a href="../../ni/ni.php">Volver a NI</a> /<a href="../../territorial/tr.php"> Volver a Territoriales</a> / <a href="../../redsuc/redsuc.php">Vover a Red de Sucursales</a></td>

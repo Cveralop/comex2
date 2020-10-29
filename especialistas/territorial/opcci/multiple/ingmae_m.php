@@ -107,10 +107,12 @@ $colname_nrooperacion = "zzz";
 if (isset($_GET['nro_operacion'])) {
   $colname_nrooperacion = $_GET['nro_operacion'];
 }
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_nrooperacion = sprintf("SELECT * FROM opcci nolock WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_nrooperacion, "text"),GetSQLValueString($colname1_nrooperacion, "text"));
 $query_limit_nrooperacion = sprintf("%s LIMIT %d, %d", $query_nrooperacion, $startRow_nrooperacion, $maxRows_nrooperacion);
 $nrooperacion = mysqli_query($comercioexterior, $query_limit_nrooperacion) or die(mysqli_error($comercioexterior));
+
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
 if (isset($_GET['totalRows_nrooperacion'])) {
   $totalRows_nrooperacion = $_GET['totalRows_nrooperacion'];
@@ -134,6 +136,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_nrooperacion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -149,6 +152,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_nrooperacion = sprintf("&totalRows_nrooperacion=%d%s", $totalRows_nrooperacion, $queryString_nrooperacion);
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -163,7 +167,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+//$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

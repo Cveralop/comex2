@@ -92,7 +92,7 @@ if (isset($_GET['rut_beneficiario'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_swift_oprecibida = sprintf("SELECT * FROM swift_oprecibida nolock WHERE date_ingreso between %s and %s and rut_beneficiario = %s ORDER BY id DESC", GetSQLValueString($colname_swift_oprecibida, "date"),GetSQLValueString($colname1_swift_oprecibida, "date"),GetSQLValueString($colname2_swift_oprecibida, "text"));
-$swift_oprecibida = mysql_query($query_swift_oprecibida, $comercioexterior) or die(mysqli_error());
+$swift_oprecibida = mysqli_query($comercioexterior, $query_swift_oprecibida) or die(mysqli_error($comercioexterior));
 $row_swift_oprecibida = mysqli_fetch_assoc($swift_oprecibida);
 $totalRows_swift_oprecibida = mysqli_num_rows($swift_oprecibida);
 ?>

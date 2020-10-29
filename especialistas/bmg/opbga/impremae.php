@@ -319,7 +319,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="left" valign="middle"><?php echo strtoupper($row_impresion['rut_cliente']); ?></div></td>
     <td align="left" valign="middle"><?php echo strtoupper($row_impresion['nombre_cliente']); ?></td>
     <td align="center" valign="middle"><?php echo $row_impresion['evento']; ?></div></td>
-    <td align="center" valign="middle"><?php echo $row_impresion['valuta']; ?></div></td>
+    <td align="center" valign="middle"><?php //echo $row_impresion['valuta']; ?></div></td>
     <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_impresion['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_impresion['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
     <td colspan="2" align="center" valign="middle"><?php if ($row_impresion['urgente'] <> $row_colores['verdeno']) { // Show if not first page ?>
       <span class="Rojo2"><?php echo $row_impresion['urgente']; ?></span>

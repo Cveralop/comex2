@@ -88,7 +88,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO opcci (nro_folio, rut_cliente, nombre_cliente, ejecutivo_cuenta, ejecutivo_ni, especialista_ni, nombre_oficina, fecha_ingreso, date_ingreso, evento, estado, obs, especialista_curse, territorial, moneda_operacion, monto_operacion, sub_estado, date_preingreso, estado_visacion, mandato, impedido_operar, urgente, campana_comex, via_web, cliente_passport) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['nro_folio'], "text"),
-					   GetSQLValueString($_POST['rut_cliente'], "text"),
+					             GetSQLValueString($_POST['rut_cliente'], "text"),
                        GetSQLValueString($_POST['nombre_cliente'], "text"),
                        GetSQLValueString($_POST['ejecutivo_cuenta'], "text"),
                        GetSQLValueString($_POST['ejecutivo_ni'], "text"),
@@ -107,11 +107,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['date_preingreso'], "date"),
                        GetSQLValueString($_POST['visacion'], "text"),
                        GetSQLValueString($_POST['mandato'], "text"),
-					   GetSQLValueString($_POST['impedido_operar'], "text"),
+					             GetSQLValueString($_POST['impedido_operar'], "text"),
                        GetSQLValueString($_POST['urgente'], "text"),
                        GetSQLValueString($_POST['campana_comex'], "text"),
                        GetSQLValueString($_POST['via_web'], "text"),
-					   GetSQLValueString($_POST['cliente_passport'], "text"));
+					             GetSQLValueString($_POST['cliente_passport'], "text"));
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $Result1 = mysqli_query($comercioexterior, $insertSQL) or die(mysqli_error($comercioexterior));
   $insertGoTo = "ingmae.php";
@@ -121,6 +121,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   }
   header(sprintf("Location: %s", $insertGoTo));
 }
+//var_dump($row_DetailRS1); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -237,7 +238,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <tr valign="middle">
       <td align="right">Observaci&oacute;n:</td>
       <td colspan="3" align="left"><span id="sprytextarea1">
-        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo $row_DetailRS1['obs']; ?></textarea>
+        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php //echo $row_DetailRS1['obs']; ?></textarea>
       <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">
@@ -269,24 +270,25 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <input name="urgente" type="radio" class="etiqueta12" value="No" checked>
 No</label></td>
     </tr>
+
     <tr valign="middle">
       <td align="right">Via Web:</td>
-      <td align="center"><label>
-        </label>
+
+      <td align="center">      
         <label>
-          <input type="radio" name="via_web" value="Si">
-        Si
-        <input name="via_web" type="radio" value="No" checked>
-No</label></td>
+          <input type="radio" name="via_web" value="Si">Si
+          <input name="via_web" type="radio" value="No" checked>No
+        </label>
+      </td>
+
       <td align="right">Campa&ntilde;a Comex:</td>
       <td align="center">
         <label>
-          <input name="campana_comex" type="radio" class="etiqueta12" id="campana_comex_1" value="Si">
-          Si</label>
-        <input name="campana_comex" type="radio" class="etiqueta12" id="campana_comex_0" value="No" checked>
-No<br>
+          <input name="campana_comex" type="radio" class="etiqueta12" id="campana_comex_1" value="Si">Si</label>
+          <input name="campana_comex" type="radio" class="etiqueta12" id="campana_comex_0" value="No" checked>No<br>
      </td>
     </tr>
+
     <tr valign="middle">
       <td align="right">Mandato / Imp. Operar / Passport:</td>
       <td colspan="3" align="left">
@@ -295,9 +297,9 @@ No<br>
          <input name="impedido_operar" type="text" class="destadado" id="impedido_operar" value="<?php echo $row_DetailRS1['impedido_operar']; ?>" size="10" maxlength="10">         
           / 
           <input name="cliente_passport" type="text" class="respuestacolumna_rojo" id="cliente_passport" value="<?php echo $row_DetailRS1['cliente_passport']; ?>" size="3" maxlength="2">          <br>
-     </td>
-    </tr>
-    <tr valign="middle">
+      </td>
+       </tr>
+        <tr valign="middle">
       <td colspan="4" align="center">
         <input type="submit" class="boton" value="Ingresar Instrucci&oacute;n">
       </div></td>

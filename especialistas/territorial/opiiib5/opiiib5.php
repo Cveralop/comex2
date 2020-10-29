@@ -160,7 +160,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
             <td align="left" valign="middle"><img src="../../../imagenes/GIF/check.gif" width="13" height="12"><a href="impremae.php">Impresi&oacute;n Multiple</a> o <a href="cartaoriginal.php">Carta Original</a></td>
           </tr>
           <tr>
-            <td align="left" valign="middle"><img src="../../../imagenes/GIF/check.gif" alt="" width="13" height="12"><a href="opiiib5.php">Carta Reparo Operaciones</a></td>
+            <td align="left" valign="middle"><img src="../../../imagenes/GIF/check.gif" alt="" width="13" height="12"><a href="reparo/reparomae.php">Carta Reparo Operaciones</a></td>
           </tr>
           <tr>
             <td align="left" valign="middle"><img src="../../../imagenes/GIF/check.gif" width="13" height="12"><a href="modificar/modmae.php">Modificar Registro Instrucciones MECO</a></td>

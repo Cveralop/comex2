@@ -163,26 +163,28 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
 </table>
 <br>
+
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr bgcolor="#999999">
-    <td colspan="4" align="left" valign="middle"><img src="../../../../imagenes/GIF/notepad.gif" width="19" height="21"><span class="Estilo5">Detalle Operaci&oacute;n</span></td>
+    <td colspan="4" align="left" valign="middle"><img src="../../../../imagenes/GIF/notepad.gif" width="19" height="21"><span class="Estilo5"><span class="titulodetalle">Detalle Operaci&oacute;n</span></span></td>
   </tr>
-  <tr>
-    <td align="right" valign="middle">Nro Registro: </td>
-    <td align="center" valign="middle"><span class="Estilo9"><?php echo $row_DetailRS1['id']; ?> </span></td>
-    <td valign="middle">Rut Cliente: </div></td>
-    <td align="center" valign="middle"><?php echo $row_DetailRS1['rut_cliente']; ?></td>
+  <tr valign="middle">
+    <td width="22%" align="right" valign="middle">Nro Registro: </td>
+    <td width="34%" align="center" valign="middle"><span class="nroregistro"><?php echo $row_DetailRS1['id']; ?> </span></td>
+    <td width="19%" align="right" valign="middle">Rut Cliente:</div></td>
+    <td width="25%" align="center" valign="middle"><?php echo strtoupper($row_DetailRS1['rut_cliente']); ?></td>
   </tr>
-  <tr>
+  <tr valign="middle">
     <td align="right" valign="middle">Nombre Cliente: </td>
-    <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['nombre_cliente']; ?> </td>
+    <td colspan="3" align="left" valign="middle"><?php echo strtoupper($row_DetailRS1['nombre_cliente']); ?> </td>
   </tr>
-  <tr>
-    <td align="right" valign="middle">Feche Cliente: </td>
+  <tr valign="middle">
+    <td align="right" valign="middle">Fecha Cliente: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['fecha_ingreso']; ?> </td>
     <td align="right" valign="middle">Evento:</td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['evento']; ?></td>
   </tr>
+
   <tr>
     <td align="right" valign="middle">Estado:</td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['estado']; ?> </td>
@@ -202,26 +204,16 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="center" valign="middle"><?php echo $row_DetailRS1['especialista']; ?></td>
   </tr>
   <tr>
-    <td align="right" valign="middle">Observaci&oacute;n:</td>
-    <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
-  </tr>
-  <tr>
     <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n:</td>
-    <td valign="middle"><span class="Estilo6"><?php echo $row_DetailRS1['moneda_operacion']; ?></span> <span class="rojopequeno">/</span> <strong><?php echo number_format($row_DetailRS1['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
-    <td align="right" valign="middle">Tipo Operaci&oacute;n: </div></td>
-    <td align="center" valign="middle"><?php echo $row_DetailRS1['tipo_operacion']; ?></div></td>
+    <td align="center" valign="middle" class="rojopequeno"><?php echo $row_DetailRS1['moneda_operacion']; ?> </td>
+    <td align="right" valign="middle">Tipo Operaci&oacute;n:</td>
+    <td align="center" valign="middle"><?php echo $row_DetailRS1['tipo_operacion']; ?></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Estado Operador: </td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['sub_estado']; ?> </td>
     <td align="right" valign="middle">Autorizador:</td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['autorizador']; ?></td>
-  </tr>
-  <tr>
-    <td align="right" valign="middle">Fecha Pre Ingreso: </td>
-    <td align="center" valign="middle"><span class="etiqueta12"><?php echo $row_DetailRS1['date_preingreso']; ?></span></td>
-    <td align="right" valign="middle">Fecha Ingreso Especialista: </td>
-    <td align="center" valign="middle"><span class="etiqueta12"><?php echo $row_DetailRS1['date_espe']; ?></span></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Fecha Visaci&oacute;n: </td>
@@ -239,11 +231,17 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right" valign="middle">Motivo Reparo: </td>
     <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['reparo_obs']; ?> </td>
   </tr>
+  <tr>
+    <td align="right" valign="middle">Observacion:  </td>
+    <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
+  </tr>
+</tr>
 </table>
 <br>
 <table width="95%"  border="0" align="center">
   <tr>
-    <td align="right" valign="middle"><a href="consulta.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80" height="25" border="0"></a></div></td>
+    <td align="right" valign="middle"><a href="consulta.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80" height="25" border="0"></a>
+    </td>    
   </tr>
 </table>
 </body>
