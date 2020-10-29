@@ -91,7 +91,7 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_impresion = sprintf("SELECT * FROM opcbe nolock WHERE especialista_curse = %s and date_ingreso = %s and rut_cliente = %s and evento = %s ORDER BY id DESC", GetSQLValueString($colname_impresion, "text"),GetSQLValueString($colname1_impresion, "date"),GetSQLValueString($colname3_impresion, "text"),GetSQLValueString($colname4_impresion, "text"));
-$impresion = mysqli_query($comercioexterior, $query_impresion) or die(mysqli_error($comercioexterior)); or die(mysqli_error());
+$impresion = mysqli_query($comercioexterior, $query_impresion) or die(mysqli_error($comercioexterior));
 $row_impresion = mysqli_fetch_assoc($impresion);
 $totalRows_impresion = mysqli_num_rows($impresion);
 

@@ -87,7 +87,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_entdoc = sprintf("SELECT * FROM opcbi nolock WHERE estado_doc = %s and evento = %s and nro_operacion = %s ORDER BY id DESC", GetSQLValueString($colname1_entdoc, "text"),GetSQLValueString($colname2_entdoc, "text"),GetSQLValueString($colname3_entdoc, "text"));
-$entdoc = mysql_query($query_entdoc, $comercioexterior) or die(mysqli_error());
+$entdoc = mysqli_query($comercioexterior, $query_entdoc) or die(mysqli_error($comercioexterior));
 $row_entdoc = mysqli_fetch_assoc($entdoc);
 $totalRows_entdoc = mysqli_num_rows($entdoc);
 ?>
