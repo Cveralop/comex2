@@ -119,7 +119,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     }
   }
   if (count($newParams) != 0) {
-    $queryString_altadocdis = "&" . htmlentities(implode("&", $newParams));
+    $queryString_entdoc = "&" . htmlentities(implode("&", $newParams));
   }
 }
 $queryString_entdoc = sprintf("&totalRows_entdoc=%d%s", $totalRows_entdoc, $queryString_entdoc);

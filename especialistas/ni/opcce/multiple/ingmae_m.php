@@ -73,6 +73,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_nrooperacion = 20;
+$pageNum_nrooperacion = 0;
+if (isset($_GET['pageNum_nrooperacion'])) {
+  $pageNum_nrooperacion = $_GET['pageNum_nrooperacion'];
+}
+$startRow_nrooperacion = $pageNum_nrooperacion * $maxRows_nrooperacion;
+
 $colname_nrooperacion = "-1";
 if (isset($_GET['nro_operacion'])) {
   $colname_nrooperacion = $_GET['nro_operacion'];
@@ -87,9 +95,35 @@ if (isset($_GET['referencia'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_nrooperacion = sprintf("SELECT * FROM opcce nolock WHERE nro_operacion LIKE %s and evento = %s and referencia LIKE %s ORDER BY date_ingreso DESC", GetSQLValueString("%" . $colname_nrooperacion . "%", "text"),GetSQLValueString($colname1_nrooperacion, "text"),GetSQLValueString("%" . $colname2_nrooperacion . "%", "text"));
-$nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion) or die(mysqli_error($comercioexterior));
+$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_nrooperacion, $startRow_nrooperacion, $maxRows_nrooperacion);
+$nrooperacion = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
 $totalRows_nrooperacion = mysqli_num_rows($nrooperacion);
+
+if (isset($_GET['totalRows_nrooperacion'])) {
+  $totalRows_nrooperacion = $_GET['totalRows_nrooperacion'];
+} else {
+  $all_nrooperacion = mysqli_query($comercioexterior, $query_nrooperacion);
+  $totalRows_nrooperacion = mysqli_num_rows($all_nrooperacion);
+}
+$totalPages_nrooperacion = ceil($totalRows_nrooperacion/$maxRows_nrooperacion)-1;
+
+$queryString_nrooperacion = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_nrooperacion") == false && 
+        stristr($param, "totalRows_nrooperacion") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_nrooperacion = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_nrooperacion = sprintf("&totalRows_nrooperacion=%d%s", $totalRows_nrooperacion, $queryString_nrooperacion);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -218,6 +252,31 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <?php } while ($row_nrooperacion = mysqli_fetch_assoc($nrooperacion)); ?>
 </table>
 <br>
+
+<table border="0" width="50%" align="center">
+        <tr>
+            <td width="23%" align="center"><?php if ($pageNum_nrooperacion > 0) { // Show if not first page ?>
+                <a href="<?php printf("%s?pageNum_nrooperacion=%d%s", $currentPage, 0, $queryString_nrooperacion); ?>">Primero</a>
+                <?php } // Show if not first page ?>
+            </td>
+            <td width="31%" align="center"><?php if ($pageNum_nrooperacion > 0) { // Show if not first page ?>
+                <a
+                    href="<?php printf("%s?pageNum_nrooperacion=%d%s", $currentPage, max(0, $pageNum_nrooperacion - 1), $queryString_nrooperacion); ?>">Anterior</a>
+                <?php } // Show if not first page ?>
+            </td>
+            <td width="23%" align="center"><?php if ($pageNum_nrooperacion < $totalPages_nrooperacion) { // Show if not last page ?>
+                <a
+                    href="<?php printf("%s?pageNum_nrooperacion=%d%s", $currentPage, min($totalPages_nrooperacion, $pageNum_nrooperacion + 1), $queryString_nrooperacion); ?>">Siguiente</a>
+                <?php } // Show if not last page ?>
+            </td>
+            <td width="23%" align="center"><?php if ($pageNum_nrooperacion < $totalPages_nrooperacion) { // Show if not last page ?>
+                <a
+                    href="<?php printf("%s?pageNum_nrooperacion=%d%s", $currentPage, $totalPages_nrooperacion, $queryString_nrooperacion); ?>">�ltimo</a>
+                <?php } // Show if not last page ?>
+            </td>
+        </tr>
+    </table>
+
 Registros del <strong><?php echo ($startRow_nrooperacion + 1) ?></strong> al <strong><?php echo min($startRow_nrooperacion + $maxRows_nrooperacion, $totalRows_nrooperacion) ?></strong> de un total de <strong><?php echo $totalRows_nrooperacion ?></strong>
 <?php } // Show if recordset not empty ?> <br>
 <br>

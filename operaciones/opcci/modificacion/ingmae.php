@@ -91,6 +91,7 @@ $query_ingreso = sprintf("SELECT * FROM opcci WHERE nro_operacion = %s and event
 $query_limit_ingreso = sprintf("%s LIMIT %d, %d", $query_ingreso, $startRow_ingreso, $maxRows_ingreso);
 $ingreso = mysqli_query($comercioexterior, $query_limit_ingreso) or die(mysqli_error());
 $row_ingreso = mysqli_fetch_assoc($ingreso);
+
 if (isset($_GET['totalRows_ingreso'])) {
   $totalRows_ingreso = $_GET['totalRows_ingreso'];
 } else {

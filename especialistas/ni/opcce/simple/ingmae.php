@@ -74,6 +74,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingvarios = 20;
+$pageNum_ingvarios = 0;
+if (isset($_GET['pageNum_ingvarios'])) {
+  $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
+}
+$startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
 
 $colname_ingvarios = "-1";
 if (isset($_GET['nro_operacion'])) {
@@ -85,9 +92,36 @@ if (isset($_GET['referencia'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingvarios = sprintf("SELECT * FROM opcce nolock  WHERE nro_operacion LIKE %s and referencia LIKE %s ORDER BY id DESC", GetSQLValueString("%" . $colname_ingvarios . "%", "text"),GetSQLValueString("%" . $colname2_ingvarios . "%", "text"));
-$ingvarios = mysqli_query($comercioexterior, $query_ingvarios) or die(mysqli_error());
+$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
+$ingvarios = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
 $row_ingvarios = mysqli_fetch_assoc($ingvarios);
 $totalRows_ingvarios = mysqli_num_rows($ingvarios);
+
+if (isset($_GET['totalRows_ingvarios'])) {
+  $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
+} else {
+  $all_ingvarios = mysqli_query($comercioexterior, $query_ingvarios);
+  $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
+}
+$totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
+
+$queryString_ingvarios = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingvarios") == false && 
+        stristr($param, "totalRows_ingvarios") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+
+//var_dump($row_ingvarios); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -212,6 +246,31 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <?php } while ($row_ingvarios = mysqli_fetch_assoc($ingvarios)); ?>
 </table>
 <br>
+
+<table border="0" width="50%" align="center">
+        <tr>
+            <td width="23%" align="center"><?php if ($pageNum_ingvarios > 0) { // Show if not first page ?>
+                <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, 0, $queryString_ingvarios); ?>">Primero</a>
+                <?php } // Show if not first page ?>
+            </td>
+            <td width="31%" align="center"><?php if ($pageNum_ingvarios > 0) { // Show if not first page ?>
+                <a
+                    href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, max(0, $pageNum_ingvarios - 1), $queryString_ingvarios); ?>">Anterior</a>
+                <?php } // Show if not first page ?>
+            </td>
+            <td width="23%" align="center"><?php if ($pageNum_ingvarios < $totalPages_ingvarios) { // Show if not last page ?>
+                <a
+                    href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, min($totalPages_ingvarios, $pageNum_ingvarios + 1), $queryString_ingvarios); ?>">Siguiente</a>
+                <?php } // Show if not last page ?>
+            </td>
+            <td width="23%" align="center"><?php if ($pageNum_ingvarios < $totalPages_ingvarios) { // Show if not last page ?>
+                <a
+                    href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, $totalPages_ingvarios, $queryString_ingvarios); ?>">�ltimo</a>
+                <?php } // Show if not last page ?>
+            </td>
+        </tr>
+    </table>
+
 Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <strong><?php echo min($startRow_ingvarios + $maxRows_ingvarios, $totalRows_ingvarios) ?></strong> de un total de <strong><?php echo $totalRows_ingvarios ?></strong>
 <?php } // Show if recordset not empty ?> <br>
 <br>

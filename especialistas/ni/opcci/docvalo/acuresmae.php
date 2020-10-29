@@ -96,8 +96,8 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_entdoc = sprintf("SELECT * FROM opcci nolock WHERE nro_operacion = %s and estado_doc = %s and evento = %s ORDER BY id DESC", GetSQLValueString($colname_entdoc, "text"),GetSQLValueString($colname1_entdoc, "text"),GetSQLValueString($colname2_entdoc, "text"));
-$query_limit_altadocdis = sprintf("%s LIMIT %d, %d", $query_entdoc, $startRow_entdoc, $maxRows_entdoc);
-$entdoc = mysqli_query($comercioexterior, $query_limit_altadocdis) or die(mysqli_error($comercioexterior));
+$query_limit_entdoc = sprintf("%s LIMIT %d, %d", $query_entdoc, $startRow_entdoc, $maxRows_entdoc);
+$entdoc = mysqli_query($comercioexterior, $query_limit_entdoc) or die(mysqli_error($comercioexterior));
 $row_entdoc = mysqli_fetch_assoc($entdoc);
 $totalRows_entdoc = mysqli_num_rows($entdoc);
 
@@ -121,7 +121,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     }
   }
   if (count($newParams) != 0) {
-    $queryString_altadocdis = "&" . htmlentities(implode("&", $newParams));
+    $queryString_entdoc = "&" . htmlentities(implode("&", $newParams));
   }
 }
 $queryString_entdoc = sprintf("&totalRows_entdoc=%d%s", $totalRows_entdoc, $queryString_entdoc);
