@@ -73,6 +73,15 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+//AGREGADO 1 para total de registros
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_altadocdis = 10;
+$pageNum_altadocdis = 0;
+if (isset($_GET['pageNum_altadocdis'])) {
+  $pageNum_altadocdis = $_GET['pageNum_altadocdis'];
+}
+$startRow_altadocdis = $pageNum_altadocdis * $maxRows_altadocdis;
+
 $colname_altadocdis = "-1";
 if (isset($_GET['nro_operacion'])) {
   $colname_altadocdis = $_GET['nro_operacion'];
@@ -83,9 +92,36 @@ if (isset($_GET['tipo_negociacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_altadocdis = sprintf("SELECT * FROM opcci nolock WHERE nro_operacion = %s and tipo_negociacion = %s ORDER BY id DESC", GetSQLValueString($colname_altadocdis, "text"),GetSQLValueString($colname1_altadocdis, "text"));
-$altadocdis = mysql_query($query_altadocdis, $comercioexterior) or die(mysqli_error());
+$query_limit_altadocdis = sprintf("%s LIMIT %d, %d", $query_altadocdis, $startRow_altadocdis, $maxRows_altadocdis);
+$altadocdis = mysqli_query($comercioexterior, $query_limit_altadocdis) or die(mysqli_error($comercioexterior));
 $row_altadocdis = mysqli_fetch_assoc($altadocdis);
-$totalRows_altadocdis = mysqli_num_rows($altadocdis);
+//$totalRows_altadocdis = mysqli_num_rows($altadocdis);
+
+//AGREGADO 1.2 para total de registros
+if (isset($_GET['totalRows_altadocdis'])) {
+  $totalRows_altadocdis = $_GET['totalRows_altadocdis'];
+} else {
+  $all_altadocdis = mysqli_query($comercioexterior, $query_altadocdis);
+  $totalRows_altadocdis = mysqli_num_rows($all_altadocdis);
+}
+$totalPages_altadocdis = ceil($totalRows_altadocdis/$maxRows_altadocdis)-1;
+
+$queryString_altadocdis = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_altadocdis") == false && 
+        stristr($param, "totalRows_altadocdis") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_altadocdis = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_altadocdis = sprintf("&totalRows_altadocdis=%d%s", $totalRows_altadocdis, $queryString_altadocdis);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
