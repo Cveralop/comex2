@@ -298,7 +298,6 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <?php } while ($row_ingape = mysqli_fetch_assoc($ingape)); ?>
 </table>
 <br>
-
 <table border="0" width="50%" align="center">
   <tr>
     <td width="23%" align="center"><?php if ($pageNum_ingape > 0) { // Show if not first page ?>
@@ -320,7 +319,6 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
 </table>
 <br>
-
 Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><?php echo min($startRow_ingape + $maxRows_ingape, $totalRows_ingape) ?></strong> de un total de <strong><?php echo $totalRows_ingape ?></strong>
 <?php } // Show if recordset not empty ?>
 <br>

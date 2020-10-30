@@ -72,6 +72,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingape = 10;
+$pageNum_ingape = 0;
+if (isset($_GET['pageNum_ingape'])) {
+  $pageNum_ingape = $_GET['pageNum_ingape'];
+}
+$startRow_ingape = $pageNum_ingape * $maxRows_ingape;
+
 
 $colname_ingape = "zzz";
 if (isset($_GET['rut_cliente'])) {
@@ -79,9 +87,35 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM cliente nolock WHERE rut_cliente = %s", GetSQLValueString($colname_ingape, "text"));
-$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
+$query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
+$ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
+
+if (isset($_GET['totalRows_modificacion'])) {
+  $totalRows_ingape = $_GET['totalRows_modificacion'];
+} else {
+  $all_ingape = mysqli_query($comercioexterior, $query_ingape);
+  $totalRows_ingape = mysqli_num_rows($all_ingape);
+}
+$totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
+
+$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
