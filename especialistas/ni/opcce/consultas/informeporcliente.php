@@ -100,6 +100,7 @@ $query_opporcliente = sprintf("SELECT * FROM opcce nolock WHERE rut_cliente = %s
 $opporcliente = mysqli_query($comercioexterior,$query_opporcliente) or die(mysqli_error());
 $row_opporcliente = mysqli_fetch_assoc($opporcliente);
 $totalRows_opporcliente = mysqli_num_rows($opporcliente);
+//var_dump($row_opporcliente); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -292,7 +293,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_opporcliente['moneda_documentos']);  ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_opporcliente['monto_documentos'], 2, ',', '.');  ?></strong></div></td>
     <td align="center" valign="middle"><?php echo strtoupper($row_opporcliente['pais']); ?></div></td>
     <td align="left" valign="middle"><?php echo strtoupper($row_opporcliente['banco_destino']); ?></td>
-    <td align="center" valign="middle"><?php echo $row_opporcliente['forward']; ?></div></td>
+    <td align="center" valign="middle"><?php //echo $row_opporcliente['forward']; //No existe forward en la tabla ?></div></td>
   </tr>
     <?php } while ($row_opporcliente = mysqli_fetch_assoc($opporcliente)); ?>
 </table>

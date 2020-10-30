@@ -75,6 +75,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_impresion = 10;
+$pageNum_impresion = 0;
+if (isset($_GET['pageNum_impresion'])) {
+  $pageNum_impresion = $_GET['pageNum_impresion'];
+}
+$startRow_impresion = $pageNum_impresion * $maxRows_impresion;
+
 $colname_impresion = "-1";
 if (isset($_GET['especialista_curse'])) {
   $colname_impresion = $_GET['especialista_curse'];
@@ -93,15 +101,42 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_impresion = sprintf("SELECT * FROM opcce nolock WHERE especialista_curse = %s and date_ingreso = %s and rut_cliente = %s and evento = %s ORDER BY id DESC", GetSQLValueString($colname_impresion, "text"),GetSQLValueString($colname1_impresion, "date"),GetSQLValueString($colname3_impresion, "text"),GetSQLValueString($colname4_impresion, "text"));
-$impresion = mysqli_query($comercioexterior, $query_impresion) or die(mysqli_error($comercioexterior));
+$query_limit_impresion = sprintf("%s LIMIT %d, %d", $query_impresion, $startRow_impresion, $maxRows_impresion);
+$impresion = mysqli_query($comercioexterior, $query_limit_impresion) or die(mysqli_error($comercioexterior));
 $row_impresion = mysqli_fetch_assoc($impresion);
 $totalRows_impresion = mysqli_num_rows($impresion);
+
+if (isset($_GET['totalRows_impresion'])) {
+  $totalRows_impresion = $_GET['totalRows_impresion'];
+} else {
+  $all_impresion = mysqli_query($comercioexterior, $query_impresion);
+  $totalRows_impresion = mysqli_num_rows($all_impresion);
+}
+$totalPages_impresion = ceil($totalRows_impresion/$maxRows_impresion)-1;
+
+$queryString_impresion = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_impresion") == false && 
+        stristr($param, "totalRows_impresion") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_impresion = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_impresion = sprintf("&totalRows_impresion=%d%s", $totalRows_impresion, $queryString_impresion);
 
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_colores = "SELECT * FROM parametrocolores nolock";
 $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($comercioexterior));
 $row_colores = mysqli_fetch_assoc($colores);
 $totalRows_colores = mysqli_num_rows($colores);
+
+//var_dump($row_impresion); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -279,6 +314,31 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <?php } while ($row_impresion = mysqli_fetch_assoc($impresion)); ?>
 </table>
 <br>
+
+<table border="0" width="50%" align="center">
+        <tr>
+            <td width="23%" align="center"><?php if ($pageNum_impresion > 0) { // Show if not first page ?>
+                <a href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, 0, $queryString_impresion); ?>">Primero</a>
+                <?php } // Show if not first page ?>
+            </td>
+            <td width="31%" align="center"><?php if ($pageNum_impresion > 0) { // Show if not first page ?>
+                <a
+                    href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, max(0, $pageNum_impresion - 1), $queryString_impresion); ?>">Anterior</a>
+                <?php } // Show if not first page ?>
+            </td>
+            <td width="23%" align="center"><?php if ($pageNum_impresion < $totalPages_impresion) { // Show if not last page ?>
+                <a
+                    href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, min($totalPages_impresion, $pageNum_impresion + 1), $queryString_impresion); ?>">Siguiente</a>
+                <?php } // Show if not last page ?>
+            </td>
+            <td width="23%" align="center"><?php if ($pageNum_impresion < $totalPages_impresion) { // Show if not last page ?>
+                <a
+                    href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, $totalPages_impresion, $queryString_impresion); ?>">&Uacute;ltimo</a>
+                <?php } // Show if not last page ?>
+            </td>
+        </tr>
+    </table>
+
 Registros del <strong><?php echo ($startRow_impresion + 1) ?></strong> al <strong><?php echo min($startRow_impresion + $maxRows_impresion, $totalRows_impresion) ?></strong> de un total de <strong><?php echo $totalRows_impresion ?></strong>
 <?php } // Show if recordset not empty ?>
 </body>

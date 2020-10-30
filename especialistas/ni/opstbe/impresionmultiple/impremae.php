@@ -73,6 +73,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_impresion = 10;
+$pageNum_impresion = 0;
+if (isset($_GET['pageNum_impresion'])) {
+  $pageNum_impresion = $_GET['pageNum_impresion'];
+}
+$startRow_impresion = $pageNum_impresion * $maxRows_impresion;
+
 $colname_impresion = "-1";
 if (isset($_GET['especialista_curse'])) {
   $colname_impresion = $_GET['especialista_curse'];
@@ -91,9 +99,34 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_impresion = sprintf("SELECT * FROM opste nolock WHERE especialista_curse = %s and date_ingreso = %s and rut_cliente = %s and evento = %s ORDER BY id DESC", GetSQLValueString($colname_impresion, "text"),GetSQLValueString($colname1_impresion, "text"),GetSQLValueString($colname3_impresion, "text"),GetSQLValueString($colname4_impresion, "text"));
-$impresion = mysqli_query($comercioexterior, $query_impresion) or die(mysqli_error($comercioexterior));
+$query_limit_impresion = sprintf("%s LIMIT %d, %d", $query_impresion, $startRow_impresion, $maxRows_impresion);
+$impresion = mysqli_query($comercioexterior, $query_limit_impresion) or die(mysqli_error($comercioexterior));
 $row_impresion = mysqli_fetch_assoc($impresion);
 $totalRows_impresion = mysqli_num_rows($impresion);
+
+if (isset($_GET['totalRows_impresion'])) {
+  $totalRows_impresion = $_GET['totalRows_impresion'];
+} else {
+  $all_impresion = mysqli_query($comercioexterior, $query_impresion);
+  $totalRows_impresion = mysqli_num_rows($all_impresion);
+}
+$totalPages_impresion = ceil($totalRows_impresion/$maxRows_impresion)-1;
+
+$queryString_impresion = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_impresion") == false && 
+        stristr($param, "totalRows_impresion") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_impresion = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_impresion = sprintf("&totalRows_impresion=%d%s", $totalRows_impresion, $queryString_impresion);
 
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_colores = "SELECT * FROM parametrocolores nolock";
@@ -259,8 +292,8 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="center" valign="middle"><?php echo strtoupper($row_impresion['rut_cliente']); ?></div></td>
     <td align="left" valign="middle"><?php echo strtoupper($row_impresion['nombre_cliente']); ?></td>
     <td align="center" valign="middle"><?php echo $row_impresion['evento']; ?> </div>      </div></td>
-    <td align="center" valign="middle"><?php echo $row_impresion['valuta']; ?></div></td>
-    <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_impresion['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_impresion['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
+    <td align="center" valign="middle"><?php //echo $row_impresion['valuta']; ?></div></td>
+    <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_impresion['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_impresion['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
     <td colspan="2" align="center" valign="middle"><?php if ($row_impresion['urgente'] <> $row_colores['verdeno']) { // Show if not first page ?>
         <span class="Rojo2"><?php echo $row_impresion['urgente']; ?> </span></span>        
 		<?php } // Show if not first page ?>

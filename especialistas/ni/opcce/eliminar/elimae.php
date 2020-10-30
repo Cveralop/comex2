@@ -73,6 +73,14 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingape = 10;
+$pageNum_ingape = 0;
+if (isset($_GET['pageNum_ingape'])) {
+  $pageNum_ingape = $_GET['pageNum_ingape'];
+}
+$startRow_ingape = $pageNum_ingape * $maxRows_ingape;
+
 $colname_ingape = "-1";
 if (isset($_GET['rut_cliente'])) {
   $colname_ingape = $_GET['rut_cliente'];
@@ -91,9 +99,35 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM opcce nolock WHERE rut_cliente LIKE %s and (estado_visacion = %s or estado_visacion = %s) and nro_operacion LIKE %s ORDER BY id DESC", GetSQLValueString("%" . $colname_ingape . "%", "text"),GetSQLValueString($colname1_ingape, "text"),GetSQLValueString($colname2_ingape . "%", "text"),GetSQLValueString("%" . $colname3_ingape . "%", "text"));
-$ingape = mysqli_query($comercioexterior, $query_ingape) or die(mysqli_error($comercioexterior));
+$query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
+$ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
 $totalRows_ingape = mysqli_num_rows($ingape);
+
+if (isset($_GET['totalRows_ingape'])) {
+  $totalRows_ingape = $_GET['totalRows_ingape'];
+} else {
+  $all_ingape = mysqli_query($comercioexterior, $query_ingape);
+  $totalRows_ingape = mysqli_num_rows($all_ingape);
+}
+$totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
+
+$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -235,7 +269,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           <span class="Estilo15"><a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, min($totalPages_ingape, $pageNum_ingape + 1), $queryString_ingape); ?>">Siguiente</a>
     <?php } // Show if not last page ?>    </td>
     <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingape) { // Show if not last page ?>
-          <span class="Estilo15"><a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">�ltimo</a>
+          <span class="Estilo15"><a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">&Uacute;ltimo</a>
     <?php } // Show if not last page ?>    </td>
   </tr>
 </table>
