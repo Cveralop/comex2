@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_ingape'])) {
   $pageNum_ingape = $_GET['pageNum_ingape'];
 }
 $startRow_ingape = $pageNum_ingape * $maxRows_ingape;
+
 $colname_ingape = "zzzxxx";
 if (isset($_GET['rut_cliente'])) {
   $colname_ingape = $_GET['rut_cliente'];
@@ -88,6 +89,7 @@ $query_ingape = sprintf("SELECT * FROM cliente WHERE rut_cliente = %s ORDER BY r
 $query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
 $ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
 $row_ingape = mysqli_fetch_assoc($ingape);
+
 if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = $_GET['totalRows_ingape'];
 } else {
@@ -95,6 +97,7 @@ if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = mysqli_num_rows($all_ingape);
 }
 $totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
+
 $maxRows_ingvarios = 10;
 $pageNum_ingvarios = 0;
 if (isset($_GET['pageNum_ingvarios'])) {
@@ -126,6 +129,7 @@ $query_opasignadas = "SELECT evento,operador,count(operador)as cantidad,(usuario
 $opasignadas = mysqli_query($comercioexterior, $query_opasignadas) or die(mysqli_error($comercioexterior));
 $row_opasignadas = mysqli_fetch_assoc($opasignadas);
 $totalRows_opasignadas = mysqli_num_rows($opasignadas);
+
 $queryString_ingape = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -141,6 +145,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
