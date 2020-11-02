@@ -74,6 +74,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_modificacion = 10;
+$pageNum_modificacion = 0;
+if (isset($_GET['pageNum_modificacion'])) {
+  $pageNum_modificacion = $_GET['pageNum_modificacion'];
+}
+$startRow_modificacion = $pageNum_modificacion * $maxRows_modificacion;
 
 $colname_modificacion = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -89,9 +96,33 @@ if (isset($_GET['estado_visacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_modificacion = sprintf("SELECT * FROM oppre nolock WHERE rut_cliente = %s and (estado_visacion = %s or estado_visacion = %s) ORDER BY id DESC", GetSQLValueString($colname_modificacion, "text"),GetSQLValueString($colname1_modificacion, "text"),GetSQLValueString($colname2_modificacion, "text"));
-$modificacion = mysqli_query($comercioexterior, $query_modificacion) or die(mysqli_error());
+$query_limit_modificacion = sprintf("%s LIMIT %d, %d", $query_modificacion, $startRow_modificacion, $maxRows_modificacion);
+$modificacion = mysqli_query($comercioexterior, $query_limit_modificacion) or die(mysqli_error($comercioexterior));
 $row_modificacion = mysqli_fetch_assoc($modificacion);
 $totalRows_modificacion = mysqli_num_rows($modificacion);
+
+if (isset($_GET['totalRows_modificacion'])) {
+  $totalRows_modificacion = $_GET['totalRows_modificacion'];
+} else {
+  $all_modificacion = mysqli_query($comercioexterior, $query_modificacion);
+  $totalRows_modificacion = mysqli_num_rows($all_modificacion);
+}
+$totalPages_modificacion = ceil($totalRows_modificacion/$maxRows_modificacion)-1;
+$queryString_modificacion = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_modificacion") == false && 
+        stristr($param, "totalRows_modificacion") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_modificacion = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_modificacion = sprintf("&totalRows_modificacion=%d%s", $totalRows_modificacion, $queryString_modificacion);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -228,6 +259,27 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_modificacion['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_modificacion['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
   </tr>
   <?php } while ($row_modificacion = mysqli_fetch_assoc($modificacion)); ?>
+</table>
+<br>
+<table border="0" width="50%" align="center">
+  <tr>
+    <td width="23%" align="center"><?php if ($pageNum_modificacion > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_modificacion=%d%s", $currentPage, 0, $queryString_modificacion); ?>">Primero</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="31%" align="center"><?php if ($pageNum_modificacion > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_modificacion=%d%s", $currentPage, max(0, $pageNum_modificacion - 1), $queryString_modificacion); ?>">Anterior</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_modificacion < $totalPages_modificacion) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_modificacion=%d%s", $currentPage, min($totalPages_modificacion, $pageNum_modificacion + 1), $queryString_modificacion); ?>">Siguiente</a>
+        <?php } // Show if not last page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_modificacion < $totalPages_modificacion) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_modificacion=%d%s", $currentPage, $totalPages_modificacion, $queryString_modificacion); ?>">&Uacute;ltimo</a>
+        <?php } // Show if not last page ?>
+    </td>
+  </tr>
 </table>
 <br>
 Registros del <strong><?php echo ($startRow_modificacion + 1) ?></strong> al <strong><?php echo min($startRow_modificacion + $maxRows_modificacion, $totalRows_modificacion) ?></strong> de un total de <strong><?php echo $totalRows_modificacion ?></strong>

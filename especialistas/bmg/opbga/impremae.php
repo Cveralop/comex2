@@ -114,6 +114,7 @@ $query_colores = "SELECT * FROM parametrocolores";
 $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($comercioexterior));
 $row_colores = mysqli_fetch_assoc($colores);
 $totalRows_colores = mysqli_num_rows($colores);
+
 $queryString_impresion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
