@@ -111,8 +111,8 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
                        GetSQLValueString($_POST['mandato'], "text"),
                        GetSQLValueString($_POST['urgente'], "text"),
                        GetSQLValueString($_POST['campana_comex'], "text"),
-					   GetSQLValueString($_POST['verifico_mandato'], "text"),
-					   GetSQLValueString($_POST['hizo_llamada'], "text"),
+					             GetSQLValueString($_POST['verifico_mandato'], "text"),
+					             GetSQLValueString($_POST['hizo_llamada'], "text"),
                        GetSQLValueString($_POST['id'], "int"));
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $Result1 = mysqli_query($comercioexterior, $updateSQL) or die(mysqli_error($comercioexterior));

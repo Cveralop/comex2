@@ -99,7 +99,7 @@ if (isset($_GET['recordID'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_enviocv = sprintf("SELECT enviocv.* FROM cliente INNER JOIN enviocv ON cliente.rut_cliente = enviocv.rut_cliente WHERE cliente.id = %s and (evento = %s or evento = %s) ORDER BY monto_operacion DESC", GetSQLValueString($colname2_enviocv, "text"),GetSQLValueString($colname_enviocv, "text"),GetSQLValueString($colname1_enviocv, "text"));
-$enviocv = mysql_query($query_enviocv, $comercioexterior) or die(mysqli_error());
+$enviocv = mysqli_query($comercioexterior, $query_enviocv) or die(mysqli_error($comercioexterior));
 $row_enviocv = mysqli_fetch_assoc($enviocv);
 $totalRows_enviocv = mysqli_num_rows($enviocv);
 
