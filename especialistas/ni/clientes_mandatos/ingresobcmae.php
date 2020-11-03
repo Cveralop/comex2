@@ -42,16 +42,15 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 }
 ?>
 <?php
-  session_start();
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
-  global $comercioexterior;
+  global $basecomercial;
 
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
-  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($comercioexterior, $theValue) : mysqli_escape_string($comercioexterior, $theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($basecomercial, $theValue) : mysqli_escape_string($basecomercial, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
@@ -83,7 +82,9 @@ $query_ingreso_cliente = sprintf("SELECT * FROM base_comercial nolock WHERE rut_
 $ingreso_cliente = mysqli_query($basecomercial, $query_ingreso_cliente) or die(mysqli_error());
 $row_ingreso_cliente = mysqli_fetch_assoc($ingreso_cliente);
 $totalRows_ingreso_cliente = mysqli_num_rows($ingreso_cliente);
-?><style type="text/css">
+//var_dump($row_ingreso_cliente); die(); //No viene subgegente en la consulta linea 181
+?>
+<style type="text/css">
 <!--
 body,td,th {
 	font-family: Verdana, Geneva, sans-serif;
@@ -177,7 +178,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <td align="left"><?php echo $row_ingreso_cliente['nombre_ejecutivo']; ?></td>
         <td align="left"><?php echo $row_ingreso_cliente['ejecutivo_ni']; ?></td>
         <td align="left"><?php echo $row_ingreso_cliente['especialista_ni']; ?></td>
-        <td align="left"><?php echo $row_ingreso_cliente['subgerente']; ?></td>
+        <td align="left"><?php //echo $row_ingreso_cliente['subgerente']; //NO VIENE EN LA CONSULTA?></td>
         <td align="left"><?php echo $row_ingreso_cliente['distribucion_goc']; ?></td>
         <td align="center" class="destadado"><?php echo $row_ingreso_cliente['negative_file']; ?></td>
       </tr>

@@ -109,6 +109,7 @@ if (isset($_GET['totalRows_impresion'])) {
   $totalRows_impresion = mysqli_num_rows($all_impresion);
 }
 $totalPages_impresion = ceil($totalRows_impresion/$maxRows_impresion)-1;
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_colores = "SELECT * FROM parametrocolores";
 $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($comercioexterior));

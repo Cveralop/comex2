@@ -59,16 +59,17 @@ if (isset($_POST['usuario'])) {
   $MM_redirectLoginSuccess = "ingreso.php";
   $MM_redirectLoginFailed = "acceso.php";
   $MM_redirecttoReferrer = false;
+
   mysqli_select_db($comercioexterior, $database_comercioexterior); //mysqli_select_db($comercioexterior, $database_comercioexterior);
   $LoginRS__query=sprintf("SELECT usuario, password, perfil FROM usuarios WHERE usuario=%s AND password=%s",
   GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
-  $LoginRS = mysqli_query($comercioexterior, $LoginRS__query) or die(mysqli_error($comercioexterior)); //$LoginRS = mysql_query($LoginRS__query, $comercioexterior) or die(mysqli_error());
+  $LoginRS = mysqli_query($comercioexterior, $LoginRS__query) or die(mysqli_error($comercioexterior)); //$LoginRS = mysqli_query($comercioexterior, $LoginRS__query) or die(mysqli_error($comercioexterior));
   $loginFoundUser = mysqli_num_rows($LoginRS);
   //var_dump($loginFoundUser); die;
   if ($loginFoundUser > 0) {
     $loginStrGroup = mysqli_fetch_array($LoginRS); //REVISAR
    // var_dump($loginStrGroup); die;
-    //$loginStrGroup = mysql_result($LoginRS,0,'perfil'); //Original
+    //$loginStrGroup = mysqli_result($LoginRS,0,'perfil'); //Original
     
     //declare two session variables and assign them
     $_SESSION['MM_Username'] = $loginUsername;

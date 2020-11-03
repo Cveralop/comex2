@@ -48,13 +48,13 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
-  global $comercioexterior;
+  global $basecomercial;
 
   if (PHP_VERSION < 6) {
     $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
   }
 
-  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($comercioexterior, $theValue) : mysqli_escape_string($comercioexterior, $theValue);
+  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($basecomercial, $theValue) : mysqli_escape_string($basecomercial, $theValue);
 
   switch ($theType) {
     case "text":

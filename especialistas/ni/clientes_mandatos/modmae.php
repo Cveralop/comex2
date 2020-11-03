@@ -74,6 +74,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_modificar = 10;
+$pageNum_modificar = 0;
+if (isset($_GET['pageNum_modificar'])) {
+  $pageNum_modificar = $_GET['pageNum_modificar'];
+}
+$startRow_modificar = $pageNum_modificar * $maxRows_modificar;
 
 $colname_modificar = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -85,9 +92,34 @@ if (isset($_GET['nombre_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_modificar = sprintf("SELECT * FROM cliente nolock WHERE rut_cliente LIKE %s and nombre_cliente LIKE %s ORDER BY rut_cliente ASC", GetSQLValueString("%" . $colname_modificar . "%", "text"),GetSQLValueString("%" . $colname1_modificar . "%", "text"));
-$modificar = mysqli_query($comercioexterior, $query_modificar) or die(mysqli_error());
+$query_limit_modificar = sprintf("%s LIMIT %d, %d", $query_modificar, $startRow_modificar, $maxRows_modificar);
+$modificar = mysqli_query($comercioexterior, $query_limit_modificar) or die(mysqli_error());
 $row_modificar = mysqli_fetch_assoc($modificar);
 $totalRows_modificar = mysqli_num_rows($modificar);
+
+if (isset($_GET['totalRows_modificar'])) {
+  $totalRows_modificar = $_GET['totalRows_modificar'];
+} else {
+  $all_modificar = mysqli_query($comercioexterior, $query_modificar);
+  $totalRows_modificar = mysqli_num_rows($all_modificar);
+}
+$totalPages_modificar = ceil($totalRows_modificar/$maxRows_modificar)-1;
+
+$queryString_modificar = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_modificar") == false && 
+        stristr($param, "totalRows_modificar") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_modificar = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_modificar = sprintf("&totalRows_modificar=%d%s", $totalRows_modificar, $queryString_modificar);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

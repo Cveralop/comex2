@@ -43,7 +43,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 }
 ?>
 <?php
-  session_start();
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -114,116 +113,157 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 ?>
 <style type="text/css">
 <!--
-.Estilo3 {font-size: 18px;
-	font-weight: bold;
-	color: #FFFFFF;
+.Estilo3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
 }
-.Estilo4 {font-size: 14px;
-	font-weight: bold;
-	color: #FFFFFF;
+
+.Estilo4 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
 }
-body,td,th {
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: 10px;
-	color: #00F;
+
+body,
+td,
+th {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    color: #00F;
 }
+
 body {
-	background-image: url(../../../imagenes/JPEG/edificio_corporativo.jpg);
+    background-image: url(../../../imagenes/JPEG/edificio_corporativo.jpg);
 }
+
 a {
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: 10px;
-	color: #00F;
-	font-weight: bold;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    color: #00F;
+    font-weight: bold;
 }
+
 a:link {
-	text-decoration: none;
+    text-decoration: none;
 }
+
 a:visited {
-	text-decoration: none;
-	color: #F00;
+    text-decoration: none;
+    color: #F00;
 }
+
 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
+
 a:active {
-	text-decoration: none;
+    text-decoration: none;
 }
 -->
 </style>
 <link href="../../../estilos/estilo12.css" rel="stylesheet" type="text/css" />
 <script>
-var segundos=1200
-var direccion='http://pdpto38:8303/comex/index.php' 
-milisegundos=segundos*1000 
-window.setTimeout("window.location.replace(direccion);",milisegundos);
-</script> 
-<title>Ingreso Cliente Segun Base Comercial - Detalle</title><body onLoad="MM_preloadImages('../../../imagenes/Botones/boton_volver_2.jpg')"><table width="95%"  border="1" align="center" bordercolor="#FF0000" bgcolor="#FF0000">
-  <tr valign="middle">
-    <td width="93%" align="left" class="Estilo3">INGRESO CLIENTES GOC SEGUN BASE COMERCIAL NI</td>
-    <td rowspan="2" align="right" class="Estilo3"><img src="../../../imagenes/GIF/erde016.gif" alt="" width="43" height="43" /></td>
-  </tr>
-  <tr valign="middle">
-    <td align="left" class="Estilo4">NEGOCIO INTERNACIONAL</td>
-  </tr>
-</table>
-<br>
-<form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
-  <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
-    <tr valign="baseline">
-      <td colspan="4" align="left" valign="middle" bgcolor="#999999"><img src="../../../imagenes/GIF/notepad.gif" width="19" height="21" /><span class="titulo_menu">Detalle Ingreso cliente</span></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Rut Cliente:</td>
-      <td align="center" valign="middle"><input name="rut_cliente" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="20" readonly="readonly" />
-        <span class="respuestacolumna_rojo">(Sin Puntos ni Gui&oacute;n)</span></td>
-      <td align="right" valign="middle">Fecha Ingreso:</td>
-      <td align="center" valign="middle"><input name="date1" type="text" class="etiqueta12" value="<?php echo date("Y-m-d H:i:s"); ?>" size="30" maxlength="30" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Nombre Cliente:</td>
-      <td colspan="3" align="left" valign="middle"><input name="nombre_cliente" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Nombre Ejecutivo:</td>
-      <td colspan="3" align="left" valign="middle"><input name="nombre_ejecutivo" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_ejecutivo']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Especialista:</td>
-      <td colspan="3" align="left" valign="middle"><input name="especialista" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['especialista_ni']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Ejecutivo:</td>
-      <td colspan="3" align="left" valign="middle"><input name="ejecutivo" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['ejecutivo_ni']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Subgerente:</td>
-      <td colspan="3" align="left" valign="middle"><input name="subgerente" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['subgerente']; ?>" size="80" maxlength="80" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Oficina:</td>
-      <td colspan="3" align="left" valign="middle"><input name="oficina" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['sucursal']; ?>" size="50" maxlength="50" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Distribucion Goc:</td>
-      <td colspan="3" align="left" valign="middle"><input name="territorial" type="text" class="etiqueta12" id="territorial" value="<?php echo $row_DetailRS1['distribucion_goc']; ?>" size="50" maxlength="50" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Ingresado Por:</td>
-      <td colspan="3" align="left" valign="middle"><input name="ing_por" type="text" class="etiqueta12" value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20" readonly="readonly" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td colspan="4" align="center" valign="middle"><input type="submit" class="boton" value="Ingresar Cliente" /></td>
-    </tr>
-  </table>
-  <input type="hidden" name="MM_insert" value="form1" />
-  <input name="sucursal" type="hidden" id="sucursal" value="<?php echo $row_DetailRS1['cod_suc']; ?>">
-</form>
-<table width="95%" border="0" align="center">
-  <tr>
-    <td align="right"><a href="ingresobcmae.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Imagen3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen3" width="80" height="25" border="0" id="Imagen3" /></a></td>
-  </tr>
-</table>
-<?php
+var segundos = 1200
+var direccion = 'http://pdpto38:8303/comex/index.php'
+milisegundos = segundos * 1000
+window.setTimeout("window.location.replace(direccion);", milisegundos);
+</script>
+<title>Ingreso Cliente Segun Base Comercial - Detalle</title>
+
+<body onLoad="MM_preloadImages('../../../imagenes/Botones/boton_volver_2.jpg')">
+    <table width="95%" border="1" align="center" bordercolor="#FF0000" bgcolor="#FF0000">
+        <tr valign="middle">
+            <td width="93%" align="left" class="Estilo3">INGRESO CLIENTES GOC SEGUN BASE COMERCIAL NI</td>
+            <td rowspan="2" align="right" class="Estilo3"><img src="../../../imagenes/GIF/erde016.gif" alt="" width="43"
+                    height="43" /></td>
+        </tr>
+        <tr valign="middle">
+            <td align="left" class="Estilo4">NEGOCIO INTERNACIONAL</td>
+        </tr>
+    </table>
+    <br>
+    <form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
+        <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
+            <tr valign="baseline">
+                <td colspan="4" align="left" valign="middle" bgcolor="#999999"><img
+                        src="../../../imagenes/GIF/notepad.gif" width="19" height="21" /><span
+                        class="titulo_menu">Detalle Ingreso cliente</span></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Rut Cliente:</td>
+                <td align="center" valign="middle"><input name="rut_cliente" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="20"
+                        readonly="readonly" />
+                    <span class="respuestacolumna_rojo">(Sin Puntos ni Gui&oacute;n)</span>
+                </td>
+                <td align="right" valign="middle">Fecha Ingreso:</td>
+                <td align="center" valign="middle"><input name="date1" type="text" class="etiqueta12"
+                        value="<?php echo date("Y-m-d H:i:s"); ?>" size="30" maxlength="30" readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Nombre Cliente:</td>
+                <td colspan="3" align="left" valign="middle"><input name="nombre_cliente" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="80" maxlength="80"
+                        readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Nombre Ejecutivo:</td>
+                <td colspan="3" align="left" valign="middle"><input name="nombre_ejecutivo" type="text"
+                        class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_ejecutivo']; ?>" size="80"
+                        maxlength="80" readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Especialista:</td>
+                <td colspan="3" align="left" valign="middle"><input name="especialista" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['especialista_ni']; ?>" size="80" maxlength="80"
+                        readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Ejecutivo:</td>
+                <td colspan="3" align="left" valign="middle"><input name="ejecutivo" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['ejecutivo_ni']; ?>" size="80" maxlength="80"
+                        readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Subgerente:</td>
+                <td colspan="3" align="left" valign="middle"><input name="subgerente" type="text" class="etiqueta12"
+                        value="<?php //echo $row_DetailRS1['subgerente']; ?>" size="80" maxlength="80"
+                        readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Oficina:</td>
+                <td colspan="3" align="left" valign="middle"><input name="oficina" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['sucursal']; ?>" size="50" maxlength="50"
+                        readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Distribucion Goc:</td>
+                <td colspan="3" align="left" valign="middle"><input name="territorial" type="text" class="etiqueta12"
+                        id="territorial" value="<?php echo $row_DetailRS1['distribucion_goc']; ?>" size="50"
+                        maxlength="50" readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Ingresado Por:</td>
+                <td colspan="3" align="left" valign="middle"><input name="ing_por" type="text" class="etiqueta12"
+                        value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20" readonly="readonly" /></td>
+            </tr>
+            <tr valign="baseline">
+                <td colspan="4" align="center" valign="middle"><input type="submit" class="boton"
+                        value="Ingresar Cliente" /></td>
+            </tr>
+        </table>
+        <input type="hidden" name="MM_insert" value="form1" />
+        <input name="sucursal" type="hidden" id="sucursal" value="<?php echo $row_DetailRS1['cod_suc']; ?>">
+    </form>
+    <table width="95%" border="0" align="center">
+        <tr>
+            <td align="right"><a href="ingresobcmae.php" onMouseOut="MM_swapImgRestore()"
+                    onMouseOver="MM_swapImage('Imagen3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img
+                        src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen3" width="80"
+                        height="25" border="0" id="Imagen3" /></a></td>
+        </tr>
+    </table>
+    <?php
 mysqli_free_result($DetailRS1);
 ?>

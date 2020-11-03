@@ -47,10 +47,11 @@ if (isset($_POST['usuario'])) {
   $MM_redirectLoginSuccess = "mandatos.php";
   $MM_redirectLoginFailed = "../../erroracceso.php";
   $MM_redirecttoReferrer = false;
+  
   mysqli_select_db($comercioexterior, $database_comercioexterior);
   $LoginRS__query=sprintf("SELECT usuario, password, perfil FROM usuarios WHERE usuario=%s AND password=%s",
   GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
-  $LoginRS = mysql_query($LoginRS__query, $comercioexterior) or die(mysqli_error());
+  $LoginRS = mysqli_query($comercioexterior, $LoginRS__query) or die(mysqli_error($comercioexterior));
   $loginFoundUser = mysqli_num_rows($LoginRS);
   if ($loginFoundUser) {
     $loginStrGroup  = mysql_result($LoginRS,0,'perfil');

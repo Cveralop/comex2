@@ -74,6 +74,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_consulta = 10;
+$pageNum_consulta = 0;
+if (isset($_GET['pageNum_consulta'])) {
+  $pageNum_consulta = $_GET['pageNum_consulta'];
+}
+$startRow_consulta = $pageNum_consulta * $maxRows_consulta;
 
 $colname1_consulta = "-1";
 if (isset($_GET['nombre_cliente'])) {
@@ -81,9 +88,34 @@ if (isset($_GET['nombre_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_consulta = sprintf("SELECT * FROM cliente nolock WHERE nombre_cliente LIKE %s", GetSQLValueString("%" . $colname1_consulta . "%", "text"));
-$consulta = mysqli_query($comercioexterior, $query_consulta) or die(mysqli_error());
+$query_limit_consulta = sprintf("%s LIMIT %d, %d", $query_consulta, $startRow_consulta, $maxRows_consulta);
+$consulta = mysqli_query($comercioexterior, $query_limit_consulta) or die(mysqli_error($comercioexterior));
 $row_consulta = mysqli_fetch_assoc($consulta);
 $totalRows_consulta = mysqli_num_rows($consulta);
+
+if (isset($_GET['totalRows_consulta'])) {
+  $totalRows_consulta = $_GET['totalRows_consulta'];
+} else {
+  $all_consulta = mysqli_query($comercioexterior, $query_consulta);
+  $totalRows_consulta = mysqli_num_rows($all_consulta);
+}
+$totalPages_consulta = ceil($totalRows_consulta/$maxRows_consulta)-1;
+
+$queryString_consulta = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_consulta") == false && 
+        stristr($param, "totalRows_consulta") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_consulta = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_consulta = sprintf("&totalRows_consulta=%d%s", $totalRows_consulta, $queryString_consulta);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -199,6 +231,26 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   <?php } while ($row_consulta = mysqli_fetch_assoc($consulta)); ?>
 </table>
 <br>
+<table border="0" width="50%" align="center">
+  <tr>
+    <td width="23%" align="center"><?php if ($pageNum_consulta > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_consulta=%d%s", $currentPage, 0, $queryString_consulta); ?>">Primero</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="31%" align="center"><?php if ($pageNum_consulta > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_consulta=%d%s", $currentPage, max(0, $pageNum_consulta - 1), $queryString_consulta); ?>">Anterior</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_consulta < $totalPages_consulta) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_consulta=%d%s", $currentPage, min($totalPages_consulta, $pageNum_consulta + 1), $queryString_consulta); ?>">Siguiente</a>
+        <?php } // Show if not last page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_consulta < $totalPages_consulta) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_consulta=%d%s", $currentPage, $totalPages_consulta, $queryString_consulta); ?>">&Uacute;ltimo</a>
+        <?php } // Show if not last page ?>
+    </td>
+  </tr>
+</table>
 Registros del <strong><?php echo ($startRow_consulta + 1) ?></strong> al <strong><?php echo min($startRow_consulta + $maxRows_consulta, $totalRows_consulta) ?></strong> de un total de <strong><?php echo $totalRows_consulta ?></strong>
 <?php } // Show if recordset not empty ?>
 <br>
