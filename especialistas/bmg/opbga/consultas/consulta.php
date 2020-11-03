@@ -101,7 +101,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_conrut = sprintf("&totalRows_conrut=%d%s", $totalRows_conrut, $queryString_conrut);
-//var_dump($row_conrut); die();
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
