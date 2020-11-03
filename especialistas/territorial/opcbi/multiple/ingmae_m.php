@@ -93,6 +93,24 @@ if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = mysqli_num_rows($all_ingape);
 }
 $totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
+
+$queryString_ingape = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingape") == false && 
+        stristr($param, "totalRows_ingape") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
+
 $maxRows_nrooperacion = 10;
 $pageNum_nrooperacion = 0;
 if (isset($_GET['pageNum_nrooperacion'])) {
@@ -110,7 +128,7 @@ if (isset($_GET['nro_operacion'])) {
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_nrooperacion = sprintf("SELECT * FROM opcbi WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_nrooperacion, "text"),GetSQLValueString($colname1_nrooperacion, "text"));
 $query_limit_nrooperacion = sprintf("%s LIMIT %d, %d", $query_nrooperacion, $startRow_nrooperacion, $maxRows_nrooperacion);
-$nrooperacion = mysqli_query($comercioexterior, $query_limit_nrooperacion) or die(mysqli_error());
+$nrooperacion = mysqli_query($comercioexterior, $query_limit_nrooperacion) or die(mysqli_error($comercioexterior));
 $row_nrooperacion = mysqli_fetch_assoc($nrooperacion);
 if (isset($_GET['totalRows_nrooperacion'])) {
   $totalRows_nrooperacion = $_GET['totalRows_nrooperacion'];
@@ -119,21 +137,7 @@ if (isset($_GET['totalRows_nrooperacion'])) {
   $totalRows_nrooperacion = mysqli_num_rows($all_nrooperacion);
 }
 $totalPages_nrooperacion = ceil($totalRows_nrooperacion/$maxRows_nrooperacion)-1;
-$queryString_ingape = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingape") == false && 
-        stristr($param, "totalRows_ingape") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_nrooperacion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -149,21 +153,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_nrooperacion = sprintf("&totalRows_nrooperacion=%d%s", $totalRows_nrooperacion, $queryString_nrooperacion);
-$queryString_ingvarios = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingvarios") == false && 
-        stristr($param, "totalRows_ingvarios") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -346,7 +336,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingape) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>
@@ -394,7 +384,7 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
             <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_nrooperacion < $totalPages_nrooperacion) { // Show if not last page ?>
-            <a href="<?php printf("%s?pageNum_nrooperacion=%d%s", $currentPage, $totalPages_nrooperacion, $queryString_nrooperacion); ?>">�ltimo</a>
+            <a href="<?php printf("%s?pageNum_nrooperacion=%d%s", $currentPage, $totalPages_nrooperacion, $queryString_nrooperacion); ?>">&Uacute;ltimo</a>
             <?php } // Show if not last page ?>
     </td>
   </tr>

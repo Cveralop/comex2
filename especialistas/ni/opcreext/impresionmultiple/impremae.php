@@ -296,7 +296,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <a href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, min($totalPages_impresion, $pageNum_impresion + 1), $queryString_impresion); ?>">Siguiente</a>
         <?php } // Show if not last page ?></td>
     <td width="23%" align="center"><?php if ($pageNum_impresion < $totalPages_impresion) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, $totalPages_impresion, $queryString_impresion); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, $totalPages_impresion, $queryString_impresion); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?></td>
   </tr>
 </table>

@@ -356,7 +356,7 @@ function MM_swapImage() { //v3.0
             <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingape) { // Show if not last page ?>
-            <a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">�ltimo</a>
+            <a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">&Uacute;ltimo</a>
             <?php } // Show if not last page ?>
     </td>
   </tr>
@@ -405,7 +405,7 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
             <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingnro < $totalPages_ingnro) { // Show if not last page ?>
-            <a href="<?php printf("%s?pageNum_ingnro=%d%s", $currentPage, $totalPages_ingnro, $queryString_ingnro); ?>">�ltimo</a>
+            <a href="<?php printf("%s?pageNum_ingnro=%d%s", $currentPage, $totalPages_ingnro, $queryString_ingnro); ?>">&Uacute;ltimo</a>
             <?php } // Show if not last page ?>
     </td>
   </tr>

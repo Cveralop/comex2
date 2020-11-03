@@ -260,7 +260,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_solconf < $totalPages_solconf) { // Show if not last page ?>
-      <a href="<?php printf("%s?pageNum_solconf=%d%s", $currentPage, $totalPages_solconf, $queryString_solconf); ?>">�ltimo</a>
+      <a href="<?php printf("%s?pageNum_solconf=%d%s", $currentPage, $totalPages_solconf, $queryString_solconf); ?>">&Uacute;ltimo</a>
       <?php } // Show if not last page ?>
     </td>
   </tr>

@@ -80,6 +80,7 @@ if (isset($_GET['pageNum_altadocdis'])) {
   $pageNum_altadocdis = $_GET['pageNum_altadocdis'];
 }
 $startRow_altadocdis = $pageNum_altadocdis * $maxRows_altadocdis;
+
 $colname1_altadocdis = "Si";
 if (isset($_GET['tipo_negociacion'])) {
   $colname1_altadocdis = $_GET['tipo_negociacion'];
@@ -95,7 +96,7 @@ if (isset($_GET['nro_operacion'])) {
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_altadocdis = sprintf("SELECT * FROM opcbi WHERE nro_operacion LIKE %s and mandato = %s and rut_cliente LIKE %s ORDER BY id DESC", GetSQLValueString("%" . $colname_altadocdis, "text"),GetSQLValueString($colname1_altadocdis, "text"),GetSQLValueString("%" . $colname2_altadocdis, "text"));
 $query_limit_altadocdis = sprintf("%s LIMIT %d, %d", $query_altadocdis, $startRow_altadocdis, $maxRows_altadocdis);
-$altadocdis = mysqli_query($comercioexterior, $query_limit_altadocdis) or die(mysqli_error());
+$altadocdis = mysqli_query($comercioexterior, $query_limit_altadocdis) or die(mysqli_error($comercioexterior));
 $row_altadocdis = mysqli_fetch_assoc($altadocdis);
 if (isset($_GET['totalRows_altadocdis'])) {
   $totalRows_altadocdis = $_GET['totalRows_altadocdis'];
@@ -282,7 +283,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_altadocdis < $totalPages_altadocdis) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_altadocdis=%d%s", $currentPage, $totalPages_altadocdis, $queryString_altadocdis); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_altadocdis=%d%s", $currentPage, $totalPages_altadocdis, $queryString_altadocdis); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

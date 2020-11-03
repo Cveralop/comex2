@@ -235,7 +235,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <a href="<?php printf("%s?pageNum_manpagcust=%d%s", $currentPage, min($totalPages_manpagcust, $pageNum_manpagcust + 1), $queryString_manpagcust); ?>">Siguiente</a>
         <?php } // Show if not last page ?></td>
     <td width="23%" align="center"><?php if ($pageNum_manpagcust < $totalPages_manpagcust) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_manpagcust=%d%s", $currentPage, $totalPages_manpagcust, $queryString_manpagcust); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_manpagcust=%d%s", $currentPage, $totalPages_manpagcust, $queryString_manpagcust); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?></td>
   </tr>
 </table>

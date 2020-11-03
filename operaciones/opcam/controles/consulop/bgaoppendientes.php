@@ -241,7 +241,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_pendientes < $totalPages_pendientes) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_pendientes=%d%s", $currentPage, $totalPages_pendientes, $queryString_pendientes); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_pendientes=%d%s", $currentPage, $totalPages_pendientes, $queryString_pendientes); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

@@ -290,7 +290,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           <?php } // Show if not last page ?>
       </td>
       <td width="23%" align="center"><?php if ($pageNum_vctoplapro < $totalPages_vctoplapro) { // Show if not last page ?>
-          <a href="<?php printf("%s?pageNum_vctoplapro=%d%s", $currentPage, $totalPages_vctoplapro, $queryString_vctoplapro); ?>">�ltimo</a>
+          <a href="<?php printf("%s?pageNum_vctoplapro=%d%s", $currentPage, $totalPages_vctoplapro, $queryString_vctoplapro); ?>">&Uacute;ltimo</a>
           <?php } // Show if not last page ?>
       </td>
     </tr>

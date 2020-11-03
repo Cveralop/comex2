@@ -313,7 +313,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingape) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>
@@ -367,7 +367,7 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingste < $totalPages_ingste) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_ingste=%d%s", $currentPage, $totalPages_ingste, $queryString_ingste); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_ingste=%d%s", $currentPage, $totalPages_ingste, $queryString_ingste); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

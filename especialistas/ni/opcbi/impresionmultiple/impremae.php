@@ -302,7 +302,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_impresion < $totalPages_impresion) { // Show if not last page ?>
-      <a href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, $totalPages_impresion, $queryString_impresion); ?>">�ltimo</a>
+      <a href="<?php printf("%s?pageNum_impresion=%d%s", $currentPage, $totalPages_impresion, $queryString_impresion); ?>">&Uacute;ltimo</a>
       <?php } // Show if not last page ?>
     </td>
   </tr>

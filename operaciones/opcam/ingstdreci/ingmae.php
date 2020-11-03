@@ -222,7 +222,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_stbr < $totalPages_stbr) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_stbr=%d%s", $currentPage, $totalPages_stbr, $queryString_stbr); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_stbr=%d%s", $currentPage, $totalPages_stbr, $queryString_stbr); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

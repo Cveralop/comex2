@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_modificacion'])) {
   $pageNum_modificacion = $_GET['pageNum_modificacion'];
 }
 $startRow_modificacion = $pageNum_modificacion * $maxRows_modificacion;
+
 $colname1_modificacion = "0";
 if (isset($_GET['operador'])) {
   $colname1_modificacion = $_GET['operador'];
@@ -292,7 +293,7 @@ function MM_swapImage() { //v3.0
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_modificacion < $totalPages_modificacion) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_modificacion=%d%s", $currentPage, $totalPages_modificacion, $queryString_modificacion); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_modificacion=%d%s", $currentPage, $totalPages_modificacion, $queryString_modificacion); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

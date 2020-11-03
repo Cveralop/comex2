@@ -291,7 +291,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           <?php } // Show if not last page ?>
       </td>
       <td width="23%" align="center"><?php if ($pageNum_altadocdis < $totalPages_altadocdis) { // Show if not last page ?>
-          <a href="<?php printf("%s?pageNum_altadocdis=%d%s", $currentPage, $totalPages_altadocdis, $queryString_altadocdis); ?>">�ltimo</a>
+          <a href="<?php printf("%s?pageNum_altadocdis=%d%s", $currentPage, $totalPages_altadocdis, $queryString_altadocdis); ?>">&Uacute;ltimo</a>
           <?php } // Show if not last page ?>
       </td>
     </tr>

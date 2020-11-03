@@ -306,7 +306,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
                 <?php } // Show if not last page ?>
           </td>
           <td width="23%" align="center"><?php if ($pageNum_modrep < $totalPages_modrep) { // Show if not last page ?>
-                <a href="<?php printf("%s?pageNum_modrep=%d%s", $currentPage, $totalPages_modrep, $queryString_modrep); ?>">�ltimo</a>
+                <a href="<?php printf("%s?pageNum_modrep=%d%s", $currentPage, $totalPages_modrep, $queryString_modrep); ?>">&Uacute;ltimo</a>
                 <?php } // Show if not last page ?>
           </td>
     </tr>

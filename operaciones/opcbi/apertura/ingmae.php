@@ -249,7 +249,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
             <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingopi < $totalPages_ingopi) { // Show if not last page ?>
-            <a href="<?php printf("%s?pageNum_ingopi=%d%s", $currentPage, $totalPages_ingopi, $queryString_ingopi); ?>">�ltimo</a>
+            <a href="<?php printf("%s?pageNum_ingopi=%d%s", $currentPage, $totalPages_ingopi, $queryString_ingopi); ?>">&Uacute;ltimo</a>
             <?php } // Show if not last page ?>
     </td>
   </tr>

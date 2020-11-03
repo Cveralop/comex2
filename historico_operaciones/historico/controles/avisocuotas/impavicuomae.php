@@ -292,7 +292,7 @@ function MM_swapImage() { //v3.0
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_avisocuotas < $totalPages_avisocuotas) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, $totalPages_avisocuotas, $queryString_avisocuotas); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_avisocuotas=%d%s", $currentPage, $totalPages_avisocuotas, $queryString_avisocuotas); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

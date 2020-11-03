@@ -192,7 +192,7 @@ a:active {
         <a href="<?php printf("%s?pageNum_consultamandatos=%d%s", $currentPage, min($totalPages_consultamandatos, $pageNum_consultamandatos + 1), $queryString_consultamandatos); ?>">Siguiente</a>
         <?php } // Show if not last page ?></td>
       <td><?php if ($pageNum_consultamandatos < $totalPages_consultamandatos) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_consultamandatos=%d%s", $currentPage, $totalPages_consultamandatos, $queryString_consultamandatos); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_consultamandatos=%d%s", $currentPage, $totalPages_consultamandatos, $queryString_consultamandatos); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?></td>
     </tr>
   </table>

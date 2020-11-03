@@ -249,7 +249,7 @@ function MM_swapImage() { //v3.0
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_opcce < $totalPages_opcce) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_opcce=%d%s", $currentPage, $totalPages_opcce, $queryString_opcce); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_opcce=%d%s", $currentPage, $totalPages_opcce, $queryString_opcce); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>

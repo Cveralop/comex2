@@ -496,7 +496,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_cartareparoopbga < $totalPages_cartareparoopbga) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_cartareparoopbga=%d%s", $currentPage, $totalPages_cartareparoopbga, $queryString_cartareparoopbga); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_cartareparoopbga=%d%s", $currentPage, $totalPages_cartareparoopbga, $queryString_cartareparoopbga); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>
@@ -547,7 +547,7 @@ Registros del <strong><?php echo ($startRow_cartareparoopbga + 1) ?></strong> al
         <a href="<?php printf("%s?pageNum_cartareparoopste=%d%s", $currentPage, min($totalPages_cartareparoopste, $pageNum_cartareparoopste + 1), $queryString_cartareparoopste); ?>">Siguiente</a>
         <?php } // Show if not last page ?></td>
       <td><?php if ($pageNum_cartareparoopste < $totalPages_cartareparoopste) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_cartareparoopste=%d%s", $currentPage, $totalPages_cartareparoopste, $queryString_cartareparoopste); ?>">�ltimo</a>
+        <a href="<?php printf("%s?pageNum_cartareparoopste=%d%s", $currentPage, $totalPages_cartareparoopste, $queryString_cartareparoopste); ?>">&Uacute;ltimo</a>
         <?php } // Show if not last page ?></td>
     </tr>
   </table>
@@ -596,7 +596,7 @@ Registros del <strong><?php echo ($startRow_cartareparoopbga + 1) ?></strong> al
           <a href="<?php printf("%s?pageNum_cartareparoopstr=%d%s", $currentPage, min($totalPages_cartareparoopstr, $pageNum_cartareparoopstr + 1), $queryString_cartareparoopstr); ?>">Siguiente</a>
       <?php } // Show if not last page ?></td>
       <td><?php if ($pageNum_cartareparoopstr < $totalPages_cartareparoopstr) { // Show if not last page ?>
-          <a href="<?php printf("%s?pageNum_cartareparoopstr=%d%s", $currentPage, $totalPages_cartareparoopstr, $queryString_cartareparoopstr); ?>">�ltimo</a>
+          <a href="<?php printf("%s?pageNum_cartareparoopstr=%d%s", $currentPage, $totalPages_cartareparoopstr, $queryString_cartareparoopstr); ?>">&Uacute;ltimo</a>
       <?php } // Show if not last page ?></td>
     </tr>
   </table>
@@ -645,7 +645,7 @@ Registros del <strong><?php echo ($startRow_cartareparoopbga + 1) ?></strong> al
           <a href="<?php printf("%s?pageNum_cartareparooptbc=%d%s", $currentPage, min($totalPages_cartareparooptbc, $pageNum_cartareparooptbc + 1), $queryString_cartareparooptbc); ?>">Siguiente</a>
           <?php } // Show if not last page ?></td>
       <td><?php if ($pageNum_cartareparooptbc < $totalPages_cartareparooptbc) { // Show if not last page ?>
-          <a href="<?php printf("%s?pageNum_cartareparooptbc=%d%s", $currentPage, $totalPages_cartareparooptbc, $queryString_cartareparooptbc); ?>">�ltimo</a>
+          <a href="<?php printf("%s?pageNum_cartareparooptbc=%d%s", $currentPage, $totalPages_cartareparooptbc, $queryString_cartareparooptbc); ?>">&Uacute;ltimo</a>
           <?php } // Show if not last page ?></td>
     </tr>
   </table>

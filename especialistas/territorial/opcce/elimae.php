@@ -303,7 +303,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           <span class="Estilo15"><a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, min($totalPages_ingape, $pageNum_ingape + 1), $queryString_ingape); ?>">Siguiente</a>
     <?php } // Show if not last page ?>    </td>
     <td width="23%" align="center"><?php if ($pageNum_ingape < $totalPages_ingape) { // Show if not last page ?>
-          <span class="Estilo15"><a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">�ltimo</a>
+          <span class="Estilo15"><a href="<?php printf("%s?pageNum_ingape=%d%s", $currentPage, $totalPages_ingape, $queryString_ingape); ?>">&Uacute;ltimo</a>
     <?php } // Show if not last page ?>    </td>
   </tr>
 </table>
