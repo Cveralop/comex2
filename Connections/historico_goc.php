@@ -15,8 +15,7 @@ $database_historico_goc);
 if ($historico_goc->connect_error) {
     die("Connection failed: " . $historico_goc->connect_error);
   }
-  echo "Connected successfully HISTORICO_GOC";
-
+  //echo "Connected successfully HISTORICO_GOC";
 
 //conexion antigua
 //$historico_goc = mysql_pconnect($hostname_historico_goc, $username_historico_goc, $password_historico_goc) or trigger_error(mysqli_error(),E_USER_ERROR); 
