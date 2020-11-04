@@ -1,4 +1,0 @@
-Table	Op	Msg_type	Msg_text
-comercioexterior.devengotasa	optimize	status	OK
-Table	Op	Msg_type	Msg_text
-comercioexterior.devengo	optimize	status	Table is already up to date
