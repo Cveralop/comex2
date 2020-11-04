@@ -135,7 +135,7 @@ function MM_preloadImages() { //v3.0
   </tr>
   <<table width="95%"  border="0" align="center">
   <tr>
-    <td align="right" valign="middle"><a href="../../bmg/bmg.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80" height="25" border="0"></a></div></td>
+    <td align="right" valign="middle"><a href="../tr.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80" height="25" border="0"></a></div></td>
   </tr>
 </table>
 </table>

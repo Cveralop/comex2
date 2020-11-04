@@ -127,23 +127,25 @@ if (isset($_GET['rut_cliente'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_DetailRS1 = sprintf("SELECT * FROM opcex nolock WHERE rut_cliente = '%s'", $colname_DetailRS1);
+$query_DetailRS1 = sprintf("SELECT * FROM opcex nolock WHERE rut_cliente = %s", GetSQLValueString($colname_DetailRS1, "text"));
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 $maxRows_DetailRS1 = 10;
 $pageNum_DetailRS1 = 0;
 if (isset($_GET['pageNum_DetailRS1'])) {
   $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
 }
 $startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
+
 $colname_DetailRS1 = "1";
 if (isset($_GET['rut_cliente'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM cliente nolock WHERE id = $recordID", $colname_ingape);
+$query_DetailRS1 = sprintf("SELECT * FROM cliente nolock WHERE id = $recordID", $colname_DetailRS1);
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -154,7 +156,8 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -323,8 +326,8 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <tr valign="baseline">
       <td align="right" valign="middle">Observaci&oacute;n:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea2">
-        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo $row_DetailRS1['obs']; ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span><span class="rojopequeno" id="countsprytextarea1">&nbsp;</span></td>
+        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php //echo $row_DetailRS1['obs']; //no viene en la consulta?></textarea>
+      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span><span class="rojopequeno" id="countsprytextarea1">&nbsp;</span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda<br> 
@@ -411,7 +414,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <span class="rojopequeno">Max. 50 Caracteres</span></td>
       <td align="right">Soluci&oacute;n Excepci&oacute;n:</td>
       <td align="center"><span id="sprytextfield"><span id="sprytextfield2">
-        <input name="solucion_excepcion" type="text" class="etiqueta12" id="solucion_excepcion" value="<?php echo $row_DetailRS1['solucion_excepcion']; ?>" size="12" maxlength="10">
+        <input name="solucion_excepcion" type="text" class="etiqueta12" id="solucion_excepcion" value="<?php //echo $row_DetailRS1['solucion_excepcion']; //no viene en la consulta ?>" size="12" maxlength="10">
         <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v&aacute;lido.</span></span><span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v&aacute;lido.</span></span><span class="rojopequeno">(aaaa-mm-dd)</span></td>
     </tr>
     <tr valign="middle">

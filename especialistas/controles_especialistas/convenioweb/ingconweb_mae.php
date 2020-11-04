@@ -216,7 +216,9 @@ function MM_swapImage() { //v3.0
 <br />
 <table width="95%" border="0" align="center">
   <tr>
-    <td align="right" valign="middle"><a href="consultacw_mae.php">Consultas WEB</a> //<a href="../../ni/ni.php"> Especialista NI</a> // <a href="../../territorial/tr.php">Especialista Territoriales</a> // <a href="../../bmg/bmg.php">Especilaista BMG </a>// <a href="convenioweb.php" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen4','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen4" width="80" height="25" border="0" id="Imagen4" /></a></td>
+    <td align="right" valign="middle"><a href="consultacw_mae.php">Consultas WEB</a> //<a href="../../ni/ni.php"> Especialista NI</a> // <a href="../../territorial/tr.php">Especialista Territoriales</a> // <a href="../../bmg/bmg.php">Especilaista BMG </a>// <a href="convenioweb.php" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen4','','../../../imagenes/Botones/boton_volver_2.jpg',1)">
+    <br><br>
+    <img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen4" width="80" height="25" border="0" id="Imagen4" /></a></td>
   </tr>
 </table>
 </body>
