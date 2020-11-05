@@ -361,7 +361,6 @@ $queryString_conrut = sprintf("&totalRows_conrut=%d%s", $totalRows_conrut, $quer
             </td>
         </tr>
     </table>
-    <br>
     Registros del <strong><?php echo ($startRow_conrut + 1) ?></strong> al
     <strong><?php echo min($startRow_conrut + $maxRows_conrut, $totalRows_conrut) ?></strong> de un total de
     <strong><?php echo $totalRows_conrut ?></strong>

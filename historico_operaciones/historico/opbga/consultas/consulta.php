@@ -383,7 +383,7 @@ function MM_preloadImages() { //v3.0
             <td align="center" valign="middle"><span
                     class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['nro_operacion']); ?></span> </div>
             </td>
-            <td align="center" valign="middle"><?php //echo $row_conrut['valuta']; ?></div>
+            <td align="center" valign="middle"><?php echo (isset($row_conrut['valuta'])?$row_conrut['valuta']:""); ?></div>
             </td>
             <td align="right" valign="middle"><span
                     class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['moneda_operacion']); ?></span>
