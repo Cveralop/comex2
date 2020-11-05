@@ -55,7 +55,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($historico_goc, $database_historico_goc);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcbi  WHERE id = $recordID", $colname_conrut);
+$query_DetailRS1 = sprintf("SELECT * FROM opcbi  WHERE id = $recordID", $colname_DetailRS1);
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($historico_goc, $query_limit_DetailRS1) or die(mysqli_error($historico_goc));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -63,11 +63,13 @@ $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = $_GET['totalRows_DetailRS1'];
 } else {
-  $all_DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1);
+  $all_DetailRS1 = mysqli_query($historico_goc, $query_DetailRS1);
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
