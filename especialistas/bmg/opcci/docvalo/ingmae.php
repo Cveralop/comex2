@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_entdoc'])) {
   $pageNum_entdoc = $_GET['pageNum_entdoc'];
 }
 $startRow_entdoc = $pageNum_entdoc * $maxRows_entdoc;
+
 $colname1_entdoc = "Negociacion.";
 if (isset($_GET['evento'])) {
   $colname1_entdoc = $_GET['evento'];

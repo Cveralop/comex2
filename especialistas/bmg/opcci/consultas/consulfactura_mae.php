@@ -77,7 +77,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
-
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_nro_factura = 20;
+$pageNum_nro_factura = 0;
+if (isset($_GET['pageNum_nro_factura'])) {
+  $pageNum_nro_factura = $_GET['pageNum_nro_factura'];
+}
+$startRow_nro_factura = $pageNum_nro_factura * $maxRows_nro_factura;
 
 $colname_nro_factura = "-1";
 if (isset($_GET['date_ini'])) {
@@ -104,10 +110,34 @@ if (isset($_GET['evento'])) {
   $colname3_nro_factura = $_GET['evento'];
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_nro_factura = sprintf("SELECT * FROM opcci WHERE date_curse between %s and %s and estado = %s and evento = (%s and %s) and informe_operaciones = %s ORDER BY date_curse ASC", GetSQLValueString($colname_nro_factura, "date"),GetSQLValueString($colname1_nro_factura, "date"),GetSQLValueString($colname2_nro_factura, "text"),GetSQLValueString($colname3_nro_factura, "text"),GetSQLValueString($colname4_nro_factura, "text"),GetSQLValueString($colname5_nro_factura, "text"));
-$nro_factura = mysqli_query($comercioexterior, $query_nro_factura) or die(mysqli_error($comercioexterior));
+$query_nro_factura = sprintf("SELECT * FROM opcci WHERE date_curse between %s and %s and estado = %s and evento = (%s and %s) and informe_operaciones = %s ORDER BY date_curse DESC", GetSQLValueString($colname_nro_factura, "date"),GetSQLValueString($colname1_nro_factura, "date"),GetSQLValueString($colname2_nro_factura, "text"),GetSQLValueString($colname3_nro_factura, "text"),GetSQLValueString($colname4_nro_factura, "text"),GetSQLValueString($colname5_nro_factura, "text"));
+$query_limit_nro_factura = sprintf("%s LIMIT %d, %d", $query_nro_factura, $startRow_nro_factura, $maxRows_nro_factura);
+$nro_factura = mysqli_query($comercioexterior, $query_limit_nro_factura) or die(mysqli_error($comercioexterior));
 $row_nro_factura = mysqli_fetch_assoc($nro_factura);
 $totalRows_nro_factura = mysqli_num_rows($nro_factura);
+
+if (isset($_GET['totalRows_nro_factura'])) {
+  $totalRows_nro_factura = $_GET['totalRows_nro_factura'];
+} else {
+  $all_nro_factura = mysqli_query($comercioexterior, $query_nro_factura);
+  $totalRows_nro_factura = mysqli_num_rows($all_nro_factura);
+}
+$totalPages_nro_factura = ceil($totalRows_nro_factura/$maxRows_nro_factura)-1;
+$queryString_nro_factura = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_nro_factura") == false && 
+        stristr($param, "totalRows_nro_factura") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_nro_factura = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_nro_factura = sprintf("&totalRows_nro_factura=%d%s", $totalRows_nro_factura, $queryString_nro_factura);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -212,7 +242,7 @@ function MM_swapImage() { //v3.0
 <br />
 <table width="95%" border="0" align="center">
   <tr>
-    <td align="right" valign="middle"><a href="../../bmg.php" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen5','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen5" width="80" height="25" border="0" id="Imagen5" /></a></td>
+    <td align="right" valign="middle"><a href="../../../bmg/opcci/opcci.php" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen5','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen5" width="80" height="25" border="0" id="Imagen5" /></a></td>
   </tr>
 </table>
 <br />
@@ -250,7 +280,29 @@ function MM_swapImage() { //v3.0
       </tr>
       <?php } while ($row_nro_factura = mysqli_fetch_assoc($nro_factura)); ?>
   </table>
-  <?php } // Show if recordset not empty ?>
+  <br>
+  <table border="0" width="50%" align="center">
+  <tr>
+    <td width="23%" align="center"><?php if ($pageNum_nro_factura > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_nro_factura=%d%s", $currentPage, 0, $queryString_nro_factura); ?>">Primero</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="31%" align="center"><?php if ($pageNum_nro_factura > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_nro_factura=%d%s", $currentPage, max(0, $pageNum_nro_factura - 1), $queryString_nro_factura); ?>">Anterior</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_nro_factura < $totalPages_nro_factura) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_nro_factura=%d%s", $currentPage, min($totalPages_nro_factura, $pageNum_nro_factura + 1), $queryString_nro_factura); ?>">Siguiente</a>
+        <?php } // Show if not last page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_nro_factura < $totalPages_nro_factura) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_nro_factura=%d%s", $currentPage, $totalPages_nro_factura, $queryString_nro_factura); ?>">&Uacute;ltimo</a>
+        <?php } // Show if not last page ?>
+    </td>
+  </tr>
+</table>
+Registros del <strong><?php echo ($startRow_nro_factura + 1) ?></strong> al <strong><?php echo min($startRow_nro_factura + $maxRows_nro_factura, $totalRows_nro_factura) ?></strong> de un total de <strong><?php echo $totalRows_nro_factura ?></strong>
+<?php } // Show if recordset not empty ?>
 </body>
 </html>
 <?php

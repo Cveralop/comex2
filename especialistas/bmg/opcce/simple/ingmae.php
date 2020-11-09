@@ -103,21 +103,7 @@ if (isset($_GET['totalRows_ingvarios'])) {
   $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
 }
 $totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
-$queryString_ingape = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingape") == false && 
-        stristr($param, "totalRows_ingape") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);

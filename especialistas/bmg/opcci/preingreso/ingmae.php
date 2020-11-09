@@ -95,50 +95,7 @@ if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = mysqli_num_rows($all_ingape);
 }
 $totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
-$maxRows_ingvarios = 10;
-$pageNum_ingvarios = 0;
-if (isset($_GET['pageNum_ingvarios'])) {
-  $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
-}
-$startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
-$colname1_ingvarios = "Apertura.";
-if (isset($_GET['evento'])) {
-  $colname1_ingvarios = $_GET['evento'];
-}
-$colname_ingvarios = "zzz";
-if (isset($_GET['nro_operacion'])) {
-  $colname_ingvarios = $_GET['nro_operacion'];
-}
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_ingvarios = sprintf("SELECT id, nro_operacion, rut_cliente, nombre_cliente FROM opcci WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_ingvarios, "text"),GetSQLValueString($colname1_ingvarios, "text"));
-$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
-$ingvarios = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
-$row_ingvarios = mysqli_fetch_assoc($ingvarios);
-if (isset($_GET['totalRows_ingvarios'])) {
-  $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
-} else {
-  $all_ingvarios = mysqli_query($comercioexterior, $query_ingvarios);
-  $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
-}
-$totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
-$colname_opcci = "-1";
-if (isset($_GET['nro_operacion_relacionada_car'])) {
-  $colname_opcci = $_GET['nro_operacion_relacionada_car'];
-}
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_opcci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_relacionada_car = %s ORDER BY nro_operacion_car DESC", GetSQLValueString($colname_opcci, "text"));
-$opcci = mysqli_query($comercioexterior, $query_opcci) or die(mysqli_error($comercioexterior));
-$row_opcci = mysqli_fetch_assoc($opcci);
-$totalRows_opcci = mysqli_num_rows($opcci);
-$colname_inglci = "L";
-if (isset($_GET['nro_operacion_car'])) {
-  $colname_inglci = $_GET['nro_operacion_car'];
-}
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_inglci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_car = %s", GetSQLValueString($colname_inglci, "text"));
-$inglci = mysqli_query($comercioexterior, $query_inglci) or die(mysqli_error($comercioexterior));
-$row_inglci = mysqli_fetch_assoc($inglci);
-$totalRows_inglci = mysqli_num_rows($inglci);
+
 $queryString_ingape = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -154,6 +111,36 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
+$maxRows_ingvarios = 10;
+$pageNum_ingvarios = 0;
+if (isset($_GET['pageNum_ingvarios'])) {
+  $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
+}
+$startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
+
+$colname1_ingvarios = "Apertura.";
+if (isset($_GET['evento'])) {
+  $colname1_ingvarios = $_GET['evento'];
+}
+$colname_ingvarios = "zzz";
+if (isset($_GET['nro_operacion'])) {
+  $colname_ingvarios = $_GET['nro_operacion'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_ingvarios = sprintf("SELECT id, nro_operacion, rut_cliente, nombre_cliente FROM opcci WHERE nro_operacion = %s and evento = %s", GetSQLValueString($colname_ingvarios, "text"),GetSQLValueString($colname1_ingvarios, "text"));
+$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
+$ingvarios = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
+$row_ingvarios = mysqli_fetch_assoc($ingvarios);
+
+if (isset($_GET['totalRows_ingvarios'])) {
+  $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
+} else {
+  $all_ingvarios = mysqli_query($comercioexterior, $query_ingvarios);
+  $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
+}
+$totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
+
 $queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -169,6 +156,92 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+
+
+$maxRows_opcci = 10;
+$pageNum_opcci = 0;
+if (isset($_GET['pageNum_opcci'])) {
+  $pageNum_opcci = $_GET['pageNum_opcci'];
+}
+$startRow_opcci = $pageNum_opcci * $maxRows_opcci;
+
+$colname_opcci = "-1";
+if (isset($_GET['nro_operacion_relacionada_car'])) {
+  $colname_opcci = $_GET['nro_operacion_relacionada_car'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_opcci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_relacionada_car = %s ORDER BY nro_operacion_car DESC", GetSQLValueString($colname_opcci, "text"));
+$opcci = mysqli_query($comercioexterior, $query_opcci) or die(mysqli_error($comercioexterior));
+$row_opcci = mysqli_fetch_assoc($opcci);
+$totalRows_opcci = mysqli_num_rows($opcci);
+
+if (isset($_GET['totalRows_opcci'])) {
+  $totalRows_opcci = $_GET['totalRows_opcci'];
+} else {
+  $all_opcci = mysqli_query($comercioexterior, $query_opcci);
+  $totalRows_opcci = mysqli_num_rows($all_opcci);
+}
+$totalPages_opcci = ceil($totalRows_opcci/$maxRows_opcci)-1;
+
+$queryString_opcci = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_opcci") == false && 
+        stristr($param, "totalRows_opcci") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_opcci = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_opcci = sprintf("&totalRows_opcci=%d%s", $totalRows_opcci, $queryString_opcci);
+
+$maxRows_inglci = 10;
+$pageNum_inglci = 0;
+if (isset($_GET['pageNum_inglci'])) {
+  $pageNum_inglci = $_GET['pageNum_inglci'];
+}
+$startRow_inglci = $pageNum_inglci * $maxRows_inglci;
+
+$colname_inglci = "L";
+if (isset($_GET['nro_operacion_car'])) {
+  $colname_inglci = $_GET['nro_operacion_car'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_inglci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_car = %s", GetSQLValueString($colname_inglci, "text"));
+$inglci = mysqli_query($comercioexterior, $query_inglci) or die(mysqli_error($comercioexterior));
+$row_inglci = mysqli_fetch_assoc($inglci);
+$totalRows_inglci = mysqli_num_rows($inglci);
+
+if (isset($_GET['totalRows_inglci'])) {
+  $totalRows_inglci = $_GET['totalRows_inglci'];
+} else {
+  $all_inglci = mysqli_query($comercioexterior, $query_inglci);
+  $totalRows_inglci = mysqli_num_rows($all_inglci);
+}
+$totalPages_inglci = ceil($totalRows_inglci/$maxRows_inglci)-1;
+
+$queryString_inglci = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_inglci") == false && 
+        stristr($param, "totalRows_inglci") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_inglci = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_inglci = sprintf("&totalRows_inglci=%d%s", $totalRows_inglci, $queryString_inglci);
+
+
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -364,7 +437,6 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <?php } while ($row_ingape = mysqli_fetch_assoc($ingape)); ?>
 </table>
-<br>
 <table border="0" width="50%" align="center">
   <tr>
     <td width="23%" align="center"><?php if ($pageNum_ingape > 0) { // Show if not first page ?>
@@ -387,8 +459,8 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
 </table>
 <br>
 Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><?php echo min($startRow_ingape + $maxRows_ingape, $totalRows_ingape) ?></strong> de un total de <strong><?php echo $totalRows_ingape ?></strong>
-<?php } // Show if recordset not empty ?>
 <br>
+<?php } // Show if recordset not empty ?>
 <?php if ($totalRows_ingvarios > 0) { // Show if recordset not empty ?>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr valign="middle" bgcolor="#999999" class="respuestacolumna">
@@ -411,7 +483,6 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
   </tr>
   <?php } while ($row_ingvarios = mysqli_fetch_assoc($ingvarios)); ?>
 </table>
-<br>
 <table border="0" width="50%" align="center">
   <tr>
     <td width="23%" align="center"><?php if ($pageNum_ingvarios > 0) { // Show if not first page ?>
@@ -435,7 +506,6 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
 <br>
 Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <strong><?php echo min($startRow_ingvarios + $maxRows_ingvarios, $totalRows_ingvarios) ?></strong> de un total de <strong><?php echo $totalRows_ingvarios ?></strong>
 <?php } // Show if recordset not empty ?>
-<br>
 <?php if ($totalRows_opcci > 0) { // Show if recordset not empty ?>
 <br>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
@@ -531,9 +601,8 @@ Registros del <strong><?php echo ($startRow_opcci + 1) ?></strong> al <strong><?
   </tr>
 </table>
 <br>
-Registros del<span class="respuestacolumna_azul"><?php echo ($startRow_inglci + 1) ?></span> al <span class="respuestacolumna_azul"><?php echo min($startRow_inglci + $maxRows_inglci, $totalRows_inglci) ?></span> de un total de <span class="respuestacolumna_azul"><?php echo $totalRows_inglci ?></span>
+Registros del <span class="respuestacolumna_azul"><?php echo ($startRow_inglci + 1) ?></span> al <span class="respuestacolumna_azul"><?php echo min($startRow_inglci + $maxRows_inglci, $totalRows_inglci) ?></span> de un total de <span class="respuestacolumna_azul"><?php echo $totalRows_inglci ?></span>
 <?php } // Show if recordset not empty ?>
-<br>
 <table width="95%"  border="0" align="center">
   <tr>
     <td align="right" valign="middle"><a href="../../../bmg/opcci/opcci.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image6" width="80" height="25" border="0"></a></div></td>

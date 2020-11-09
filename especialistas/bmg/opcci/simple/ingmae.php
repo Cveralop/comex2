@@ -497,7 +497,6 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
     </td>
   </tr>
 </table>
-<br>
 Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <strong><?php echo min($startRow_ingvarios + $maxRows_ingvarios, $totalRows_ingvarios) ?></strong> de un total de <strong><?php echo $totalRows_ingvarios ?></strong>
 <?php } // Show if recordset not empty ?> <br>
 <br>
@@ -524,7 +523,6 @@ Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <stron
     </tr>
     <?php } while ($row_ingcci = mysqli_fetch_assoc($ingcci)); ?>
   </table>
-  <br>
 <table border="0" width="50%" align="center">
   <tr>
     <td width="23%" align="center"><?php if ($pageNum_ingcci > 0) { // Show if not first page ?>
@@ -541,10 +539,8 @@ Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <stron
       <?php } // Show if not last page ?></td>
   </tr>
 </table>
-<br>
 Registros del <strong><?php echo ($startRow_ingcci + 1) ?></strong> al <strong><?php echo min($startRow_ingcci + $maxRows_ingcci, $totalRows_ingcci) ?></strong> de un total de <strong><?php echo $totalRows_ingcci ?></strong>
 <?php } // Show if recordset not empty ?>
-<br>
 <?php if ($totalRows_inglci > 0) { // Show if recordset not empty ?>
 <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
   <tr>
@@ -585,10 +581,8 @@ Registros del <strong><?php echo ($startRow_ingcci + 1) ?></strong> al <strong><
       <?php } // Show if not last page ?></td>
   </tr>
 </table>
-<br>
 Registros del <span class="respuestacolumna_azul"><?php echo ($startRow_inglci + 1) ?></span> al <span class="respuestacolumna_azul"><?php echo min($startRow_inglci + $maxRows_inglci, $totalRows_inglci) ?></span> de un total de <span class="respuestacolumna_azul"><?php echo $totalRows_inglci ?></span>
 <?php } // Show if recordset not empty ?>
-<br>
 <table width="95%"  border="0" align="center">
   <tr>
     <td align="right" valign="middle"><a href="../../../bmg/opcci/opcci.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image6','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image6" width="80" height="25" border="0"></a></div></td>
