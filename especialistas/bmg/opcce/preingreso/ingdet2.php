@@ -115,6 +115,7 @@ $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_err
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM opcce INNER JOIN cliente ON opcce.rut_cliente=cliente.rut_cliente WHERE opcce.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
@@ -135,7 +136,7 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcce  WHERE id = $recordID", $colname_ingvarios,$colname1_ingvarios);
+$query_DetailRS1 = sprintf("SELECT * FROM opcce  WHERE id = $recordID",$colname_DetailRS1,$colname1_DetailRS1); //$colname_ingvarios,$colname1_ingvarios
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);

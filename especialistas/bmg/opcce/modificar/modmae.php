@@ -92,6 +92,7 @@ $query_modificacion = sprintf("SELECT * FROM opcce WHERE rut_cliente = %s and es
 $query_limit_modificacion = sprintf("%s LIMIT %d, %d", $query_modificacion, $startRow_modificacion, $maxRows_modificacion);
 $modificacion = mysqli_query($comercioexterior, $query_limit_modificacion) or die(mysqli_error($comercioexterior));
 $row_modificacion = mysqli_fetch_assoc($modificacion);
+
 if (isset($_GET['totalRows_modificacion'])) {
   $totalRows_modificacion = $_GET['totalRows_modificacion'];
 } else {
@@ -99,6 +100,7 @@ if (isset($_GET['totalRows_modificacion'])) {
   $totalRows_modificacion = mysqli_num_rows($all_modificacion);
 }
 $totalPages_modificacion = ceil($totalRows_modificacion/$maxRows_modificacion)-1;
+
 $queryString_modificacion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
