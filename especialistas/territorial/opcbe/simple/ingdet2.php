@@ -356,7 +356,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
                 <td align="right" valign="middle">Observaci&oacute;n:</td>
                 <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
                         <textarea name="obs" cols="80" rows="4"
-                            class="etiqueta12"><?php echo $row_DetailRS1['obs']; ?></textarea>
+                            class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
                         <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span
                             class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span>
                 </td>

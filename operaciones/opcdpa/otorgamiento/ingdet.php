@@ -255,7 +255,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Observaci&oacute;n:</td>
-      <td colspan="3" align="left" valign="middle"><textarea name="obs" cols="80" rows="4" class="etiqueta12" id="obs"><?php echo $row_DetailRS1['obs']; ?></textarea></td>
+      <td colspan="3" align="left" valign="middle"><textarea name="obs" cols="80" rows="4" class="etiqueta12" id="obs"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda / <br>

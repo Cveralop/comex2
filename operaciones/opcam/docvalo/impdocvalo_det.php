@@ -183,7 +183,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <td align="left" valign="middle"><strong><img src="../../../imagenes/GIF/check.gif" alt="" width="13" height="12" />Situaci&oacute;n del Documento</strong></td>
   </tr>
   <tr>
-    <td align="left" valign="middle">Observación <strong><?php echo $row_DetailRS1['obs']; ?></strong></td>
+    <td align="left" valign="middle">Observación <strong><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></strong></td>
   </tr>
   <tr>
     <td align="left" valign="middle"><strong><img src="../../../imagenes/GIF/check.gif" alt="" width="13" height="12" />Beneficiario</strong></td>

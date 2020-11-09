@@ -336,7 +336,7 @@ do {
   <input name="segmento" type="hidden" id="segmento" value="<?php echo $row_DetailRS1['segmento']; ?>">
   <input name="despacho_doctos" type="hidden" id="despacho_doctos" value="<?php echo $row_DetailRS1['despacho_doctos']; ?>">
   <input name="sucursal" type="hidden" id="sucursal" value="<?php echo $row_DetailRS1['sucursal']; ?>">
-  <input name="obs" type="hidden" id="obs" value="<?php echo $row_DetailRS1['obs']; ?>">
+  <input name="obs" type="hidden" id="obs" value="<?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?>">
 </form>
 <br>
 <table width="95%"  border="0" align="center">

@@ -232,7 +232,7 @@ $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
         </tr>
         <tr>
             <td align="right" valign="middle">Observaci&oacute;n:</td>
-            <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
+            <td colspan="3" align="left" valign="middle"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?> </td>
         </tr>
         <tr>
             <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n:</td>

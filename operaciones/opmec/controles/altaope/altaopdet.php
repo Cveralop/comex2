@@ -265,7 +265,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <tr valign="baseline">
       <td align="right" valign="middle">Observaciones:</td>
       <td colspan="3" align="left" valign="middle">
-        <textarea name="obs" cols="80" rows="3" class="etiqueta12" id="obs"><?php echo $row_DetailRS1['obs']; ?></textarea>
+        <textarea name="obs" cols="80" rows="3" class="etiqueta12" id="obs"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
       <span class="rojopequeno">(255 caracteres max. 3 l&iacute;neas)</span></div></td>
     </tr>
     <tr valign="baseline">

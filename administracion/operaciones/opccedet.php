@@ -330,7 +330,7 @@ function MM_swapImage() { //v3.0
     <tr valign="baseline">
       <td align="right" valign="middle" nowrap>Observaci&oacute;n:</td>
       <td colspan="3" align="center" valign="middle"><div align="left">
-        <textarea name="obs" cols="85" rows="3" class="etiqueta12"><?php echo $row_DetailRS1['obs']; ?></textarea>
+        <textarea name="obs" cols="85" rows="3" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
         <span class="rojopequeno">(255 caracteres m&aacute;ximo)</span></div></td>
     </tr>
     <tr valign="baseline">

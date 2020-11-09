@@ -201,7 +201,7 @@ a:active {
       <td align="right" valign="middle"><?php echo $row_DetailRS1['moneda_operacion']; ?> <?php echo number_format($row_DetailRS1['monto_operacion'], 2, ',', '.'); ?></td>
       <td align="right" valign="middle"><?php echo $row_DetailRS1['moneda_documentos']; ?> <?php echo number_format($row_DetailRS1['monto_documentos'], 2, ',', '.'); ?></td>
       <td align="right" valign="middle"><?php echo number_format($row_DetailRS1['monto_usd'], 2, ',', '.'); ?></td>
-      <td align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['reparo_obs']; ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['especialista_curse']; ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['sub_estado']; ?></td>

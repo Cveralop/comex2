@@ -218,7 +218,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Observaciones:</td>
-    <td colspan="3" align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?> </td>
+    <td colspan="3" align="left" valign="middle"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?> </td>
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Fecha Pre Ingreso: </td>

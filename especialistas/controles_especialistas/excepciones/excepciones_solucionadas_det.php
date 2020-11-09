@@ -183,7 +183,7 @@ function MM_swapImage() { //v3.0
   </tr>
   <tr>
     <td align="right" valign="middle">Observaciones:</td>
-    <td colspan="3" align="left"><?php echo $row_DetailRS1['obs']; ?></td>
+    <td colspan="3" align="left"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></td>
   </tr>
 </table>
 <br />

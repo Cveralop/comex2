@@ -224,7 +224,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   </tr>
   <tr valign="middle">
     <td align="right">Observaci&oacute;n:</td>
-    <td colspan="3" align="left"><?php echo $row_DetailRS1['obs']; ?> </td>
+    <td colspan="3" align="left"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?> </td>
   </tr>
   <tr valign="middle">
     <td align="right">Moneda / Monto Operaci&oacute;n:</td>

@@ -218,7 +218,7 @@ Operaci�n Ingresada FUERA DE HORARIO
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Obsevaciones:</div></td>
-    <td align="left" valign="middle"><strong><?php echo $row_DetailRS1['obs']; ?></strong></td>
+    <td align="left" valign="middle"><strong><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></strong></td>
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n:</div></td>

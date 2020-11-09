@@ -167,7 +167,7 @@ Monto Negociaci&oacute;n</td>
       <td align="left" valign="middle">Tipo negociaci&oacute;n <strong><?php echo $row_DetailRS1['tipo_negociacion']; ?></strong></td>
     </tr>
     <tr>
-      <td align="left" valign="middle"><strong><?php echo $row_DetailRS1['obs']; ?></strong></td>
+      <td align="left" valign="middle"><strong><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></strong></td>
     </tr>
     <tr>
       <td align="left" valign="middle"><strong><img src="../../../imagenes/GIF/check.gif" width="13" height="12">Alzamiento</strong></td>

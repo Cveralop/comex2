@@ -144,7 +144,7 @@ a:active {
       <td align="left" valign="middle"><?php echo $row_DetailRS1['asignador']; ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['operador']; ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['producto']; ?></td>
-      <td align="left" valign="middle"><?php echo $row_DetailRS1['obs']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['reparo_obs']; ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['especialista_curse']; ?></td>
       <td align="left" valign="middle"><?php echo $row_DetailRS1['sub_estado']; ?></td>

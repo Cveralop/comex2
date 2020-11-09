@@ -244,7 +244,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
   </tr>
   <tr>
     <td align="right" valign="middle">Obsevaciones:</td>
-    <td colspan="3" align="left" valign="middle"><strong><?php echo $row_DetailRS1['obs']; ?></strong></td>
+    <td colspan="3" align="left" valign="middle"><strong><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></strong></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Nro Operaci&oacute;n:</td>

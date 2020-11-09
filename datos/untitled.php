@@ -108,7 +108,7 @@ $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
   </tr>
   <tr>
     <td>obs</td>
-    <td><?php echo $row_DetailRS1['obs']; ?></td>
+    <td><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></td>
   </tr>
   <tr>
     <td>especialista</td>

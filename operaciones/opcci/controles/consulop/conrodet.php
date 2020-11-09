@@ -202,7 +202,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <tr valign="middle">
     <td align="right">Observaciones:</div></td>
-    <td colspan="3" align="center"><?php echo $row_DetailRS1['obs']; ?> </td>
+    <td colspan="3" align="center"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?> </td>
   </tr>
   <tr valign="middle">
     <td align="right">Moneda Monto / Operaci&oacute;n:</div></td>
