@@ -14,4 +14,4 @@ $database_comercioexterior);
 if ($comercioexterior->connect_error) {
     die("Connection failed: " . $comercioexterior->connect_error);
   }
-  ?>
+?>

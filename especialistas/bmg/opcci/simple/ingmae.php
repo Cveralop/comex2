@@ -43,14 +43,14 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
-{
-  global $comercioexterior;
-
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-  }
-  $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($comercioexterior, $theValue) : mysqli_escape_string($comercioexterior, $theValue);
+  function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+  {
+    global $comercioexterior;
+  
+    if (PHP_VERSION < 6) {
+      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+    }
+    $theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($comercioexterior, $theValue) : mysqli_escape_string($comercioexterior, $theValue);
   switch ($theType) {
     case "text":
       $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
@@ -83,7 +83,7 @@ $colname_ingape = "zzz";
 if (isset($_GET['rut_cliente'])) {
   $colname_ingape = $_GET['rut_cliente'];
 }
-mysqli_select_db($comercioexterior, $database_comercioexterior); //Funcionando
+mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingape = sprintf("SELECT * FROM cliente WHERE rut_cliente = %s ORDER BY rut_cliente ASC", GetSQLValueString($colname_ingape, "text"));
 $query_limit_ingape = sprintf("%s LIMIT %d, %d", $query_ingape, $startRow_ingape, $maxRows_ingape);
 $ingape = mysqli_query($comercioexterior, $query_limit_ingape) or die(mysqli_error($comercioexterior));
@@ -95,89 +95,8 @@ if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = mysqli_num_rows($all_ingape);
 }
 $totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
-//
-$maxRows_ingvarios = 10;
-$pageNum_ingvarios = 0;
-if (isset($_GET['pageNum_ingvarios'])) {
-  $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
-}
-$startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
-$colname_ingvarios = "zzz";
-if (isset($_GET['nro_operacion'])) {
-  $colname_ingvarios = $_GET['nro_operacion'];
-}
 
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_ingvarios = sprintf("SELECT id, nro_operacion, rut_cliente, nombre_cliente, nro_factura FROM opcci WHERE nro_operacion = %s", GetSQLValueString($colname_ingvarios, "text"));
-$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
-$ingvarios = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
-$row_ingvarios = mysqli_fetch_assoc($ingvarios);
-if (isset($_GET['totalRows_ingvarios'])) {
-  $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
-} else {
-  $all_ingvarios = mysqli_query($comercioexterior, $query_ingvarios);
-  $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
-}
-$totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
-$colname_ingcci = "-1";
-if (isset($_GET['nro_operacion_relacionada_car'])) {
-  $colname_ingcci = $_GET['nro_operacion_relacionada_car'];
-}
-
-//PRIMERA linea agregada de prueba
-$maxRows_ingcci = 10;
-$pageNum_ingcci = 0;
-if (isset($_GET['pageNum_ingcci'])) {
-  $pageNum_ingcci = $_GET['pageNum_ingcci'];
-}
-$startRow_ingcci = $pageNum_ingcci * $maxRows_ingcci;
-$colname_ingcci = "zzz";
-if (isset($_GET['nro_operacion_relacionada_car'])) {
-  $colname_ingcci = $_GET['nro_operacion_relacionada_car'];
-}//termina linea agregada de prueba
-
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_ingcci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_relacionada_car = %s ORDER BY nro_operacion_car DESC", GetSQLValueString($colname_ingcci, "text"));
-//linea agregada de prueba
-$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingcci, $startRow_ingcci, $maxRows_ingcci);
-
-$ingcci = mysqli_query($comercioexterior, $query_ingcci) or die(mysqli_error($comercioexterior));
-$row_ingcci = mysqli_fetch_assoc($ingcci);
-$totalRows_ingcci = mysqli_num_rows($ingcci);
-
-//linea de prueba
-$totalPages_ingcci = ceil($totalRows_ingcci/$maxRows_ingcci)-1;
-
-$colname_inglci = "L";
-if (isset($_GET['nro_operacion_car'])) {
-  $colname_inglci = $_GET['nro_operacion_car'];
-}
-//
-//SEGUNDA linea agregada de prueba
-$maxRows_inglci = 10;
-$pageNum_inglci = 0;
-if (isset($_GET['pageNum_ingcci'])) {
-  $pageNum_inglci = $_GET['pageNum_ingcci'];
-}
-$startRow_inglci = $pageNum_inglci * $maxRows_inglci;
-$colname_inglci = "zzz";
-if (isset($_GET['nro_operacion_car'])) {
-  $colname_inglci = $_GET['nro_operacion_car'];
-}//termina linea agregada de prueba
-
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_inglci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_car = %s", GetSQLValueString($colname_inglci, "text"));
-//linea agregada de prueba
-$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingcci, $startRow_inglci, $maxRows_inglci);
-
-$inglci = mysqli_query($comercioexterior, $query_inglci) or die(mysqli_error($comercioexterior));
-$row_inglci = mysqli_fetch_assoc($inglci);
-$totalRows_inglci = mysqli_num_rows($inglci);
-
-//SEGUNDA linea de prueba
-$totalPages_inglci = ceil($totalRows_inglci/$maxRows_inglci)-1;
-
-$queryString_ingape = ""; //primera linea
+$queryString_ingape = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
   $newParams = array();
@@ -193,8 +112,32 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
 
-//segunda linea
-$queryString_ingvarios = ""; 
+$maxRows_ingvarios = 10;
+$pageNum_ingvarios = 0;
+if (isset($_GET['pageNum_ingvarios'])) {
+  $pageNum_ingvarios = $_GET['pageNum_ingvarios'];
+}
+$startRow_ingvarios = $pageNum_ingvarios * $maxRows_ingvarios;
+
+$colname_ingvarios = "zzz";
+if (isset($_GET['nro_operacion'])) {
+  $colname_ingvarios = $_GET['nro_operacion'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_ingvarios = sprintf("SELECT id, nro_operacion, rut_cliente, nombre_cliente, nro_factura FROM opcci WHERE nro_operacion = %s", GetSQLValueString($colname_ingvarios, "text"));
+$query_limit_ingvarios = sprintf("%s LIMIT %d, %d", $query_ingvarios, $startRow_ingvarios, $maxRows_ingvarios);
+$ingvarios = mysqli_query($comercioexterior, $query_limit_ingvarios) or die(mysqli_error($comercioexterior));
+$row_ingvarios = mysqli_fetch_assoc($ingvarios);
+
+if (isset($_GET['totalRows_ingvarios'])) {
+  $totalRows_ingvarios = $_GET['totalRows_ingvarios'];
+} else {
+  $all_ingvarios = mysqli_query($comercioexterior, $query_ingvarios);
+  $totalRows_ingvarios = mysqli_num_rows($all_ingvarios);
+}
+$totalPages_ingvarios = ceil($totalRows_ingvarios/$maxRows_ingvarios)-1;
+
+$queryString_ingvarios = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
   $newParams = array();
@@ -209,7 +152,94 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
-//var_dump($row_ingvarios); die();
+
+$maxRows_ingcci = 10;
+$pageNum_ingcci = 0;
+if (isset($_GET['pageNum_ingcci'])) {
+  $pageNum_ingcci = $_GET['pageNum_ingcci'];
+}
+$startRow_ingcci = $pageNum_ingcci * $maxRows_ingcci;
+
+$colname_ingcci = "-1";
+if (isset($_GET['nro_operacion_relacionada_car'])) {
+  $colname_ingcci = $_GET['nro_operacion_relacionada_car'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_ingcci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_relacionada_car = %s ORDER BY nro_operacion_car DESC", GetSQLValueString($colname_ingcci, "text"));
+$query_limit_ingcci = sprintf("%s LIMIT %d, %d", $query_ingcci, $startRow_ingcci, $maxRows_ingcci);
+$ingcci = mysqli_query($comercioexterior, $query_limit_ingcci) or die(mysqli_error($comercioexterior));
+$row_ingcci = mysqli_fetch_assoc($ingcci);
+$totalRows_ingcci = mysqli_num_rows($ingcci);
+
+if (isset($_GET['totalRows_ingcci'])) {
+  $totalRows_ingcci = $_GET['totalRows_ingcci'];
+} else {
+  $all_ingcci = mysqli_query($comercioexterior, $query_ingcci);
+  $totalRows_ingcci = mysqli_num_rows($all_ingcci);
+}
+$totalPages_ingcci = ceil($totalRows_ingcci/$maxRows_ingcci)-1;
+
+$queryString_ingcci = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingcci") == false && 
+        stristr($param, "totalRows_ingcci") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingcci = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingcci = sprintf("&totalRows_ingcci=%d%s", $totalRows_ingcci, $queryString_ingcci);
+//var_dump($row_ingcci); die();
+
+$maxRows_inglci = 10;
+$pageNum_inglci = 0;
+if (isset($_GET['pageNum_inglci'])) {
+  $pageNum_inglci = $_GET['pageNum_inglci'];
+}
+$startRow_inglci = $pageNum_inglci * $maxRows_inglci;
+
+$colname_inglci = "L";
+if (isset($_GET['nro_operacion_car'])) {
+  $colname_inglci = $_GET['nro_operacion_car'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_inglci = sprintf("SELECT * FROM carteraopera WHERE nro_operacion_car = %s", GetSQLValueString($colname_inglci, "text"));
+$query_limit_inglci = sprintf("%s LIMIT %d, %d", $query_inglci, $startRow_inglci, $maxRows_inglci);
+$inglci = mysqli_query($comercioexterior, $query_limit_inglci) or die(mysqli_error($comercioexterior));
+$row_inglci = mysqli_fetch_assoc($inglci);
+$totalRows_inglci = mysqli_num_rows($inglci);
+
+if (isset($_GET['totalRows_inglci'])) {
+  $totalRows_inglci = $_GET['totalRows_inglci'];
+} else {
+  $all_inglci = mysqli_query($comercioexterior, $query_inglci);
+  $totalRows_inglci = mysqli_num_rows($all_inglci);
+}
+$totalPages_inglci = ceil($totalRows_inglci/$maxRows_inglci)-1;
+
+$queryString_inglci = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_inglci") == false && 
+        stristr($param, "totalRows_inglci") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_inglci = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_inglci = sprintf("&totalRows_inglci=%d%s", $totalRows_inglci, $queryString_inglci);
+
+
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -293,11 +323,13 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
 //-->
 </script>
 <script>
+<!--
 //Script original de KarlanKas para forosdelweb.com 
 var segundos=1200
 var direccion='http://pdpto38:8303/comex/index.php' 
 milisegundos=segundos*1000 
 window.setTimeout("window.location.replace(direccion);",milisegundos);
+//-->
 </script> 
 <link rel="shortcut icon" href="../../../../imagenes/barraweb/favicon.ico">
 <link rel="icon" type="image/gif" href="../../../../imagenes/barraweb/animated_favicon1.gif">
@@ -433,14 +465,14 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
     <td align="center" class="titulocolumnas">Rut Cliente</td>
     <td align="center" class="titulocolumnas">Nombre Cliente</td>
     <td align="center" class="titulocolumnas">Nro Factura</td>
-  </tr>
+  </tr>  
   <?php do { ?>
   <tr valign="middle">
     <td align="center"><a href="../../../bmg/opcci/simple/ingdet2.php?recordID=<?php echo $row_ingvarios['id']; ?>"> <img src="../../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></div></td>
     <td align="center"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_ingvarios['nro_operacion']); ?></span>      </div></td>
     <td align="center"><?php echo $row_ingvarios['rut_cliente']; ?> </div></td>
     <td align="left"><?php echo $row_ingvarios['nombre_cliente']; ?> </td>
-    <td align="left"><?php echo $row_ingvarios['nro_factura']; ?></td>
+    <td align="left"><?php echo (isset($row_ingvarios['nro_factura'])?$row_ingvarios['nro_factura']:""); ?></td>
   </tr>
   <?php } while ($row_ingvarios = mysqli_fetch_assoc($ingvarios)); ?>
 </table>
@@ -460,7 +492,7 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
         <?php } // Show if not last page ?>
     </td>
     <td width="23%" align="center"><?php if ($pageNum_ingvarios < $totalPages_ingvarios) { // Show if not last page ?>
-        <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, $totalPages_ingvarios, $queryString_ingvarios); ?>">&Uacute;ltimo</a>
+        <a href="<?php printf("%s?pageNum_ingvarios=%d%s", $currentPage, $totalPages_ingvarios, $queryString_ingvarios); ?>">�ltimo</a>
         <?php } // Show if not last page ?>
     </td>
   </tr>
@@ -493,7 +525,6 @@ Registros del <strong><?php echo ($startRow_ingvarios + 1) ?></strong> al <stron
     <?php } while ($row_ingcci = mysqli_fetch_assoc($ingcci)); ?>
   </table>
   <br>
-
 <table border="0" width="50%" align="center">
   <tr>
     <td width="23%" align="center"><?php if ($pageNum_ingcci > 0) { // Show if not first page ?>
@@ -540,16 +571,16 @@ Registros del <strong><?php echo ($startRow_ingcci + 1) ?></strong> al <strong><
 <br>
 <table width="50%" border="0" align="center">
   <tr>
-    <td width="23%" align="center"><?php if ($pageNum_inglci > 0) { // Show if not first page ?>
+    <td><?php if ($pageNum_inglci > 0) { // Show if not first page ?>
       <a href="<?php printf("%s?pageNum_inglci=%d%s", $currentPage, 0, $queryString_inglci); ?>">Primero</a>
       <?php } // Show if not first page ?></td>
-    <td width="31%" align="center"><?php if ($pageNum_inglci > 0) { // Show if not first page ?>
+    <td><?php if ($pageNum_inglci > 0) { // Show if not first page ?>
       <a href="<?php printf("%s?pageNum_inglci=%d%s", $currentPage, max(0, $pageNum_inglci - 1), $queryString_inglci); ?>">Anterior</a>
       <?php } // Show if not first page ?></td>
-    <td width="23%" align="center"><?php if ($pageNum_inglci < $totalPages_inglci) { // Show if not last page ?>
+    <td><?php if ($pageNum_inglci < $totalPages_inglci) { // Show if not last page ?>
       <a href="<?php printf("%s?pageNum_inglci=%d%s", $currentPage, min($totalPages_inglci, $pageNum_inglci + 1), $queryString_inglci); ?>">Siguiente</a>
       <?php } // Show if not last page ?></td>
-    <td width="23%" align="center"><?php if ($pageNum_inglci < $totalPages_inglci) { // Show if not last page ?>
+    <td><?php if ($pageNum_inglci < $totalPages_inglci) { // Show if not last page ?>
       <a href="<?php printf("%s?pageNum_inglci=%d%s", $currentPage, $totalPages_inglci, $queryString_inglci); ?>">&Uacute;ltimo</a>
       <?php } // Show if not last page ?></td>
   </tr>
