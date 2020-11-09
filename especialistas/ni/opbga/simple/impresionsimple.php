@@ -221,7 +221,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <td align="right" valign="middle">Urgente:</div></td>
     <td align="center" valign="middle"><span class="Estilo12"><?php echo $row_DetailRS1['urgente']; ?></span></td>
     <td align="right" valign="middle">Valuta:</td>
-    <td align="center" valign="middle"><span class="Estilo12"><?php echo $row_DetailRS1['valuta']; ?></span></td>
+    <td align="center" valign="middle"><span class="Estilo12"><?php echo (isset($row_DetailRS1['valuta'])?$row_DetailRS1['valuta']:""); ?></span></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Mandato / Imp. Operar / Passport:</td>

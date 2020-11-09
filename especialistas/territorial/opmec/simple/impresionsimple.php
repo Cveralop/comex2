@@ -252,7 +252,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
   </tr>
   <tr valign="middle">
     <td align="right">Valuta:</div></td>
-    <td align="center" class="NegrillaCartaReparo"><?php echo $row_DetailRS1['valuta']; ?></td>
+    <td align="center" class="NegrillaCartaReparo"><?php echo (isset($row_DetailRS1['valuta'])?$row_DetailRS1['valuta']:""); ?></td>
     <td align="right">Mandato / Imp. Operar / Passport:</td>
     <td align="center" class="NegrillaCartaReparo"><?php echo $row_DetailRS1['mandato']; ?> / <?php echo $row_DetailRS1['impedido_operar']; ?> / <?php echo $row_DetailRS1['cliente_passport']; ?></td>
   </tr>

@@ -231,7 +231,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
   </tr>
   <tr valign="middle">
     <td align="right" valign="middle">Valuta:</div></td>
-    <td align="left" valign="middle"><strong class="Estilo12"><?php echo $row_DetailRS1['valuta']; ?></strong></td>
+    <td align="left" valign="middle"><strong class="Estilo12"><?php echo (isset($row_DetailRS1['valuta'])?$row_DetailRS1['valuta']:""); ?></strong></td>
   </tr>
 </table>
 <br>

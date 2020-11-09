@@ -247,7 +247,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <tr valign="middle">
     <td align="right">Valuta:</td>
-    <td colspan="3" align="left"><?php echo $row_DetailRS1['valuta']; ?></td>
+    <td colspan="3" align="left"><?php echo (isset($row_DetailRS1['valuta'])?$row_DetailRS1['valuta']:""); ?></td>
   </tr>
 </table>
 <br>

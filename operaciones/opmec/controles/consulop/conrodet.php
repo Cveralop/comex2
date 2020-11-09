@@ -226,7 +226,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <td align="right" valign="middle">Fecha Supervisor:</td>
     <td align="center" valign="middle"><?php echo $row_DetailRS1['date_supe']; ?></td>
     <td align="right" valign="middle">Valuta:</td>
-    <td align="center" valign="middle"><?php echo $row_DetailRS1['valuta']; ?></td>
+    <td align="center" valign="middle"><?php echo (isset($row_DetailRS1['valuta'])?$row_DetailRS1['valuta']:""); ?></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Fuera Horario:</td>
