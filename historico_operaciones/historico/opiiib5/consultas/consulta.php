@@ -282,7 +282,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td align="center" valign="middle"><?php echo $row_conrut['estado']; ?></div></td>
     <td align="center" valign="middle"><?php echo $row_conrut['fecha_curse']; ?></div>      </div></td>
     <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['nro_operacion']); ?></span>      </div></td>
-    <td align="center" valign="middle"><?php echo $row_conrut['valuta']; ?></div></td>
+    <td align="center" valign="middle"><?php echo (isset($row_conrut['valuta']) ? $row_conrut['valuta']:""); ?></div></td>
     <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_conrut['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_conrut['monto_operacion'], 2, ',', '.'); ?></strong> </div></td>
   </tr>
   <?php } while ($row_conrut = mysqli_fetch_assoc($conrut)); ?>
