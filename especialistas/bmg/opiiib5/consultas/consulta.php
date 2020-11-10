@@ -56,6 +56,7 @@ $query_conrut = sprintf("SELECT * FROM optbc WHERE rut_cliente LIKE '%s%%' and e
 $conrut = mysqli_query($comercioexterior, $query_conrut) or die(mysqli_error());
 $row_conrut = mysqli_fetch_assoc($conrut);
 $totalRows_conrut = mysqli_num_rows($conrut);
+
 $queryString_conrut = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -217,7 +218,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
 <br>
 <table width="95%"  border="0" align="center">
   <tr>
-    <td align="right" valign="middle"><a href="../../../../bmg/opiiib5/opiiib5.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image5','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image5" width="80" height="25" border="0"></a></div></td>
+    <td align="right" valign="middle"><a href="../opiiib5.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image5','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image5" width="80" height="25" border="0"></a></div></td>
   </tr>
 </table>
 <br>

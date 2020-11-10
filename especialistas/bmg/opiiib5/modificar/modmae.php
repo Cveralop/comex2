@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_modificacion'])) {
   $pageNum_modificacion = $_GET['pageNum_modificacion'];
 }
 $startRow_modificacion = $pageNum_modificacion * $maxRows_modificacion;
+
 $colname1_modificacion = "Pendiente.";
 if (isset($_GET['estado_visacion'])) {
   $colname1_modificacion = $_GET['estado_visacion'];
@@ -92,6 +93,7 @@ $query_modificacion = sprintf("SELECT * FROM optbc WHERE rut_cliente = %s and es
 $query_limit_modificacion = sprintf("%s LIMIT %d, %d", $query_modificacion, $startRow_modificacion, $maxRows_modificacion);
 $modificacion = mysqli_query($comercioexterior, $query_limit_modificacion) or die(mysqli_error());
 $row_modificacion = mysqli_fetch_assoc($modificacion);
+
 if (isset($_GET['totalRows_modificacion'])) {
   $totalRows_modificacion = $_GET['totalRows_modificacion'];
 } else {
