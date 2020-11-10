@@ -116,6 +116,7 @@ $query_DetailRS1 = sprintf("SELECT * FROM optbc  WHERE id = %s", GetSQLValueStri
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
+
 if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = $_GET['totalRows_DetailRS1'];
 } else {
@@ -123,11 +124,14 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM opste INNER JOIN cliente ON opste.rut_cliente=cliente.rut_cliente WHERE opste.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
 $totalRows_DetailRS2 = mysqli_num_rows($DetailRS2);
+//var_dump($row_DetailRS2); die();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -280,7 +284,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Mandato:</td>
-      <td align="center" valign="middle"><input name="mandato" type="text" class="etiqueta12" value="<?php echo $row_DetailRS2['estado_mandato']; ?>" size="20" maxlength="25" /></td>
+      <td align="center" valign="middle"><input name="mandato" type="text" class="etiqueta12" value="<?php echo (isset($row_DetailRS2['estado_mandato']) ? $row_DetailRS2['estado_mandato'] :""); ?>" size="20" maxlength="25" /></td>
       <td align="right" valign="middle">Urgente:</td>
       <td align="center" valign="middle"><label>
         <input name="urgente" type="radio" class="etiqueta12" value="Si" />

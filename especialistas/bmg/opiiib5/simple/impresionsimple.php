@@ -126,6 +126,7 @@ $query_excepciones = sprintf("SELECT * FROM excepciones WHERE especialista_curse
 $excepciones = mysqli_query($comercioexterior, $query_excepciones) or die(mysqli_error($comercioexterior));
 $row_excepciones = mysqli_fetch_assoc($excepciones);
 $totalRows_excepciones = mysqli_num_rows($excepciones);
+
 $queryString_DetailRS1 = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -141,6 +142,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_DetailRS1 = sprintf("&totalRows_DetailRS1=%d%s", $totalRows_DetailRS1, $queryString_DetailRS1);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <script> 
@@ -192,7 +194,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <td colspan="2" align="center" valign="middle"><span class="Estilo9">CAMBIOS - CREDITOS III B5</span></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" valign="middle"><?php if ($row_DetailRS1['esp'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
+    <td colspan="2" align="center" valign="middle"><?php if ($row_DetailRS1['especialista'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
       <span class="FueraHorario"><span class="Estilo13" >Operaci&oacute;n Ingresada FUERA DE HORARIO </span></span>
     <?php } // Show if not first page ?></td>
   </tr>

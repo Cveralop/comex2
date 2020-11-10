@@ -104,10 +104,19 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM optbc INNER JOIN cliente ON optbc.rut_cliente=cliente.rut_cliente WHERE optbc.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
 $totalRows_DetailRS2 = mysqli_num_rows($DetailRS2);
+
+$maxRows_DetailRS1 = 10;
+$pageNum_DetailRS1 = 0;
+if (isset($_GET['pageNum_DetailRS1'])) {
+  $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
+}
+$startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
+
 $colname_DetailRS1 = "1";
 if (isset($_GET['recordID'])) {
   $colname_DetailRS1 = $_GET['recordID'];
@@ -117,22 +126,25 @@ $query_DetailRS1 = sprintf("SELECT * FROM optbc WHERE id = %s", GetSQLValueStrin
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
+
 $maxRows_DetailRS1 = 10;
 $pageNum_DetailRS1 = 0;
 if (isset($_GET['pageNum_DetailRS1'])) {
   $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
 }
 $startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
+
 $colname_DetailRS1 = "1";
 if (isset($_GET['rut_cliente'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM optbc WHERE id = $recordID", $colname_ingape);
+$query_DetailRS1 = sprintf("SELECT * FROM optbc WHERE id = $recordID", $colname_DetailRS1);
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
+
 if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = $_GET['totalRows_DetailRS1'];
 } else {
@@ -140,59 +152,76 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Pre-Ingreso Instruccion - Detalle</title>
-<style type="text/css">
-<!--
-@import url("../../../../estilos/estilo12.css");
-body,td,th {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	color: #0000FF;
-}
-body {
-	background-image: url(../../../../imagenes/JPEG/edificio_corporativo.jpg);
-}
-a {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	color: #FF0000;
-	font-weight: bold;
-}
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: underline;
-}
-a:active {
-	text-decoration: none;
-}
-.Estilo3 {font-size: 18px;
-	font-weight: bold;
-	color: #FFFFFF;
-}
-.Estilo4 {font-size: 14px;
-	font-weight: bold;
-	color: #FFFFFF;
-}
-.Estilo5 {
-	color: #FFFFFF;
-	font-size: 12px;
-	font-weight: bold;
-}
--->
-</style>
-<script src="../../../../SpryAssets/SpryValidationTextarea.js" type="text/javascript"></script>
-<script src="../../../../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
-<script language="JavaScript" type="text/JavaScript">
-<!--
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Pre-Ingreso Instruccion - Detalle</title>
+    <style type="text/css">
+    <!--
+    @import url("../../../../estilos/estilo12.css");
+
+    body,
+    td,
+    th {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #0000FF;
+    }
+
+    body {
+        background-image: url(../../../../imagenes/JPEG/edificio_corporativo.jpg);
+    }
+
+    a {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #FF0000;
+        font-weight: bold;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:active {
+        text-decoration: none;
+    }
+
+    .Estilo3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    .Estilo4 {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    .Estilo5 {
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    -->
+    </style>
+    <script src="../../../../SpryAssets/SpryValidationTextarea.js" type="text/javascript"></script>
+    <script src="../../../../SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+    <script language="JavaScript" type="text/JavaScript">
+        <!--
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
 }
@@ -232,135 +261,178 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
   if (restore) selObj.selectedIndex=0;
 }
 //-->
-</script>
-<script>
-//Script original de KarlanKas para forosdelweb.com 
-var segundos=1200
-var direccion='http://pdpto38:8303/comex/index.php' 
-milisegundos=segundos*1000 
-window.setTimeout("window.location.replace(direccion);",milisegundos);
-</script> 
-<link rel="shortcut icon" href="../../../../imagenes/barraweb/favicon.ico">
-<link rel="icon" type="image/gif" href="../../../../imagenes/barraweb/animated_favicon1.gif">
-<link href="../../../../SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
-<link href="../../../../SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+    </script>
+    <script>
+    //Script original de KarlanKas para forosdelweb.com 
+    var segundos = 1200
+    var direccion = 'http://pdpto38:8303/comex/index.php'
+    milisegundos = segundos * 1000
+    window.setTimeout("window.location.replace(direccion);", milisegundos);
+    </script>
+    <link rel="shortcut icon" href="../../../../imagenes/barraweb/favicon.ico">
+    <link rel="icon" type="image/gif" href="../../../../imagenes/barraweb/animated_favicon1.gif">
+    <link href="../../../../SpryAssets/SpryValidationTextarea.css" rel="stylesheet" type="text/css">
+    <link href="../../../../SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
 </head>
-<body onLoad="MM_preloadImages('../../../../bmg/imagenes/Botones/boton_volver_2.jpg','../../../../imagenes/Botones/boton_volver_2.jpg')">
-<table width="95%"  border="1" align="center" bordercolor="#FF0000" bgcolor="#FF0000">
-  <tr>
-    <td width="93%" align="left" valign="middle" class="Estilo3">PRE-INGRESO INSTRUCCION - DETALLE </td>
-    <td width="7%" rowspan="2" align="left" valign="middle" class="Estilo3"><img src="../../../../imagenes/GIF/erde016.gif" width="43" height="43" align="right"></td>
-  </tr>
-  <tr>
-    <td align="left" valign="middle" class="Estilo4">CAMBIOS - CREDITOS IIIB5</td>
-  </tr>
-</table>
-<br>
-<form action="<?php echo $editFormAction; ?>" method="POST" name="form1" onSubmit="MM_validateForm('monto_operacion','','RisNum');return document.MM_returnValue">
-  <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
-    <tr valign="baseline" bgcolor="#999999">
-      <td colspan="4" align="left" valign="middle"><img src="../../../../imagenes/GIF/notepad.gif" width="19" height="21" border="0"><span class="titulodetalle">Pre-Ingreso Instrucci&oacute;n</div>
-      </span></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Rut Cliente:</td>
-      <td align="center" valign="middle">
-          <input name="rut_cliente" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="15" readonly="readonly">
-      <span class="rojopequeno">Sin puntos ni Guion</span></div></td>
-      <td align="right" valign="middle">Fecha Ingreso:</div></td>
-      <td align="center" valign="middle">
-          <input name="fecha_ingreso" type="text" class="etiqueta12" value="<?php echo date("d-m-Y"); ?>" size="12" maxlength="10"> 
-      <span class="rojopequeno">(dd-mm-aaaa)</span> </div></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Nombre Cliente:</td>
-      <td colspan="3" align="left" valign="middle"><input name="nombre_cliente" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="122" maxlength="120" readonly="readonly"></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Evento:</td>
-      <td align="center" valign="middle"><select name="evento" class="etiqueta12" id="evento">
-        <option value="Otorgamiento." selected>Otorgamiento</option>
-        <option value="Modificacion.">Modificacion</option>
-        <option value="Pago.">Pago</option>
-        <option value="Cambio Tasa.">Cambio Tasa</option>
-        <option value="Requerimiento.">Requerimiento</option>
-        <option value="Dev Comisiones.">Dev Comisiones</option>
-      </select>        </div></td>
-      <td align="right" valign="middle">Especilista Curse:</div></td>
-      <td align="center" valign="middle"><span id="sprytextfield1">
-        <input name="especialista_curse" type="text" class="etiqueta12" id="especialista_curse" value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20">
-        <span class="textfieldRequiredMsg">Si esta valor esta en Blanco ingrese nuevamente a la aplicaci&oacute;n.</span></span></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Observaci&oacute;n:</td>
-      <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
-        <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Moneda / <br> 
-      Monto Operaci&oacute;n:</td>
-      <td align="center" valign="middle">
-          <select name="moneda_operacion" class="etiqueta12" id="moneda_operacion">
-            <option value="CLP">CLP</option>
-            <option value="DKK">DKK</option>
-            <option value="NOK">NOK</option>
-            <option value="SEK">SEK</option>
-            <option value="USD" selected>USD</option>
-            <option value="CAD">CAD</option>
-            <option value="AUD">AUD</option>
-            <option value="HKD">HKD</option>
-            <option value="EUR">EUR</option>
-            <option value="CHF">CHF</option>
-            <option value="GBP">GBP</option>
-            <option value="ZAR">ZAR</option>
-            <option value="JPY">JPY</option>
-        </select> 
-          <span class="rojopequeno">/</span>        
-          <input name="monto_operacion" type="text" class="etiqueta12" value="0.00" size="20" maxlength="20">
-      </div></td>
-      <td align="right" valign="middle">Mandato:</td>
-      <td align="center" valign="middle"><input name="mandato" type="text" class="etiqueta12" id="mandato" value="<?php echo $row_DetailRS2['estado_mandato']; ?>" size="30" maxlength="25" readonly="readonly"></td>
-    </tr>
-    <tr valign="baseline">
-      <td align="right" valign="middle">Urgente:</td>
-      <td align="center" valign="middle">
-        <label>
-          <input name="urgente" type="radio" class="etiqueta12" value="Si">
-          Si</label>
-        <label>
-          <input name="urgente" type="radio" class="etiqueta12" value="No" checked>
-          No</label>
-      </td>
-      <td align="right" valign="middle">Nro Operaci&oacute;n:</td>
-      <td align="center" valign="middle"><input name="nro_operacion" type="text" class="etiqueta12" id="nro_operacion" value="<?php echo $row_DetailRS1['nro_operacion']; ?>" size="15" maxlength="7">
-        <span class="rojopequeno">F000000</span></td>
-    </tr>
-    <tr valign="baseline">
-      <td colspan="4" align="center" valign="middle">
-        <input type="submit" class="boton" value="Ingresar Instrucci&oacute;n">
-      </div></td>
-    </tr>
-  </table>
-  <input type="hidden" name="id">
-  <input type="hidden" name="MM_insert" value="form1">
-  <input type="hidden" name="date_ingreso" value="<?php echo date("Y-m-d"); ?>" size="32">
-  <input name="date_preingreso" type="hidden" id="date_preingreso" value="<?php echo date("Y-m-d H:i:s"); ?>" size="32">
-  <input name="sub_estado" type="hidden" id="sub_estado" value="Preingresada.">
-</form>
-<br>
-<table width="95%"  border="0" align="center">
-  <tr>
-    <td align="right" valign="middle"><a href="ingmae.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80" height="25" border="0"></a></div></td>
-  </tr>
-</table>
-<script type="text/javascript">
-<!--
-var sprytextarea1 = new Spry.Widget.ValidationTextarea("sprytextarea1", {isRequired:false, minChars:0, maxChars:255, validateOn:["blur"], counterId:"countsprytextarea1", counterType:"chars_remaining"});
-var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytextfield1", "none", {validateOn:["blur", "change"]});
-//-->
-</script>
+
+<body
+    onLoad="MM_preloadImages('../../../../bmg/imagenes/Botones/boton_volver_2.jpg','../../../../imagenes/Botones/boton_volver_2.jpg')">
+    <table width="95%" border="1" align="center" bordercolor="#FF0000" bgcolor="#FF0000">
+        <tr>
+            <td width="93%" align="left" valign="middle" class="Estilo3">PRE-INGRESO INSTRUCCION - DETALLE </td>
+            <td width="7%" rowspan="2" align="left" valign="middle" class="Estilo3"><img
+                    src="../../../../imagenes/GIF/erde016.gif" width="43" height="43" align="right"></td>
+        </tr>
+        <tr>
+            <td align="left" valign="middle" class="Estilo4">CAMBIOS - CREDITOS IIIB5</td>
+        </tr>
+    </table>
+    <br>
+    <form action="<?php echo $editFormAction; ?>" method="POST" name="form1"
+        onSubmit="MM_validateForm('monto_operacion','','RisNum');return document.MM_returnValue">
+        <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
+            <tr valign="baseline" bgcolor="#999999">
+                <td colspan="4" align="left" valign="middle"><img src="../../../../imagenes/GIF/notepad.gif" width="19"
+                        height="21" border="0"><span class="titulodetalle">Pre-Ingreso Instrucci&oacute;n</div>
+                    </span></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Rut Cliente:</td>
+                <td align="center" valign="middle">
+                    <input name="rut_cliente" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="15"
+                        readonly="readonly">
+                    <span class="rojopequeno">Sin puntos ni Guion</span></div>
+                </td>
+                <td align="right" valign="middle">Fecha Ingreso:</div>
+                </td>
+                <td align="center" valign="middle">
+                    <input name="fecha_ingreso" type="text" class="etiqueta12" value="<?php echo date("d-m-Y"); ?>"
+                        size="12" maxlength="10">
+                    <span class="rojopequeno">(dd-mm-aaaa)</span> </div>
+                </td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Nombre Cliente:</td>
+                <td colspan="3" align="left" valign="middle"><input name="nombre_cliente" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="122" maxlength="120"
+                        readonly="readonly"></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Evento:</td>
+                <td align="center" valign="middle"><select name="evento" class="etiqueta12" id="evento">
+                        <option value="Otorgamiento." selected>Otorgamiento</option>
+                        <option value="Modificacion.">Modificacion</option>
+                        <option value="Pago.">Pago</option>
+                        <option value="Cambio Tasa.">Cambio Tasa</option>
+                        <option value="Requerimiento.">Requerimiento</option>
+                        <option value="Dev Comisiones.">Dev Comisiones</option>
+                    </select> </div>
+                </td>
+                <td align="right" valign="middle">Especilista Curse:</div>
+                </td>
+                <td align="center" valign="middle"><span id="sprytextfield1">
+                        <input name="especialista_curse" type="text" class="etiqueta12" id="especialista_curse"
+                            value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20">
+                        <span class="textfieldRequiredMsg">Si esta valor esta en Blanco ingrese nuevamente a la
+                            aplicaci&oacute;n.</span></span></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Observaci&oacute;n:</td>
+                <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
+                        <textarea name="obs" cols="80" rows="4"
+                            class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
+                        <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span
+                            class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span>
+                </td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Moneda / <br>
+                    Monto Operaci&oacute;n:</td>
+                <td align="center" valign="middle">
+                    <select name="moneda_operacion" class="etiqueta12" id="moneda_operacion">
+                        <option value="CLP">CLP</option>
+                        <option value="DKK">DKK</option>
+                        <option value="NOK">NOK</option>
+                        <option value="SEK">SEK</option>
+                        <option value="USD" selected>USD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="AUD">AUD</option>
+                        <option value="HKD">HKD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="CHF">CHF</option>
+                        <option value="GBP">GBP</option>
+                        <option value="ZAR">ZAR</option>
+                        <option value="JPY">JPY</option>
+                    </select>
+                    <span class="rojopequeno">/</span>
+                    <input name="monto_operacion" type="text" class="etiqueta12" value="0.00" size="20" maxlength="20">
+                    </div>
+                </td>
+                <td align="right" valign="middle">Mandato:</td>
+                <td align="center" valign="middle"><input name="mandato" type="text" class="etiqueta12" id="mandato"
+                        value="<?php echo $row_DetailRS2['estado_mandato']; ?>" size="30" maxlength="25"
+                        readonly="readonly"></td>
+            </tr>
+            <tr valign="baseline">
+                <td align="right" valign="middle">Urgente:</td>
+                <td align="center" valign="middle">
+                    <label>
+                        <input name="urgente" type="radio" class="etiqueta12" value="Si">
+                        Si</label>
+                    <label>
+                        <input name="urgente" type="radio" class="etiqueta12" value="No" checked>
+                        No</label>
+                </td>
+                <td align="right" valign="middle">Nro Operaci&oacute;n:</td>
+                <td align="center" valign="middle"><input name="nro_operacion" type="text" class="etiqueta12"
+                        id="nro_operacion" value="<?php echo $row_DetailRS1['nro_operacion']; ?>" size="15"
+                        maxlength="7">
+                    <span class="rojopequeno">F000000</span>
+                </td>
+            </tr>
+            <tr valign="baseline">
+                <td colspan="4" align="center" valign="middle">
+                    <input type="submit" class="boton" value="Ingresar Instrucci&oacute;n">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="id">
+        <input type="hidden" name="MM_insert" value="form1">
+        <input type="hidden" name="date_ingreso" value="<?php echo date("Y-m-d"); ?>" size="32">
+        <input name="date_preingreso" type="hidden" id="date_preingreso" value="<?php echo date("Y-m-d H:i:s"); ?>"
+            size="32">
+        <input name="sub_estado" type="hidden" id="sub_estado" value="Preingresada.">
+    </form>
+    <br>
+    <table width="95%" border="0" align="center">
+        <tr>
+            <td align="right" valign="middle"><a href="ingmae.php" onMouseOut="MM_swapImgRestore()"
+                    onMouseOver="MM_swapImage('Image3','','../../../../imagenes/Botones/boton_volver_2.jpg',1)"><img
+                        src="../../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80"
+                        height="25" border="0"></a></div>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+    <!--
+    var sprytextarea1 = new Spry.Widget.ValidationTextarea("sprytextarea1", {
+        isRequired: false,
+        minChars: 0,
+        maxChars: 255,
+        validateOn: ["blur"],
+        counterId: "countsprytextarea1",
+        counterType: "chars_remaining"
+    });
+    var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytextfield1", "none", {
+        validateOn: ["blur", "change"]
+    });
+    //
+    -->
+    </script>
 </body>
+
 </html>
 <?php
 mysqli_free_result($DetailRS2);

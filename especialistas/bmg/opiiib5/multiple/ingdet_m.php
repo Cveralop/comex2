@@ -112,22 +112,25 @@ $query_DetailRS1 = sprintf("SELECT * FROM optbc WHERE rut_cliente = '%s'", $coln
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 $maxRows_DetailRS1 = 10;
 $pageNum_DetailRS1 = 0;
 if (isset($_GET['pageNum_DetailRS1'])) {
   $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
 }
 $startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
+
 $colname_DetailRS1 = "1";
 if (isset($_GET['rut_cliente'])) {
   $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM cliente  WHERE id = $recordID", $colname_ingape);
+$query_DetailRS1 = sprintf("SELECT * FROM cliente  WHERE id = $recordID", $colname_DetailRS1);
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
+
 if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = $_GET['totalRows_DetailRS1'];
 } else {
@@ -135,7 +138,9 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
@@ -285,7 +290,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaci&oacute;n:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda<br> 
@@ -321,7 +326,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           <input name="urgente" type="radio" class="etiqueta12" value="No" checked>
           No</label></td>
       <td align="right" valign="middle">Nro Operaci&oacute;n:</td>
-      <td align="center" valign="middle"><input name="nro_operacion" type="text" class="etiqueta12" id="nro_operacion" value="<?php echo $row_DetailRS1['operador']; ?>" size="15" maxlength="7">
+      <td align="center" valign="middle"><input name="nro_operacion" type="text" class="etiqueta12" id="nro_operacion" value="<?php echo (isset($row_DetailRS1['operador']) ? $row_DetailRS1['operador'] :""); ?>" size="15" maxlength="7">
         <span class="rojopequeno">F000000</span></td>
     </tr>
     <tr valign="baseline">
