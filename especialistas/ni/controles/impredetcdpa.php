@@ -182,7 +182,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <span class="Estilo13">CESI&Oacute;N DE DERECHO O PAGO ANTICIPADO</span></span></div></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" valign="middle"><?php if ($row_DetailRS1['esp'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
+    <td colspan="2" align="center" valign="middle"><?php if ($row_DetailRS1['especialista'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
       <span class="FueraHorario"><span class="Estilo13" >Operaci�n Ingresada FUERA DE HORARIO </span></span>
     <?php } // Show if not first page ?></td>
   </tr>

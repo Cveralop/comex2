@@ -43,7 +43,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 ?>
 <?php
 $currentPage = $_SERVER["PHP_SELF"];
-$maxRows_ingape = 10;
+$maxRows_ingape = 20;
 $pageNum_ingape = 0;
 if (isset($_GET['pageNum_ingape'])) {
   $pageNum_ingape = $_GET['pageNum_ingape'];
@@ -65,7 +65,7 @@ if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = mysqli_num_rows($all_ingape);
 }
 $totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
-$maxRows_ingste = 10;
+$maxRows_ingste = 20;
 $pageNum_ingste = 0;
 if (isset($_GET['pageNum_ingste'])) {
   $pageNum_ingste = $_GET['pageNum_ingste'];
@@ -372,7 +372,6 @@ Registros del <strong><?php echo ($startRow_ingape + 1) ?></strong> al <strong><
     </td>
   </tr>
 </table>
-<br>
 Registros del <strong><?php echo ($startRow_ingste + 1) ?></strong> al <strong><?php echo min($startRow_ingste + $maxRows_ingste, $totalRows_ingste) ?></strong> de un total de <strong><?php echo $totalRows_ingste ?></strong>
 <?php } // Show if recordset not empty ?> <br>
 <br>

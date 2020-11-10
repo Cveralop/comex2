@@ -42,6 +42,15 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 }
 ?>
 <?php
+
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_opporcliente = 20;
+$pageNum_opporcliente = 0;
+if (isset($_GET['pageNum_opporcliente'])) {
+  $pageNum_opporcliente = $_GET['pageNum_opporcliente'];
+}
+$startRow_opporcliente = $pageNum_opporcliente * $maxRows_opporcliente;
+
 $colname_opporcliente = "zzz";
 if (isset($_GET['rut_cliente'])) {
   $colname_opporcliente = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
@@ -60,9 +69,35 @@ if (isset($_GET['estado'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_opporcliente = sprintf("SELECT * FROM opcci WHERE rut_cliente = '%s' and fecha_curse LIKE '%%%s%%' and evento LIKE '%%%s%%' and estado LIKE '%%%s%%' ORDER BY id ASC", $colname_opporcliente,$colname1_opporcliente,$colname2_opporcliente,$colname3_opporcliente);
-$opporcliente = mysqli_query($comercioexterior, $query_opporcliente) or die(mysqli_error($comercioexterior));
+$query_limit_opporcliente = sprintf("%s LIMIT %d, %d", $query_opporcliente, $startRow_opporcliente, $maxRows_opporcliente);
+$opporcliente = mysqli_query($comercioexterior, $query_limit_opporcliente) or die(mysqli_error($comercioexterior));
 $row_opporcliente = mysqli_fetch_assoc($opporcliente);
 $totalRows_opporcliente = mysqli_num_rows($opporcliente);
+
+if (isset($_GET['totalRows_opporcliente'])) {
+  $totalRows_opporcliente = $_GET['totalRows_opporcliente'];
+} else {
+  $all_opporcliente = mysqli_query($comercioexterior, $query_opporcliente);
+  $totalRows_opporcliente = mysqli_num_rows($all_opporcliente);
+}
+$totalPages_opporcliente = ceil($totalRows_opporcliente/$maxRows_opporcliente)-1;
+
+$queryString_opporcliente = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_opporcliente") == false && 
+        stristr($param, "totalRows_opporcliente") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_opporcliente = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_opporcliente = sprintf("&totalRows_opporcliente=%d%s", $totalRows_opporcliente, $queryString_opporcliente);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -270,6 +305,28 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
     <?php } while ($row_opporcliente = mysqli_fetch_assoc($opporcliente)); ?>
 </table>
+<br>
+<table border="0" width="50%" align="center">
+  <tr>
+    <td width="23%" align="center"><?php if ($pageNum_opporcliente > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_opporcliente=%d%s", $currentPage, 0, $queryString_opporcliente); ?>">Primero</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="31%" align="center"><?php if ($pageNum_opporcliente > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_opporcliente=%d%s", $currentPage, max(0, $pageNum_opporcliente - 1), $queryString_opporcliente); ?>">Anterior</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_opporcliente < $totalPages_opporcliente) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_opporcliente=%d%s", $currentPage, min($totalPages_opporcliente, $pageNum_opporcliente + 1), $queryString_opporcliente); ?>">Siguiente</a>
+        <?php } // Show if not last page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_opporcliente < $totalPages_opporcliente) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_opporcliente=%d%s", $currentPage, $totalPages_opporcliente, $queryString_opporcliente); ?>">&Uacute;ltimo</a>
+        <?php } // Show if not last page ?>
+    </td>
+  </tr>
+</table>
+Registros del <strong><?php echo ($startRow_opporcliente + 1) ?></strong> al <strong><?php echo min($startRow_opporcliente + $maxRows_opporcliente, $totalRows_opporcliente) ?></strong> de un total de <strong><?php echo $totalRows_opporcliente ?></strong>
 <?php } // Show if recordset not empty ?>
 <br>
 </body>

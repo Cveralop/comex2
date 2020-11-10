@@ -43,7 +43,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 ?>
 <?php
 $currentPage = $_SERVER["PHP_SELF"];
-$maxRows_impresion = 5000;
+$maxRows_impresion = 500;
 $pageNum_impresion = 0;
 if (isset($_GET['pageNum_impresion'])) {
   $pageNum_impresion = $_GET['pageNum_impresion'];

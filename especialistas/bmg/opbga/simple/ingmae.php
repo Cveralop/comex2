@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_ingape'])) {
   $pageNum_ingape = $_GET['pageNum_ingape'];
 }
 $startRow_ingape = $pageNum_ingape * $maxRows_ingape;
+
 $colname_ingape = "zzz";
 if (isset($_GET['rut_cliente'])) {
   $colname_ingape = $_GET['rut_cliente'];
@@ -95,28 +96,7 @@ if (isset($_GET['totalRows_ingape'])) {
   $totalRows_ingape = mysqli_num_rows($all_ingape);
 }
 $totalPages_ingape = ceil($totalRows_ingape/$maxRows_ingape)-1;
-$maxRows_ingsbte = 10;
-$pageNum_ingsbte = 0;
-if (isset($_GET['pageNum_ingsbte'])) {
-  $pageNum_ingsbte = $_GET['pageNum_ingsbte'];
-}
-$startRow_ingsbte = $pageNum_ingsbte * $maxRows_ingsbte;
-$colname_ingsbte = "1";
-if (isset($_GET['nro_operacion'])) {
-  $colname_ingsbte = $_GET['nro_operacion'];
-}
-mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_ingsbte = sprintf("SELECT * FROM opbga WHERE nro_operacion LIKE %s ORDER BY nro_operacion ASC", GetSQLValueString($colname_ingsbte . "%", "text"));
-$query_limit_ingsbte = sprintf("%s LIMIT %d, %d", $query_ingsbte, $startRow_ingsbte, $maxRows_ingsbte);
-$ingsbte = mysqli_query($comercioexterior, $query_limit_ingsbte) or die(mysqli_error($comercioexterior));
-$row_ingsbte = mysqli_fetch_assoc($ingsbte);
-if (isset($_GET['totalRows_ingsbte'])) {
-  $totalRows_ingsbte = $_GET['totalRows_ingsbte'];
-} else {
-  $all_ingsbte = mysqli_query($comercioexterior, $query_ingsbte);
-  $totalRows_ingsbte = mysqli_num_rows($all_ingsbte);
-}
-$totalPages_ingsbte = ceil($totalRows_ingsbte/$maxRows_ingsbte)-1;
+
 $queryString_ingape = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -132,6 +112,32 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
+
+$maxRows_ingsbte = 10;
+$pageNum_ingsbte = 0;
+if (isset($_GET['pageNum_ingsbte'])) {
+  $pageNum_ingsbte = $_GET['pageNum_ingsbte'];
+}
+$startRow_ingsbte = $pageNum_ingsbte * $maxRows_ingsbte;
+
+$colname_ingsbte = "1";
+if (isset($_GET['nro_operacion'])) {
+  $colname_ingsbte = $_GET['nro_operacion'];
+}
+mysqli_select_db($comercioexterior, $database_comercioexterior);
+$query_ingsbte = sprintf("SELECT * FROM opbga WHERE nro_operacion LIKE %s ORDER BY nro_operacion ASC", GetSQLValueString($colname_ingsbte . "%", "text"));
+$query_limit_ingsbte = sprintf("%s LIMIT %d, %d", $query_ingsbte, $startRow_ingsbte, $maxRows_ingsbte);
+$ingsbte = mysqli_query($comercioexterior, $query_limit_ingsbte) or die(mysqli_error($comercioexterior));
+$row_ingsbte = mysqli_fetch_assoc($ingsbte);
+
+if (isset($_GET['totalRows_ingsbte'])) {
+  $totalRows_ingsbte = $_GET['totalRows_ingsbte'];
+} else {
+  $all_ingsbte = mysqli_query($comercioexterior, $query_ingsbte);
+  $totalRows_ingsbte = mysqli_num_rows($all_ingsbte);
+}
+$totalPages_ingsbte = ceil($totalRows_ingsbte/$maxRows_ingsbte)-1;
+
 $queryString_ingsbte = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);
@@ -147,21 +153,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_ingsbte = sprintf("&totalRows_ingsbte=%d%s", $totalRows_ingsbte, $queryString_ingsbte);
-$queryString_ingvarios = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingvarios") == false && 
-        stristr($param, "totalRows_ingvarios") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s",$totalRows_ingsbte, $queryString_ingvarios); //$totalRows_ingvarios
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

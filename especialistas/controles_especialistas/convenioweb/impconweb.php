@@ -178,7 +178,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
     <td align="center" valign="middle"><span class="Estilo9">CONTROL CONTABLE</span></td>
   </tr>
   <tr>
-    <td align="center" valign="middle"><?php if ($row_DetailRS1['esp'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
+    <td align="center" valign="middle"><?php if ($row_DetailRS1['especialista'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
       <span class="FueraHorario"><span class="Estilo13" >Operaci&oacute;n Ingresada FUERA DE HORARIO </span></span>
     <?php } // Show if not first page ?></td>
   </tr>

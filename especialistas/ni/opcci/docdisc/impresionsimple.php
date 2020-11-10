@@ -153,7 +153,7 @@ echo strftime("Santiago, %d de %B de %Y");?>
 </table>
 <table width="95%"  border="0" align="center">
   <tr>
-    <td align="center" valign="middle"><?php if ($row_DetailRS1['esp'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
+    <td align="center" valign="middle"><?php if ($row_DetailRS1['especialista'] > $row_fuerahorario['fuera_horario']) { // Show if not first page ?>
 Operaci�n Ingresada FUERA DE HORARIO 
     <?php } // Show if not first page ?></td>
   </tr>
