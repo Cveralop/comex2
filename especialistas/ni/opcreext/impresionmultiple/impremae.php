@@ -265,7 +265,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
         <td align="center" valign="middle"><?php echo $row_impresion['evento']; ?>
           </div>
           </div></td>
-        <td align="center" valign="middle"><?php echo $row_impresion['valuta']; ?>
+        <td align="center" valign="middle"><?php echo (isset($row_impresion['valuta']) ? $row_impresion['valuta']:""); ?>
           </div></td>
         <td align="right" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_impresion['moneda_operacion']); ?></span> <strong class="respuestacolumna_azul"><?php echo number_format($row_impresion['monto_operacion'], 2, ',', '.'); ?></strong>
           </div></td>

@@ -276,7 +276,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
           <option value="LBTR." <?php if (!(strcmp("LBTR.", $row_DetailRS1['evento']))) {echo "selected=\"selected\"";} ?>>LBTR</option>
           <option value="LIQ.RET." <?php if (!(strcmp("LIQ.RET.", $row_DetailRS1['evento']))) {echo "selected=\"selected\"";} ?>>Liquidacion de Retorno</option>
           <option value="Requerimiento." <?php if (!(strcmp("Requerimiento.", $row_DetailRS1['evento']))) {echo "selected=\"selected\"";} ?>>Requerimiento</option>
-          <option value="EMI.PLA." <?php if (!(strcmp("EMI.PLA.", $row_DetailRS1['evento']))) {echo "selected=\"selected\"";} ?>>Emisi�n Planilla</option>
+          <option value="EMI.PLA." <?php if (!(strcmp("EMI.PLA.", $row_DetailRS1['evento']))) {echo "selected=\"selected\"";} ?>>Emisi&oacuten Planilla</option>
           <option value="Dev Comisiones." <?php if (!(strcmp("Dev Comisiones.", $row_DetailRS1['evento']))) {echo "selected=\"selected\"";} ?>>Dev Comisiones</option>
         </select>
       </div></td>

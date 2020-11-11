@@ -44,7 +44,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   exit;
 }
 ?>
-<?php session_start(); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
@@ -102,6 +101,7 @@ $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);$colname_DetailRS1 = "-1";
 if (isset($_GET['id'])) {
   $colname_DetailRS1 = $_GET['id'];
 }
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -247,7 +247,7 @@ function MM_preloadImages() { //v3.0
     </tr>
     <tr align="left" valign="middle" bgcolor="#999999">
       <td align="right" valign="middle" bgcolor="#CCCCCC">Parag&eacute; / Convenio:</td>
-      <td colspan="3" align="left" valign="middle" bgcolor="#CCCCCC"><input name="doc_1" type="checkbox" id="doc_1" value="Pagare." <?php if (!(strcmp($row_DetailRS1['doc_1'],"Pagare."))) {echo "checked=\"checked\"";} ?> <?php if (!(strcmp($row_DetailRS1['pagare'],"Pagare."))) {echo "checked=\"checked\"";} ?>>
+      <td colspan="3" align="left" valign="middle" bgcolor="#CCCCCC"><input name="doc_1" type="checkbox" id="doc_1" value="Pagare." <?php if (!(strcmp($row_DetailRS1['doc_1'],"Pagare."))) {echo "checked=\"checked\"";} ?> <?php //if (!(strcmp($row_DetailRS1['pagare'],"Pagare."))) {echo "checked=\"checked\"";} ?>
         Pagare
         <input name="doc_2" type="checkbox" id="doc_2" value="Convenio." <?php if (!(strcmp($row_DetailRS1['doc_2'],"Convenio."))) {echo "checked=\"checked\"";} ?>>
       Convenio
