@@ -160,7 +160,7 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
                 </div>
             </td>
         </tr>
-        <<table width="95%" border="0" align="center">
+        <table width="95%" border="0" align="center">
             <tr>
                 <td align="right" valign="middle"><a href="../../territorial/tr.php" onMouseOut="MM_swapImgRestore()"
                         onMouseOver="MM_swapImage('Image3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img

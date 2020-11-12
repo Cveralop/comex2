@@ -74,6 +74,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_cumplimiento = 50;
+$pageNum_cumplimiento = 0;
+if (isset($_GET['pageNum_cumplimiento'])) {
+  $pageNum_cumplimiento = $_GET['pageNum_cumplimiento'];
+}
+$startRow_cumplimiento = $pageNum_cumplimiento * $maxRows_cumplimiento;
 
 $colname_cumplimiento = "-1";
 if (isset($_GET['date_ini'])) {
@@ -85,9 +92,35 @@ if (isset($_GET['date_fin'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_cumplimiento = sprintf("SELECT * FROM cumplimiento_operaciones_dia WHERE date_ingreso between %s and %s ORDER BY date_ingreso, producto, evento ASC", GetSQLValueString($colname_cumplimiento, "date"),GetSQLValueString($colname1_cumplimiento, "date"));
-$cumplimiento = mysqli_query($comercioexterior, $query_cumplimiento) or die(mysqli_error($comercioexterior));
+$query_limit_cumplimiento = sprintf("%s LIMIT %d, %d", $query_cumplimiento, $startRow_cumplimiento, $maxRows_cumplimiento);
+$cumplimiento = mysqli_query($comercioexterior, $query_limit_cumplimiento) or die(mysqli_error($comercioexterior));
 $row_cumplimiento = mysqli_fetch_assoc($cumplimiento);
 $totalRows_cumplimiento = mysqli_num_rows($cumplimiento);
+
+if (isset($_GET['totalRows_cumplimiento'])) {
+  $totalRows_cumplimiento = $_GET['totalRows_cumplimiento'];
+} else {
+  $all_cumplimiento = mysqli_query($comercioexterior, $query_cumplimiento);
+  $totalRows_cumplimiento = mysqli_num_rows($all_cumplimiento);
+}
+$totalPages_cumplimiento = ceil($totalRows_cumplimiento/$maxRows_cumplimiento)-1;
+
+$queryString_cumplimiento = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_cumplimiento") == false && 
+        stristr($param, "totalRows_cumplimiento") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_cumplimiento = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_cumplimiento = sprintf("&totalRows_cumplimiento=%d%s", $totalRows_cumplimiento, $queryString_cumplimiento);
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -166,6 +199,29 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <?php } while ($row_cumplimiento = mysqli_fetch_assoc($cumplimiento)); ?>
 </table>
 <br />
+<table border="0" width="50%" align="center">
+  <tr>
+    <td width="23%" align="center"><?php if ($pageNum_cumplimiento > 0) { // Show if not first page ?>
+      <a href="<?php printf("%s?pageNum_cumplimiento=%d%s", $currentPage, 0, $queryString_cumplimiento); ?>">Primero</a>
+      <?php } // Show if not first page ?>
+    </td>
+    <td width="31%" align="center"><?php if ($pageNum_cumplimiento > 0) { // Show if not first page ?>
+      <a href="<?php printf("%s?pageNum_cumplimiento=%d%s", $currentPage, max(0, $pageNum_cumplimiento - 1), $queryString_cumplimiento); ?>">Anterior</a>
+      <?php } // Show if not first page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_cumplimiento < $totalPages_cumplimiento) { // Show if not last page ?>
+      <a href="<?php printf("%s?pageNum_cumplimiento=%d%s", $currentPage, min($totalPages_cumplimiento, $pageNum_cumplimiento + 1), $queryString_cumplimiento); ?>">Siguiente</a>
+      <?php } // Show if not last page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_cumplimiento < $totalPages_cumplimiento) { // Show if not last page ?>
+      <a href="<?php printf("%s?pageNum_cumplimiento=%d%s", $currentPage, $totalPages_cumplimiento, $queryString_cumplimiento); ?>">&Uacute;ltimo</a>
+      <?php } // Show if not last page ?>
+    </td>
+  </tr>
+</table>
+<br>
+Registros del <strong><?php echo ($startRow_cumplimiento + 1) ?></strong> al <strong><?php echo min($startRow_cumplimiento + $maxRows_cumplimiento, $totalRows_cumplimiento) ?></strong> de un total de <strong><?php echo $totalRows_cumplimiento ?></strong>
+
 <table width="95%" border="0" align="center">
   <tr>
     <td align="right" valign="middle"><a href="cumplimiento_curse_operaciones_mae.php" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Imagen1','','../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Imagen1" width="80" height="25" border="0" id="Imagen1" /></a></td>

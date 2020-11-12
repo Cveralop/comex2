@@ -167,6 +167,7 @@ $query_trasa_opersupe = sprintf("SELECT * FROM trasabilidad nolock WHERE date(da
 $trasa_opersupe = mysqli_query($comercioexterior, $query_trasa_opersupe) or die(mysqli_error($comercioexterior));
 $row_trasa_opersupe = mysqli_fetch_assoc($trasa_opersupe);
 $totalRows_trasa_opersupe = mysqli_num_rows($trasa_opersupe);
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -263,11 +264,11 @@ function MM_swapImage() { //v3.0
   </tr>
   <?php do { ?>
     <tr>
-      <td align="left" valign="middle"><?php echo $row_trasa_ingrec['producto']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_ingrec['fecha']; ?> </td>
-      <td align="center" valign="middle"><?php echo $row_trasa_ingrec['minimo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_ingrec['maximo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_ingrec['promedio']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_ingrec['producto']) ? $row_trasa_ingrec['producto']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_ingrec['fecha']) ? $row_trasa_ingrec['fecha']:""); ?> </td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_ingrec['minimo']) ? $row_trasa_ingrec['minimo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_ingrec['maximo']) ? $row_trasa_ingrec['maximo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_ingrec['promedio']) ? $row_trasa_ingrec['promedio']:""); ?></td>
     </tr>
     <?php } while ($row_trasa_ingrec = mysqli_fetch_assoc($trasa_ingrec)); ?>
 </table>
@@ -286,12 +287,12 @@ function MM_swapImage() { //v3.0
   </tr>
   <?php do { ?>
     <tr>
-      <td align="left" valign="middle"><?php echo $row_trasa_espevisa['producto']; ?></td>
-      <td align="left" valign="middle"><?php echo $row_trasa_espevisa['evento']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_espevisa['date_espe']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_espevisa['minimo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_espevisa['maximo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_espevisa['promedio']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_espevisa['producto']) ? $row_trasa_espevisa['producto']:""); ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_espevisa['evento']) ? $row_trasa_espevisa['evento']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_espevisa['date_espe']) ? $row_trasa_espevisa['date_es']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_espevisa['minimo']) ? $row_trasa_espevisa['minimo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_espevisa['maximo']) ? $row_trasa_espevisa['maximo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_espevisa['promedio']) ? $row_trasa_espevisa['promedio']:""); ?></td>
     </tr>
     <?php } while ($row_trasa_espevisa = mysqli_fetch_assoc($trasa_espevisa)); ?>
 </table>
@@ -310,12 +311,12 @@ function MM_swapImage() { //v3.0
   </tr>
   <?php do { ?>
     <tr>
-      <td align="left" valign="middle"><?php echo $row_trasa_visaasig['producto']; ?></td>
-      <td align="left" valign="middle"><?php echo $row_trasa_visaasig['evento']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_visaasig['date_espe']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_visaasig['minimo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_visaasig['maximo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_visaasig['promedio']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_visaasig['producto']) ? $row_trasa_visaasig['producto']: ""); ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_visaasig['evento']) ? $row_trasa_visaasig['evento']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_visaasig['date_espe']) ? $row_trasa_visaasig['date_es']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_visaasig['minimo']) ? $row_trasa_visaasig['minimo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_visaasig['maximo']) ? $row_trasa_visaasig['maximo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_visaasig['promedio']) ? $row_trasa_visaasig['promedio']:""); ?></td>
     </tr>
     <?php } while ($row_trasa_visaasig = mysqli_fetch_assoc($trasa_visaasig)); ?>
 </table>
@@ -334,12 +335,12 @@ function MM_swapImage() { //v3.0
   </tr>
   <?php do { ?>
     <tr>
-      <td align="left" valign="middle"><?php echo $row_trasa_asigoper['producto']; ?></td>
-      <td align="left" valign="middle"><?php echo $row_trasa_asigoper['evento']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_asigoper['date_espe']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_asigoper['minimo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_asigoper['maximo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_asigoper['promedio']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_asigoper['producto']) ? $row_trasa_asigoper['producto']:""); ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_asigoper['evento']) ? $row_trasa_asigoper['evento']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_asigoper['date_espe']) ? $row_trasa_asigoper['date_espe']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_asigoper['minimo']) ? $row_trasa_asigoper['minimo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_asigoper['maximo']) ? $row_trasa_asigoper['maximo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_asigoper['promedio']) ? $row_trasa_asigoper['promedio']:""); ?></td>
     </tr>
     <?php } while ($row_trasa_asigoper = mysqli_fetch_assoc($trasa_asigoper)); ?>
 </table>
@@ -358,12 +359,12 @@ function MM_swapImage() { //v3.0
   </tr>
   <?php do { ?>
     <tr>
-      <td align="left" valign="middle"><?php echo $row_trasa_opersupe['producto']; ?></td>
-      <td align="left" valign="middle"><?php echo $row_trasa_opersupe['evento']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_opersupe['date_espe']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_opersupe['minimo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_opersupe['maximo']; ?></td>
-      <td align="center" valign="middle"><?php echo $row_trasa_opersupe['promedio']; ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_opersupe['producto']) ? $row_trasa_opersupe['producto']:""); ?></td>
+      <td align="left" valign="middle"><?php echo (isset($row_trasa_opersupe['evento']) ? $row_trasa_opersupe['evento']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_opersupe['date_espe']) ? $row_trasa_opersupe['date_espe']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_opersupe['minimo']) ? $row_trasa_opersupe['minimo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_opersupe['maximo']) ? $row_trasa_opersupe['maximo']:""); ?></td>
+      <td align="center" valign="middle"><?php echo (isset($row_trasa_opersupe['promedio']) ? $row_trasa_opersupe['promedio']:""); ?></td>
     </tr>
     <?php } while ($row_trasa_opersupe = mysqli_fetch_assoc($trasa_opersupe)); ?>
 </table>

@@ -81,6 +81,7 @@ if (isset($_GET['pageNum_impresion'])) {
   $pageNum_impresion = $_GET['pageNum_impresion'];
 }
 $startRow_impresion = $pageNum_impresion * $maxRows_impresion;
+
 $colname1_impresion = "1";
 if (isset($_GET['fecha_ingreso'])) {
   $colname1_impresion = $_GET['fecha_ingreso'];
@@ -102,6 +103,7 @@ $query_impresion = sprintf("SELECT * FROM opcce WHERE especialista_curse = %s an
 $query_limit_impresion = sprintf("%s LIMIT %d, %d", $query_impresion, $startRow_impresion, $maxRows_impresion);
 $impresion = mysqli_query($comercioexterior, $query_limit_impresion) or die(mysqli_error($comercioexterior));
 $row_impresion = mysqli_fetch_assoc($impresion);
+
 if (isset($_GET['totalRows_impresion'])) {
   $totalRows_impresion = $_GET['totalRows_impresion'];
 } else {
@@ -109,11 +111,13 @@ if (isset($_GET['totalRows_impresion'])) {
   $totalRows_impresion = mysqli_num_rows($all_impresion);
 }
 $totalPages_impresion = ceil($totalRows_impresion/$maxRows_impresion)-1;
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_colores = "SELECT * FROM parametrocolores";
 $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($comercioexterior));
 $row_colores = mysqli_fetch_assoc($colores);
 $totalRows_colores = mysqli_num_rows($colores);
+
 $queryString_impresion = "";
 if (!empty($_SERVER['QUERY_STRING'])) {
   $params = explode("&", $_SERVER['QUERY_STRING']);

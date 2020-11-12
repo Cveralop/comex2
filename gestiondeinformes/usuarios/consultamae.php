@@ -72,6 +72,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_consulta = 10;
+$pageNum_consulta = 0;
+if (isset($_GET['pageNum_consulta'])) {
+  $pageNum_consulta = $_GET['pageNum_consulta'];
+}
+$startRow_consulta = $pageNum_consulta * $maxRows_consulta;
 
 $colname_consulta = "1";
 if (isset($_GET['nombre'])) {
@@ -79,9 +86,35 @@ if (isset($_GET['nombre'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_consulta = sprintf("SELECT * FROM usuarios nolock WHERE nombre LIKE %s ORDER BY nombre ASC", GetSQLValueString($colname_consulta . "%", "text"));
-$consulta = mysqli_query($comercioexterior, $query_consulta) or die(mysqli_error($comercioexterior));
+$query_limit_consulta = sprintf("%s LIMIT %d, %d", $query_consulta, $startRow_consulta, $maxRows_consulta);
+$consulta = mysqli_query($comercioexterior, $query_limit_consulta) or die(mysqli_error($comercioexterior));
 $row_consulta = mysqli_fetch_assoc($consulta);
 $totalRows_consulta = mysqli_num_rows($consulta);
+
+if (isset($_GET['totalRows_consulta'])) {
+  $totalRows_consulta = $_GET['totalRows_consulta'];
+} else {
+  $all_consulta = mysqli_query($comercioexterior, $query_consulta);
+  $totalRows_consulta = mysqli_num_rows($all_consulta);
+}
+$totalPages_consulta = ceil($totalRows_consulta/$maxRows_consulta)-1;
+
+$queryString_consulta = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_consulta") == false && 
+        stristr($param, "totalRows_consulta") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_consulta = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_consulta = sprintf("&totalRows_consulta=%d%s", $totalRows_consulta, $queryString_consulta);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
