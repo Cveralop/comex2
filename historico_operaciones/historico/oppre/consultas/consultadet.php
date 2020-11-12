@@ -55,7 +55,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($historico_goc, $database_historico_goc);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM oppre  WHERE id = $recordID"); //, $colname_conrut
+$query_DetailRS1 = sprintf("SELECT * FROM oppre  WHERE id = $recordID",$colname_DetailRS1); //, $colname_conrut
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($historico_goc, $query_limit_DetailRS1) or die(mysqli_error($historico_goc));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -229,7 +229,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
     <td align="right">Moneda / Monto Operaci&oacute;n:</td>
     <td align="center"><span class="respuestacolumna_rojo"><?php echo $row_DetailRS1['moneda_operacion']; ?></span> <span class="rojopequeno">/</span> <strong class="respuestacolumna_azul"><?php echo number_format($row_DetailRS1['monto_operacion'], 2, ',', '.'); ?></strong></div></td>
     <td align="right">Forward:</td>
-    <td align="center"><?php echo $row_DetailRS1['forward']; ?></td>
+    <td align="center"><?php echo (isset($row_DetailRS1['forward']) ? $row_DetailRS1['forward']: ''); ?></td>
   </tr>
   <tr valign="middle">
     <td align="right">Tipo Operaci&oacute;n:</td>

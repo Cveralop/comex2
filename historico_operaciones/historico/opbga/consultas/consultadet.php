@@ -55,7 +55,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($historico_goc, $database_historico_goc);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opbga  WHERE id = $recordID"); //, $colname_conrut
+$query_DetailRS1 = sprintf("SELECT * FROM opbga  WHERE id = $recordID", $colname_DetailRS1); //, $colname_conrut
 //var_dump($colname_conrut); die();
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($historico_goc, $query_limit_DetailRS1) or die(mysqli_error($historico_goc));
