@@ -48,6 +48,7 @@ if (isset($_GET['pageNum_asignar'])) {
   $pageNum_asignar = $_GET['pageNum_asignar'];
 }
 $startRow_asignar = $pageNum_asignar * $maxRows_asignar;
+
 $colname_asignar = "Reg_Doctos.";
 if (isset($_GET['evento'])) {
   $colname_asignar = (get_magic_quotes_gpc()) ? $_GET['evento'] : addslashes($_GET['evento']);
@@ -57,7 +58,7 @@ $query_asignar = sprintf("SELECT * FROM opcbi WHERE evento = '%s' ORDER BY id AS
 $query_limit_asignar = sprintf("%s LIMIT %d, %d", $query_asignar, $startRow_asignar, $maxRows_asignar);
 $asignar = mysqli_query($comercioexterior, $query_limit_asignar) or die(mysqli_error($comercioexterior));
 $row_asignar = mysqli_fetch_assoc($asignar);
-//var_dump($asignar); die();
+
 if (isset($_GET['totalRows_asignar'])) {
   $totalRows_asignar = $_GET['totalRows_asignar'];
 } else {
@@ -82,6 +83,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
   }
 }
 $queryString_asignar = sprintf("&totalRows_asignar=%d%s", $totalRows_asignar, $queryString_asignar);
+//var_dump($row_asignar); die();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -205,11 +207,12 @@ function MM_swapImage() { //v3.0
 
     <?php do { ?>
       <tr valign="middle">
-        <td align="center"><a href="asigdet.php?recordID=<?php echo $row_asignar['id']; ?> <img src=" ../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></td>
-        <td align="center"><?php echo $row_asignar['fecha_ingreso']; ?></div></td>
-        <td align="center"><?php echo $row_asignar['rut_cliente']; ?> </div></td>
-        <td align="left"><?php echo $row_asignar['nombre_cliente']; ?> </td>
-        <td align="right"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_asignar['moneda_operacion']); ?></span>&nbsp; <strong class="respuestacolumna_azul"><?php echo number_format($row_asignar['monto_operacion'], 2, ',', '.'); ?></strong> </div>
+        <td align="center"><a href="asigdet.php?recordID=<?php echo (isset($row_asignar['id']) ? $row_asignar['id'] :""); ?> <img src=" ../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></td>
+        <td align="center"><?php echo (isset($row_asignar['fecha_ingreso']) ? $row_asignar['fecha_ingreso']: ""); ?></div></td>
+        <td align="center"><?php echo (isset($row_asignar['rut_cliente']) ? $row_asignar['rut_cliente']: ""); ?> </div></td>
+        <td align="left"><?php echo (isset($row_asignar['nombre_cliente']) ? $row_asignar['nombre_cliente']:""); ?> </td>
+        <td align="right"><span class="respuestacolumna_rojo"><?php echo strtoupper(isset($row_asignar['moneda_operacion']) ? $row_asignar['moneda_operacion'] :""); ?>
+        </span>&nbsp; <strong class="respuestacolumna_azul"><?php echo number_format($row_asignar['monto_operacion'], 2, ',', '.'); ?></strong> </div>
         </td>
       </tr>
     <?php } while ($row_asignar = mysqli_fetch_assoc($asignar)); ?>

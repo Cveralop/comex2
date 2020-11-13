@@ -222,10 +222,10 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <?php do { ?>
   <tr valign="middle">
-    <td align="center"><a href="asigdetcch.php?recordID=<?php echo $row_asignar['id']; ?>"> <img src="../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></div></td>
-    <td align="center"><?php echo $row_asignar['fecha_ingreso']; ?> </div></td>
-    <td align="center"><?php echo $row_asignar['rut_cliente']; ?> </div></td>
-    <td align="left"><?php echo $row_asignar['nombre_cliente']; ?> </td>
+    <td align="center"><a href="asigdetcch.php?recordID=<?php echo (empty($row_asignar['id']));?>"> <img src="../../../imagenes/ICONOS/ingreso_dato.jpg" width="20" height="20" border="0"></a></div></td>
+    <td align="center"><?php echo (empty($row_asignar['fecha_ingreso'])); ?> </div></td>
+    <td align="center"><?php echo (empty($row_asignar['rut_cliente'])); ?> </div></td>
+    <td align="left"><?php echo (empty($row_asignar['nombre_cliente'])); ?> </td>
     <td align="right"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_asignar['moneda_operacion']); ?></span>&nbsp; <strong class="respuestacolumna_azul"><?php echo number_format($row_asignar['monto_operacion'], 2, ',', '.'); ?></strong> </div></td>
   </tr>
   <?php } while ($row_asignar = mysqli_fetch_assoc($asignar)); ?>

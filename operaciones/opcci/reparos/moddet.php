@@ -108,13 +108,14 @@ if (isset($_GET['pageNum_DetailRS1'])) {
   $pageNum_DetailRS1 = $_GET['pageNum_DetailRS1'];
 }
 $startRow_DetailRS1 = $pageNum_DetailRS1 * $maxRows_DetailRS1;
-$colname1_DetailRS1 = "1";
+
+$colname1_modrep = "1";
 if (isset($_GET['rut_cliente'])) {
-  $colname1_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
+  $colname1_modrep = (get_magic_quotes_gpc()) ? $_GET['rut_cliente'] : addslashes($_GET['rut_cliente']);
 }
-$colname_DetailRS1 = "1";
+$colname_modrep = "1";
 if (isset($_GET['reparo_obs'])) {
-  $colname_DetailRS1 = (get_magic_quotes_gpc()) ? $_GET['reparo_obs'] : addslashes($_GET['reparo_obs']);
+  $colname_modrep = (get_magic_quotes_gpc()) ? $_GET['reparo_obs'] : addslashes($_GET['reparo_obs']);
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];

@@ -133,61 +133,75 @@ if (isset($_GET['totalRows_DetailRS1'])) {
   $totalRows_DetailRS1 = mysqli_num_rows($all_DetailRS1);
 }
 $totalPages_DetailRS1 = ceil($totalRows_DetailRS1/$maxRows_DetailRS1)-1;
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Registro de Documentos - Detalle</title>
-<style type="text/css">
-<!--
-.Estilo3 {font-size: 18px;
-	font-weight: bold;
-	color: #FFFFFF;
-}
-.Estilo4 {font-size: 14px;
-	font-weight: bold;
-	color: #FFFFFF;
-}
-body,td,th {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	color: #0000FF;
-}
-body {
-	background-image: url(../../../imagenes/JPEG/edificio_corporativo.jpg);
-}
-a {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	color: #FF0000;
-	font-weight: bold;
-}
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: underline;
-}
-a:active {
-	text-decoration: none;
-}
--->
-</style>
-<link href="../../../estilos/estilo12.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-<!--
-.Estilo5 {
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: bold;
-}
--->
-</style>
-<script language="JavaScript" type="text/JavaScript">
-<!--
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Registro de Documentos - Detalle</title>
+    <style type="text/css">
+    <!--
+    .Estilo3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    .Estilo4 {
+        font-size: 14px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+
+    body,
+    td,
+    th {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #0000FF;
+    }
+
+    body {
+        background-image: url(../../../imagenes/JPEG/edificio_corporativo.jpg);
+    }
+
+    a {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #FF0000;
+        font-weight: bold;
+    }
+
+    a:link {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:active {
+        text-decoration: none;
+    }
+    -->
+    </style>
+    <link href="../../../estilos/estilo12.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    <!--
+    .Estilo5 {
+        font-size: 12px;
+        color: #FFFFFF;
+        font-weight: bold;
+    }
+    -->
+    </style>
+    <script language="JavaScript" type="text/JavaScript">
+        <!--
 function MM_swapImgRestore() { //v3.0
   var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
 }
@@ -223,126 +237,163 @@ function MM_validateForm() { //v4.0
   document.MM_returnValue = (errors == '');
 }
 //-->
-</script>
-<script> 
-var segundos=1200
-var direccion='http://pdpto38:8303/comex/index.php' 
-milisegundos=segundos*1000 
-window.setTimeout("window.location.replace(direccion);",milisegundos); 
-</script>
+    </script>
+    <script>
+    var segundos = 1200
+    var direccion = 'http://pdpto38:8303/comex/index.php'
+    milisegundos = segundos * 1000
+    window.setTimeout("window.location.replace(direccion);", milisegundos);
+    </script>
 </head>
 <link rel="shortcut icon" href="../../../imagenes/barraweb/favicon.ico">
 <link rel="icon" type="image/gif" href="../../../imagenes/barraweb/animated_favicon1.gif">
+
 <body onLoad="MM_preloadImages('../../../imagenes/Botones/boton_volver_2.jpg')">
-<table width="95%"  border="1" align="center" bordercolor="#FF0000" bgcolor="#FF0000">
-  <tr>
-    <td width="93%" align="left" valign="middle" class="Estilo3">REGISTRO DOCUMENTOS DE COBRANZAS DE IMPORTACI&Oacute;N - DETALLE </td>
-    <td width="7%" rowspan="2" align="left" valign="middle" class="Estilo3"><img src="../../../imagenes/GIF/erde016.gif" width="43" height="43" align="right"></td>
-  </tr>
-  <tr>
-    <td align="left" valign="middle" class="Estilo4">COBRANZA DE IMPORTACI&Oacute;N y OPI </td>
-  </tr>
-</table>
-<br>
-<form action="<?php echo $editFormAction; ?>" method="post" name="form1" onSubmit="MM_validateForm('rut_cliente','','R','fecha_ingreso','','R','nombre_cliente','','R','operador','','R','especialista','','R','moneda_operacion','','R','monto_operacion','','RisNum','folio','','R','currier','','R');return document.MM_returnValue">
-  <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
-    <tr valign="middle" bgcolor="#999999">
-      <td colspan="4" align="left"><img src="../../../imagenes/GIF/notepad.gif" width="19" height="21" border="0"><span class="Estilo5">Registro Documentos</span></div></td>
-    </tr>
-    <tr valign="middle">
-      <td align="right">Rut Cliente:</td>
-      <td align="center">
-        <input name="rut_cliente" type="text" disabled="disabled" class="etiqueta12" value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="15">
-      <span class="rojopequeno">Sin puntos ni Guion</span></div></td>
-      <td align="right">Fecha Ingreso:</td>
-      <td align="center">
-        <input name="fecha_ingreso" type="text" disabled="disabled" class="etiqueta12" value="<?php echo date("d-m-Y"); ?>" size="12" maxlength="10">
-      <span class="rojopequeno">(dd-mm-aaaa)</span></div></td>
-    </tr>
-    <tr valign="middle">
-      <td align="right">Nombre Cliente:</td>
-      <td colspan="3" align="center"><input name="nombre_cliente" type="text" disabled="disabled" class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="122" maxlength="120"></td>
-    </tr>
-    <tr valign="middle">
-      <td align="right">Operador:</td>
-      <td align="center">
-        <input name="operador" type="text" class="etiqueta12" value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20">
-      </div></td>
-      <td align="right">Especialista:</div></td>
-      <td align="center">
-        <input name="especialista" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['especialista']; ?>" size="20" maxlength="20">
-      </div></td>
-    </tr>
-    <tr valign="middle">
-      <td align="right">Moneda / Monto:</td>
-      <td align="center">
-          <select name="moneda_operacion" class="etiqueta12" id="moneda_operacion">
-            <option value="CLP">CLP</option>
-            <option value="DKK">DKK</option>
-            <option value="NOK">NOK</option>
-            <option value="SEK">SEK</option>
-            <option value="USD" selected>USD</option>
-            <option value="CAD">CAD</option>
-            <option value="AUD">AUD</option>
-            <option value="HKD">HKD</option>
-            <option value="EUR">EUR</option>
-            <option value="CHF">CHF</option>
-            <option value="GBP">GBP</option>
-            <option value="ZAR">ZAR</option>
-            <option value="JPY">JPY</option>
-          </select> 
-          <span class="rojopequeno">/</span>          <input name="monto_operacion" type="text" class="etiqueta12" value="" size="17" maxlength="15">
-      </div></td>
-      <td align="right">Segmento:</div></td>
-      <td align="center">
-        <input name="segmento" type="text" class="etiqueta12" id="segmento" value="<?php echo $row_DetailRS1['segmento']; ?>" size="20" maxlength="20">
-      </div></td>
-    </tr>
-    <tr valign="middle">
-      <td align="right">Folio:</td>
-      <td align="center">
-        <input name="folio" type="text" class="etiqueta12" value="<?php echo date("dmYhis"); ?>" size="20" maxlength="20">
-      </div></td>
-      <td align="right">Currier:</div></td>
-      <td align="center">
-        <input name="currier" type="text" class="etiqueta12" value="" size="20" maxlength="20">
-      </div></td>
-    </tr>
-    <tr valign="middle">
-      <td align="right">Tipo Operaci&oacute;n: </div></td>
-      <td align="center">
-<label><input name="tipo_operacion" type="radio" value="CBI" checked>
-  Cobranza de Importaci�n</label>
-<br>
-        </div></td>
-      <td align="right">Segmento:</td>
-      <td align="center">
-        <input name="segmento" type="text" class="etiqueta12" id="segmento" value="<?php echo $row_DetailRS1['segmento']; ?>" size="25" maxlength="50">
-      </div></td>
-    </tr>
-    <tr valign="middle">
-      <td colspan="4" align="center">
-        <input type="submit" class="boton" value="Ingresar Documentos">
-      </div></td>
-    </tr>
-  </table>
-  <input type="hidden" name="MM_insert" value="form1">
-  <input name="rut_cliente" type="hidden" id="rut_cliente" value="<?php echo $row_DetailRS1['rut_cliente']; ?>">
-  <input name="nombre_cliente" type="hidden" id="nombre_cliente" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>">
-  <input name="id" type="hidden" id="id">
-  <input name="evento" type="hidden" class="etiqueta12" value="Reg_Doctos." size="20" maxlength="20">
-  <input name="sucursal" type="hidden" id="sucursal" value="<?php echo $row_DetailRS1['sucursal']; ?>">
-  <input name="fecha_ingreso" type="hidden" id="fecha_ingreso" value="<?php echo date("d-m-Y"); ?>">
-  <input name="date_ingreso" type="hidden" id="date_ingreso" value="<?php echo date("Y-m-d"); ?>">
-  <input name="despacho_doctos" type="hidden" class="etiqueta12" id="despacho_doctos" value="<?php echo $row_DetailRS1['despacho_doctos']; ?>" size="25" maxlength="120">
-</form>
-<br>
-<table width="95%"  border="0" align="center">
-  <tr>
-    <td align="right" valign="middle"><a href="regmae.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80" height="25" border="0"></a></div></td>
-  </tr>
-</table>
+    <table width="95%" border="1" align="center" bordercolor="#FF0000" bgcolor="#FF0000">
+        <tr>
+            <td width="93%" align="left" valign="middle" class="Estilo3">REGISTRO DOCUMENTOS DE COBRANZAS DE
+                IMPORTACI&Oacute;N - DETALLE </td>
+            <td width="7%" rowspan="2" align="left" valign="middle" class="Estilo3"><img
+                    src="../../../imagenes/GIF/erde016.gif" width="43" height="43" align="right"></td>
+        </tr>
+        <tr>
+            <td align="left" valign="middle" class="Estilo4">COBRANZA DE IMPORTACI&Oacute;N y OPI </td>
+        </tr>
+    </table>
+    <br>
+    <form action="<?php echo $editFormAction; ?>" method="post" name="form1"
+        onSubmit="MM_validateForm('rut_cliente','','R','fecha_ingreso','','R','nombre_cliente','','R','operador','','R','especialista','','R','moneda_operacion','','R','monto_operacion','','RisNum','folio','','R','currier','','R');return document.MM_returnValue">
+        <table width="95%" border="1" align="center" bordercolor="#666666" bgcolor="#CCCCCC">
+            <tr valign="middle" bgcolor="#999999">
+                <td colspan="4" align="left"><img src="../../../imagenes/GIF/notepad.gif" width="19" height="21"
+                        border="0"><span class="Estilo5">Registro Documentos</span></div>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td align="right">Rut Cliente:</td>
+                <td align="center">
+                    <input name="rut_cliente" type="text" disabled="disabled" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="15">
+                    <span class="rojopequeno">Sin puntos ni Guion</span></div>
+                </td>
+                <td align="right">Fecha Ingreso:</td>
+                <td align="center">
+                    <input name="fecha_ingreso" type="text" disabled="disabled" class="etiqueta12"
+                        value="<?php echo date("d-m-Y"); ?>" size="12" maxlength="10">
+                    <span class="rojopequeno">(dd-mm-aaaa)</span></div>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td align="right">Nombre Cliente:</td>
+                <td colspan="3" align="center"><input name="nombre_cliente" type="text" disabled="disabled"
+                        class="etiqueta12" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>" size="122"
+                        maxlength="120"></td>
+            </tr>
+            <tr valign="middle">
+                <td align="right">Operador:</td>
+                <td align="center">
+                    <input name="operador" type="text" class="etiqueta12" value="<?php echo $_SESSION['login'];?>"
+                        size="20" maxlength="20">
+                    </div>
+                </td>
+                <td align="right">Especialista:</div>
+                </td>
+                <td align="center">
+                    <input name="especialista" type="text" class="etiqueta12"
+                        value="<?php echo $row_DetailRS1['especialista']; ?>" size="20" maxlength="20">
+                    </div>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td align="right">Moneda / Monto:</td>
+                <td align="center">
+                    <select name="moneda_operacion" class="etiqueta12" id="moneda_operacion">
+                        <option value="CLP">CLP</option>
+                        <option value="DKK">DKK</option>
+                        <option value="NOK">NOK</option>
+                        <option value="SEK">SEK</option>
+                        <option value="USD" selected>USD</option>
+                        <option value="CAD">CAD</option>
+                        <option value="AUD">AUD</option>
+                        <option value="HKD">HKD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="CHF">CHF</option>
+                        <option value="GBP">GBP</option>
+                        <option value="ZAR">ZAR</option>
+                        <option value="JPY">JPY</option>
+                    </select>
+                    <span class="rojopequeno">/</span> <input name="monto_operacion" type="text" class="etiqueta12"
+                        value="" size="17" maxlength="15">
+                    </div>
+                </td>
+                <td align="right">Segmento:</div>
+                </td>
+                <td align="center">
+                    <input name="segmento" type="text" class="etiqueta12" id="segmento"
+                        value="<?php echo $row_DetailRS1['segmento']; ?>" size="20" maxlength="20">
+                    </div>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td align="right">Folio:</td>
+                <td align="center">
+                    <input name="folio" type="text" class="etiqueta12" value="<?php echo date("dmYhis"); ?>" size="20"
+                        maxlength="20">
+                    </div>
+                </td>
+                <td align="right">Currier:</div>
+                </td>
+                <td align="center">
+                    <input name="currier" type="text" class="etiqueta12" value="" size="20" maxlength="20">
+                    </div>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td align="right">Tipo Operaci&oacute;n: </div>
+                </td>
+                <td align="center">
+                    <label><input name="tipo_operacion" type="radio" value="CBI" checked>
+                        Cobranza de Importaci&oacute;n</label>
+                    <br>
+                    </div>
+                </td>
+                <td align="right">Segmento:</td>
+                <td align="center">
+                    <input name="segmento" type="text" class="etiqueta12" id="segmento"
+                        value="<?php echo $row_DetailRS1['segmento']; ?>" size="25" maxlength="50">
+                    </div>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="4" align="center">
+                    <input type="submit" class="boton" value="Ingresar Documentos">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name="MM_insert" value="form1">
+        <input name="rut_cliente" type="hidden" id="rut_cliente" value="<?php echo $row_DetailRS1['rut_cliente']; ?>">
+        <input name="nombre_cliente" type="hidden" id="nombre_cliente" value="<?php echo $row_DetailRS1['nombre_cliente']; ?>">
+        <input name="id" type="hidden" id="id">
+        <input name="evento" type="hidden" class="etiqueta12" value="Reg_Doctos." size="20" maxlength="20">
+        <input name="sucursal" type="hidden" id="sucursal" value="<?php echo $row_DetailRS1['sucursal']; ?>">
+        <input name="fecha_ingreso" type="hidden" id="fecha_ingreso" value="<?php echo date("d-m-Y"); ?>">
+        <input name="date_ingreso" type="hidden" id="date_ingreso" value="<?php echo date("Y-m-d"); ?>">
+        <input name="despacho_doctos" type="hidden" class="etiqueta12" id="despacho_doctos"
+            value="<?php echo $row_DetailRS1['despacho_doctos']; ?>" size="25" maxlength="120">
+    </form>
+    <br>
+    <table width="95%" border="0" align="center">
+        <tr>
+            <td align="right" valign="middle"><a href="regmae.php" onMouseOut="MM_swapImgRestore()"
+                    onMouseOver="MM_swapImage('Image3','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img
+                        src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image3" width="80"
+                        height="25" border="0"></a></div>
+            </td>
+        </tr>
+    </table>
 </body>
+
 </html><?php
 mysqli_free_result($DetailRS1);
 ?>
