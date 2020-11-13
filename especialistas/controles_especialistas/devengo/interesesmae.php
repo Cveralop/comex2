@@ -45,7 +45,6 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 }
 ?>
 <?php
-//session_start();
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -113,7 +112,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form3")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-//session_start();
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {

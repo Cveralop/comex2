@@ -72,6 +72,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_conrut = 10;
+$pageNum_conrut = 0;
+if (isset($_GET['pageNum_conrut'])) {
+  $pageNum_conrut = $_GET['pageNum_conrut'];
+}
+$startRow_conrut = $pageNum_conrut * $maxRows_conrut;
 
 $colname_conrut = "-1";
 if (isset($_GET['rut_cliente'])) {
@@ -83,9 +90,36 @@ if (isset($_GET['nro_operacion'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_conrut = sprintf("SELECT * FROM opcbe nolock WHERE rut_cliente LIKE %s and nro_operacion LIKE %s ORDER BY id DESC", GetSQLValueString($colname_conrut . "%", "text"),GetSQLValueString($colname1_conrut . "%", "text"));
-$conrut = mysqli_query($comercioexterior, $query_conrut) or die(mysqli_error());
+$query_limit_conrut = sprintf("%s LIMIT %d, %d", $query_conrut, $startRow_conrut, $maxRows_conrut);
+$conrut = mysqli_query($comercioexterior, $query_limit_conrut) or die(mysqli_error($comercioexterior));
 $row_conrut = mysqli_fetch_assoc($conrut);
 $totalRows_conrut = mysqli_num_rows($conrut);
+
+if (isset($_GET['totalRows_conrut'])) {
+  $totalRows_conrut = $_GET['totalRows_conrut'];
+} else {
+  $all_conrut = mysqli_query($comercioexterior, $query_conrut);
+  $totalRows_conrut = mysqli_num_rows($all_conrut);
+}
+$totalPages_conrut = ceil($totalRows_conrut/$maxRows_conrut)-1;
+
+
+$queryString_conrut = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_conrut") == false && 
+        stristr($param, "totalRows_conrut") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_conrut = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_conrut = sprintf("&totalRows_conrut=%d%s", $totalRows_conrut, $queryString_conrut);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -246,6 +280,29 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <?php } while ($row_conrut = mysqli_fetch_assoc($conrut)); ?>
 </table>
+<br>
+<table border="0" width="50%" align="center">
+  <tr>
+    <td width="23%" align="center"><?php if ($pageNum_conrut > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_conrut=%d%s", $currentPage, 0, $queryString_conrut); ?>">Primero</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="31%" align="center"><?php if ($pageNum_conrut > 0) { // Show if not first page ?>
+        <a href="<?php printf("%s?pageNum_conrut=%d%s", $currentPage, max(0, $pageNum_conrut - 1), $queryString_conrut); ?>">Anterior</a>
+        <?php } // Show if not first page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_conrut < $totalPages_conrut) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_conrut=%d%s", $currentPage, min($totalPages_conrut, $pageNum_conrut + 1), $queryString_conrut); ?>">Siguiente</a>
+        <?php } // Show if not last page ?>
+    </td>
+    <td width="23%" align="center"><?php if ($pageNum_conrut < $totalPages_conrut) { // Show if not last page ?>
+        <a href="<?php printf("%s?pageNum_conrut=%d%s", $currentPage, $totalPages_conrut, $queryString_conrut); ?>">&Uacute;ltimo</a>
+        <?php } // Show if not last page ?>
+    </td>
+  </tr>
+</table>
+Registros del <strong><?php echo ($startRow_conrut + 1) ?></strong> al <strong><?php echo min($startRow_conrut + $maxRows_conrut, $totalRows_conrut) ?></strong> de un total de <strong><?php echo $totalRows_conrut ?></strong>
+
 <?php } // Show if recordset not empty ?>
 </body>
 </html>
