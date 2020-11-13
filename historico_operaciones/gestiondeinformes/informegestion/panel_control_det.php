@@ -161,11 +161,11 @@ function MM_swapImage() { //v3.0
   </tr>
   <tr>
     <td width="16%" align="right" valign="middle">Fecha Desde:</td>
-    <td width="84%" align="left" valign="middle"><?php echo $row_bei['fechainicio']; ?></td>
+    <td width="84%" align="left" valign="middle"><?php echo (isset($row_bei['fechainicio']) ? $row_bei['fechainicio'] :""); ?></td>
   </tr>
   <tr>
     <td align="right" valign="middle">Fecha Hasta:</td>
-<td align="left" valign="middle"><?php echo $row_bei['fechatermino']; ?></td>
+<td align="left" valign="middle"><?php echo (isset($row_bei['fechatermino'])?$row_bei['fechatermino']:""); ?></td>
   </tr>
 </table>
 <br />

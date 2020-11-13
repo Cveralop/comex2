@@ -1,4 +1,5 @@
-<?php require_once('../../Connections/historico_goc.php'); ?>
+
+<?php require_once('../../../Connections/historico_goc.php'); ?>
 <?php
 if (!isset($_SESSION)) {
   session_start();
@@ -87,7 +88,7 @@ if (isset($_GET['date_fin'])) {
   $colname2_bei = $_GET['date_fin'];
 }
 mysqli_select_db($historico_goc, $database_historico_goc);
-$query_bei = sprintf("SELECT producto,min(date_ingreso)as fechainicio, max(date_ingreso)as fechatermino, sum(cantidad_visadas)as visadas,  sum(cantidad_cursadas)as cursadas, sum(cantidad_reparadas)as reparadas, sum(cantidad_dentrohorario)as dentrohorario, sum(cantidad_fuerahorario)as fuerahorario, sum(monto_usd)as monto FROM panel_control WHERE date_ingreso between %s and %s GROUP BY date_curse", GetSQLValueString($colname1_bei, "date"),GetSQLValueString($colname2_bei, "date"));
+$query_bei = sprintf("SELECT producto,min(date_ingreso)as fechainicio, max(date_ingreso)as fechatermino, sum(cantidad_visadas)as visadas,  sum(cantidad_cursadas)as cursadas, sum(cantidad_reparadas)as reparadas,sum(cantidad_rechazadas)as rechazadas,sum(cantidad_excepciones)as excepciones ,sum(cantidad_dentrohorario)as dentrohorario, sum(cantidad_fuerahorario)as fuerahorario, sum(monto_usd)as monto FROM panel_control WHERE date_ingreso between %s and %s GROUP BY date_curse", GetSQLValueString($colname1_bei, "date"),GetSQLValueString($colname2_bei, "date"));
 $bei = mysqli_query($historico_goc, $query_bei) or die(mysqli_error($historico_goc));
 $row_bei = mysqli_fetch_assoc($bei);
 $totalRows_bei = mysqli_num_rows($bei);
@@ -194,7 +195,7 @@ function MM_swapImage() { //v3.0
     <td width="12%" align="center" valign="middle" class="titulocolumnas">OP. Reparadas</td>
     <td width="12%" align="center" valign="middle" class="titulocolumnas">OP. Rechazadas</td>
     <td width="12%" align="center" valign="middle" class="titulocolumnas">OP. Dentro Horario</td>
-    <td width="12%" align="center" valign="middle" class="titulocolumnas">OP.  Fuera Horario</td>
+    <td width="12%" align="center" valign="middle" class="titulocolumnas">OP. Fuera Horario</td>
     <td width="12%" align="center" valign="middle" class="titulocolumnas">Op. Excepcionadas</td>
     <td width="12%" align="center" valign="middle" class="titulocolumnas">Monto en MMU$D</td>
   </tr>
