@@ -264,7 +264,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
   </tr>
   <?php do { ?>
   <tr>
-    <td align="center" valign="middle"><a href="elidet.php?recordID=<?php echo $row_eliminar['id']; ?>"> <img src="../../../imagenes/ICONOS/papelero.jpg" width="20" height="21" border="0"></a></div></td>
+    <td align="center" valign="middle"><a href="elidet.php?recordID=<?php echo (isset($row_eliminar['id']) ? $row_eliminar['id']:""); ?>"> <img src="../../../imagenes/ICONOS/papelero.jpg" width="20" height="21" border="0"></a></div></td>
     <td align="center" valign="middle"><?php echo $row_eliminar['rut_cliente']; ?> </td>
     <td align="left" valign="middle"><?php echo $row_eliminar['nombre_cliente']; ?> </td>
     <td align="center" valign="middle"><span class="respuestacolumna_rojo"><?php echo strtoupper($row_eliminar['nro_operacion']); ?> </span></td>

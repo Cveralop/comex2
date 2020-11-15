@@ -79,6 +79,7 @@ if (isset($_GET['pageNum_reparo'])) {
   $pageNum_reparo = $_GET['pageNum_reparo'];
 }
 $startRow_reparo = $pageNum_reparo * $maxRows_reparo;
+
 $colname1_reparo = "1";
 if (isset($_GET['evento'])) {
   $colname1_reparo = $_GET['evento'];
@@ -88,7 +89,7 @@ if (isset($_GET['rut_cliente'])) {
   $colname_reparo = $_GET['rut_cliente'];
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
-$query_reparo = sprintf("SELECT * FROM opcbi WHERE rut_cliente LIKE %s and id LIKE %s and nro_operacion LIKE %%colname2%% and sub_estado = 'Reparada.' ORDER BY id DESC", GetSQLValueString("%" . $colname_reparo . "%", "text"),GetSQLValueString("%" . $colname1_reparo . "%", "text"));
+$query_reparo = sprintf("SELECT * FROM opcbi WHERE rut_cliente LIKE %s and id LIKE %s and nro_operacion LIKE '%%colname2%%' and sub_estado = 'Reparada.' ORDER BY id DESC", GetSQLValueString("%" . $colname_reparo . "%", "text"),GetSQLValueString("%" . $colname1_reparo . "%", "text"));
 $query_limit_reparo = sprintf("%s LIMIT %d, %d", $query_reparo, $startRow_reparo, $maxRows_reparo);
 $reparo = mysqli_query($comercioexterior, $query_limit_reparo) or die(mysqli_error($comercioexterior));
 $row_reparo = mysqli_fetch_assoc($reparo);
