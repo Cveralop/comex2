@@ -322,7 +322,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaciones:</div></td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n:</td>
@@ -379,7 +379,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Cantidad:</td>
       <td align="center" valign="middle"><span id="sprytextfield4">
       <input name="cantidad" type="text" class="etiqueta12" id="cantidad" value="<?php echo $row_DetailRS1['cantidad']; ?>" size="5" maxlength="5">
-      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td colspan="4" align="left" valign="middle" bgcolor="#999999"><img src="../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21"><span class="titulodetalle">Excepci&oacute;n Operaci&oacute;n</span></td>
@@ -437,7 +437,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaci&oacute;n Reparo:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea2">
         <textarea name="reparo_obs" cols="80" rows="6" class="etiqueta12" id="reparo_obs"></textarea>
-      <span class="rojopequeno"><span id="countsprytextarea2">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></div></td>
+      <span class="rojopequeno"><span id="countsprytextarea2">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></div></td>
     </tr>
     <tr valign="baseline">
       <td colspan="4" align="center" valign="middle">

@@ -307,7 +307,7 @@ window.setTimeout(sentencia+"location.replace(direccion);",milisegundos);
       <?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?>
       </textarea>
       <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span>
-      <span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span>
+      <span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span>
       </span>
       </td>
     </tr>

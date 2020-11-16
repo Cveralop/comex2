@@ -316,7 +316,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaci&oacute;n:</div></td>
       <td colspan="6" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda / <br>
@@ -451,7 +451,7 @@ No</label>
       <td align="right" valign="middle">Observaci&oacute;n Reparo:</td>
       <td colspan="6" align="left" valign="middle"><span id="sprytextarea2">
         <textarea name="reparo_obs" cols="80" rows="6" class="etiqueta12" id="reparo_obs"></textarea>
-      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></div></td>
+      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></div></td>
     </tr>
     <tr valign="baseline">
       <td colspan="7" align="left" valign="middle"><span class="Estilo5"><img src="../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21">Cursar Operaci&oacute;n</span></td>
@@ -460,7 +460,7 @@ No</label>
       <td align="right" valign="middle">Nro. Planilla:</td>
       <td align="center" valign="middle"><span id="sprytextfield1">
       <input name="nro_planillas" type="text" class="etiqueta12" id="nro_planillas" value="1" size="6" maxlength="6">
-      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="rojopequeno">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="rojopequeno">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
       <td align="right" valign="middle">Nro Inscripci&oacute;n:</td>
       <td align="center" valign="middle"><input name="nro_inscripcion" type="text" class="etiqueta12" id="nro_inscripcion" size="10" maxlength="10"></td>
       <td align="right" valign="middle">Tipo Plazo:</td>

@@ -122,7 +122,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcbe  WHERE id = $recordID", $colname_modificar,$colname1_modificar);
+$query_DetailRS1 = sprintf("SELECT * FROM opcbe  WHERE id = $recordID",$colname_DetailRS1, $colname1_DetailRS1); //$colname1_modificar, $colname_modificar
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -339,7 +339,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Observaci&oacute;n:</td>
       <td colspan="3" align="left"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">
       <td align="right">Moneda / Monto<br> 

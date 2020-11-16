@@ -293,7 +293,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Observaci&oacute;n:</td>
       <td colspan="3" align="left"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-        <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span>        
+        <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span>        
       </div></td>
     </tr>
     <tr valign="middle">

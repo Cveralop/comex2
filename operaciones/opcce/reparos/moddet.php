@@ -100,6 +100,7 @@ $query_DetailRS1 = sprintf("SELECT * FROM opcce WHERE id = %s", $colname_DetailR
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 $maxRows_DetailRS1 = 10;
 $pageNum_DetailRS1 = 0;
 if (isset($_GET['pageNum_DetailRS1'])) {
@@ -116,7 +117,7 @@ if (isset($_GET['reparo_obs'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcce  WHERE id = $recordID", $colname_modrep,$colname1_modrep);
+$query_DetailRS1 = sprintf("SELECT * FROM opcce  WHERE id = $recordID",$colname_DetailRS1, $colname1_DetailRS1); //$colname_modrep,$colname1_modrep
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -276,9 +277,9 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n:</td>
       <td align="center" valign="middle">
-        <input name="moneda_reparo" type="text" class="etiqueta12" id="moneda_reparo" value="<?php echo $row_DetailRS1['moneda_reparo']; ?>" size="5" maxlength="3">
+        <input name="moneda_reparo" type="text" class="etiqueta12" id="moneda_reparo" value="<?php echo (isset($row_DetailRS1['moneda_reparo']) ? $row_DetailRS1['moneda_reparo']:""); //No existe moneda_reparo en tabla BD?>" size="5" maxlength="3">
       </div> / 
-      <input name="monto_reparo" type="text" class="etiqueta12" id="monto_reparo" value="<?php echo $row_DetailRS1['monto_reparo']; ?>" size="17" maxlength="15"></td>
+      <input name="monto_reparo" type="text" class="etiqueta12" id="monto_reparo" value="<?php echo (isset($row_DetailRS1['monto_reparo']) ? $row_DetailRS1['monto_reparo']:""); ?>" size="17" maxlength="15"></td>
       <td align="right" valign="middle">Monto:</div></td>
       <td align="center" valign="middle"></div>
         </div>
@@ -294,7 +295,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Reparo Observaciones:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="reparo_obs" cols="80" rows="6" class="etiqueta12"><?php echo $row_DetailRS1['reparo_obs']; ?></textarea>
-        <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span><span class="rojopequeno"><br>
+        <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span><span class="rojopequeno"><br>
       </span></td>
     </tr>
     <tr valign="baseline">

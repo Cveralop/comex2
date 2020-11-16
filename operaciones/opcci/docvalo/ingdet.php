@@ -344,7 +344,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td width="18%" align="right" valign="middle">Observaci&oacute;n / Discrepancia: </td>
       <td colspan="5" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Fecha Negociaci&oacute;n:</td>
@@ -361,7 +361,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Garantia:</td>
       <td colspan="5" align="left" valign="middle"><span id="sprytextarea2">
         <textarea name="garantia" cols="80" rows="4" class="etiqueta12"><?php echo $row_DetailRS1['garantia']; ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle" bgcolor="#999999">
       <td align="center" valign="middle"><span class="Estilo5">Cantidad Doctos </span></td>

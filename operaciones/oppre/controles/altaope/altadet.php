@@ -217,7 +217,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Nro Operaci&oacute;n:</td>
       <td align="center"><span id="sprytextfield2">
       <input name="nro_operacion" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['nro_operacion']; ?>" size="15" maxlength="7">
-      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span><span class="rojopequeno">F &oacute; K000000</span><span class="etiqueta12"> /</span><span class="rojopequeno">
+      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span><span class="rojopequeno">F &oacute; K000000</span><span class="etiqueta12"> /</span><span class="rojopequeno">
 <input name="nro_operacion_relacionada" type="text" class="etiqueta12" id="nro_operacion_relacionada" value="<?php echo $row_DetailRS1['nro_operacion_relacionada']; ?>" size="15" maxlength="7">
       </span>
       </div> <span class="respuestacolumna_rojo">L000000</span></td>
@@ -392,7 +392,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Observaci&oacute;n:</div></td>
       <td colspan="7" align="left"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12" id="obs"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></div></td>
+      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></div></td>
     </tr>
     <tr align="center" valign="middle">
       <td colspan="8" align="left" bgcolor="#999999"><span class="Estilo5"><img src="../../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21" border="0"></span><span class="Estilo5">Reparo</span></td>
@@ -401,7 +401,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Observaci&oacute;n Reparo:</td>
       <td colspan="7" align="left"><span id="sprytextarea2">
         <textarea name="reparo_obs" cols="80" rows="6" class="etiqueta12" id="reparo_obs"><?php echo $row_DetailRS1['reparo_obs']; ?></textarea>
-      <span class="rojopequeno"><span id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span><span class="rojopequeno"></span></span></td>
+      <span class="rojopequeno"><span id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span><span class="rojopequeno"></span></span></td>
     </tr>
     <tr align="center" valign="middle">
       <td colspan="8" align="center"><input type="submit" class="boton" value="Alta Supervisor"></td>

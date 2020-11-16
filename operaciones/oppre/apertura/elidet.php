@@ -231,7 +231,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Observaci&oacute;n:</td>
       <td colspan="3" align="left"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12" id="obs"></textarea>
-      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></div></td>
+      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></div></td>
     </tr>
     <tr valign="middle">
       <td colspan="4" align="center">

@@ -339,7 +339,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td colspan="3" align="left"><span class="respuestacolumna_rojo"><span id="sprytextfield3">
         <label>
           <input name="nro_folio" type="text" class="etiqueta12" id="nro_folio" size="15" maxlength="10">
-        <span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span><span class="textfieldMinValueMsg">El valor introducido es inferior al m�nimo permitido.</span><span class="textfieldMaxValueMsg">El valor introducido es superior al m�ximo permitido.</span></label>
+        <span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span><span class="textfieldMinValueMsg">El valor introducido es inferior al m�nimo permitido.</span><span class="textfieldMaxValueMsg">El valor introducido es superior al m�ximo permitido.</span></label>
 </span>#</span></td>
     </tr>
     <tr valign="middle">
@@ -385,7 +385,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Observaci&oacute;n:</td>
       <td colspan="3" align="left"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">
       <td align="right">Moneda<br> 

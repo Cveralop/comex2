@@ -329,7 +329,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaciones:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
       <textarea name="observacion" cols="80" rows="4" class="etiqueta12" id="observacion"></textarea>
-      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno"><span id="countsprytextarea1">&nbsp;</span></span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">
       <td align="right" valign="middle">Aval 1:</td>

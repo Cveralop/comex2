@@ -244,7 +244,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
                         <textarea name="obs" cols="80" rows="4"
                             class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
                         <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span
-                            class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span>
+                            class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span>
                 </td>
             </tr>
             <tr valign="middle">

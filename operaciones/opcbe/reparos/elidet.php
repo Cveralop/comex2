@@ -116,7 +116,7 @@ if (isset($_GET['rut_cliente'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opcbe  WHERE id = $recordID", $colname_reparo);
+$query_DetailRS1 = sprintf("SELECT * FROM opcbe  WHERE id = $recordID", $colname_DetailRS1); //$colname_reparo
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
@@ -279,7 +279,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaci&oacute;n:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda / Monto Operaci&oacute;n: </td>
@@ -290,26 +290,26 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       </div></td>
       <td align="right" valign="middle">Moneda / Monto Documentos:</div></td>
       <td align="center" valign="middle">
-        <input name="monto_documentos" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['monto_documentos']; ?>" size="5" maxlength="3"> 
+        <input name="monto_documentos" type="text" disabled class="etiqueta12" value="<?php echo (isset($row_DetailRS1['monto_documentos']) ? $row_DetailRS1['monto_documentos']: ""); ?>" size="5" maxlength="3"> 
          <span class="rojopequeno">/</span>         
-         <input name="moneda_documentos" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['moneda_documentos']; ?>" size="17" maxlength="15"> 
+         <input name="moneda_documentos" type="text" disabled class="etiqueta12" value="<?php echo (isset($row_DetailRS1['moneda_documentos']) ? $row_DetailRS1['moneda_documentos']: ""); ?>" size="17" maxlength="15"> 
       </div></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Convenio:</td>
       <td align="center" valign="middle">
-        <input name="convenio" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['convenio']; ?>" size="5" maxlength="3">
+        <input name="convenio" type="text" disabled class="etiqueta12" value="<?php echo (isset($row_DetailRS1['convenio']) ? $row_DetailRS1['convenio']: ""); ?>" size="5" maxlength="3">
       </div></td>
       <td align="right" valign="middle">Tipo Negociaci&oacute;n: </div></td>
       <td align="center" valign="middle">
-        <input name="tipo_negociacion" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['tipo_negociacion']; ?>" size="20" maxlength="20">
+        <input name="tipo_negociacion" type="text" disabled class="etiqueta12" value="<?php echo (isset($row_DetailRS1['tipo_negociacion']) ? $row_DetailRS1['tipo_negociacion']: ""); ?>" size="20" maxlength="20">
       </div></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Reparo Observaciones:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea2">
         <textarea name="reparo_obs" cols="80" rows="6" disabled class="etiqueta12"><?php echo $row_DetailRS1['reparo_obs']; ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td colspan="4" align="center" valign="middle">

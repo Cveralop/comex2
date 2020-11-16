@@ -286,7 +286,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
  / 
  <span id="sprytextfield1">
  <input name="autorizador" type="text" class="etiqueta12" id="autorizador" value="<?php echo $_SESSION['login'];?>" size="20" maxlength="20">
- <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span><br>
+ <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span><br>
       </div></td>
     </tr>
     <tr valign="baseline">

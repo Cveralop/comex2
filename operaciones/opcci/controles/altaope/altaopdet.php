@@ -291,7 +291,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaci&oacute;n:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12" id="obs"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></div></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></div></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Financiamiento Banco:</td>
@@ -322,7 +322,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <label>
         <textarea name="seg_obs" cols="80" rows="4" class="etiqueta12" id="seg_obs"></textarea>
         <span class="rojopequeno"><span id="countsprytextarea2">&nbsp;</span></span></label>
-      <span class="rojopequeno"><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></span></td>
+      <span class="rojopequeno"><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></span></td>
     </tr>
     <tr valign="baseline">
       <td colspan="4" align="left" valign="middle" bgcolor="#999999"><span class="Estilo5"><img src="../../../../imagenes/GIF/notepad.gif" alt="" width="19" height="21" border="0"></span><span class="Estilo5">Reparo</span></td>

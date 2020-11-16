@@ -212,7 +212,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right">Nro Operaci&oacute;n:</td>
       <td align="center"><span id="sprytextfield1">
       <input name="nro_operacion" type="text" disabled class="etiqueta12" value="<?php echo $row_DetailRS1['nro_operacion']; ?>" size="15" maxlength="7"> 
-      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span><span class="rojopequeno"> K/L o F000000</span></div></td>
+      <span class="textfieldRequiredMsg">Se necesita un valor.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span><span class="rojopequeno"> K/L o F000000</span></div></td>
       <td align="right">Rut Cliente:</div></td>
       <td colspan="3" align="center">
           <input name="rut_cliente" type="text" disabled="disabled" class="etiqueta12" value="<?php echo $row_DetailRS1['rut_cliente']; ?>" size="17" maxlength="15">
@@ -355,7 +355,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <label>
         <textarea name="obs_avisopago" cols="84" rows="4" class="etiqueta12" id="obs_avisopago"><?php echo $row_DetailRS1['obs_avisopago']; ?></textarea>
         <span class="rojopequeno"><span id="countsprytextarea2">&nbsp;</span></label>
-<span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+<span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="middle">
       <td colspan="6" align="center"><input type="submit" class="boton" value="Guardar Aviso Cuota"></td>

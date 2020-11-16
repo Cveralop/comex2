@@ -266,7 +266,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Nro Folio:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextfield1">
       <input name="nro_folio" type="text" class="etiqueta12" id="nro_folio" value="<?php echo $row_DetailRS1['nro_folio']; ?>" size="15" maxlength="10">
-      <span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span><span class="textfieldMinValueMsg">El valor introducido es inferior al m�nimo permitido.</span><span class="textfieldMaxValueMsg">El valor introducido es superior al m�ximo permitido.</span><span class="textfieldRequiredMsg">Se necesita un valor.</span></span><span class="respuestacolumna_rojo">#</span></td>
+      <span class="textfieldInvalidFormatMsg">Formato no v�lido.</span><span class="textfieldMinCharsMsg">No se cumple el m�nimo de caracteres requerido.</span><span class="textfieldMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span><span class="textfieldMinValueMsg">El valor introducido es inferior al m�nimo permitido.</span><span class="textfieldMaxValueMsg">El valor introducido es superior al m�ximo permitido.</span><span class="textfieldRequiredMsg">Se necesita un valor.</span></span><span class="respuestacolumna_rojo">#</span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Nro Registro:</td>
@@ -305,7 +305,7 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaci&oacute;n:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Nro Operaci&oacute;n:</td>

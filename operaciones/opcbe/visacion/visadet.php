@@ -121,12 +121,15 @@ $query_DetailRS1 = sprintf("SELECT * FROM opcbe WHERE id = %s", GetSQLValueStrin
 $DetailRS1 = mysqli_query($comercioexterior, $query_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);
 $totalRows_DetailRS1 = mysqli_num_rows($DetailRS1);
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_colores = "SELECT * FROM parametrocolores";
 $colores = mysqli_query($comercioexterior, $query_colores) or die(mysqli_error($comercioexterior));
 $row_colores = mysqli_fetch_assoc($colores);
 $totalRows_colores = mysqli_num_rows($colores);
+
 mysqli_select_db($comercioexterior, $database_comercioexterior);
+$recordID = $_GET['recordID'];
 $query_DetailRS2 = "SELECT cliente.* FROM opcbe INNER JOIN cliente ON opcbe.rut_cliente=cliente.rut_cliente WHERE opcbe.id = $recordID";
 $DetailRS2 = mysqli_query($comercioexterior, $query_DetailRS2) or die(mysqli_error($comercioexterior));
 $row_DetailRS2 = mysqli_fetch_assoc($DetailRS2);
@@ -314,14 +317,14 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
       <td align="right" valign="middle">Observaciones:</div></td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea1">
         <textarea name="obs" cols="80" rows="4" class="etiqueta12"><?php echo (isset($row_DetailRS1['obs'])?$row_DetailRS1['obs']:""); ?></textarea>
-      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></td>
+      <span class="rojopequeno" id="countsprytextarea1">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Nro Operaci&oacute;n:</td>
       <td align="center" valign="middle"><input name="nro_operacion" type="text" class="etiqueta12" value="<?php echo $row_DetailRS1['nro_operacion']; ?>" size="15" maxlength="7">
       <span class="rojopequeno">O000000</span></td>
       <td align="right" valign="middle">Mandato:</td>
-      <td align="center" valign="middle"><input name="mandato" type="text" class="etiqueta12" id="mandato" value="<?php echo $row_DetailRS2['mandato']; ?>">        </div></td>
+      <td align="center" valign="middle"><input name="mandato" type="text" class="etiqueta12" id="mandato" value="<?php echo (isset($row_DetailRS2['mandato']) ? $row_DetailRS2['mandato']:""); ?>">        </div></td>
     </tr>
     <tr valign="baseline">
       <td align="right" valign="middle">Moneda / <br>
@@ -436,7 +439,7 @@ Monto Operaci&oacute;n:</td>
       <td align="right" valign="middle">Observaci&oacute;n Reparo:</td>
       <td colspan="3" align="left" valign="middle"><span id="sprytextarea2">
         <textarea name="reparo_obs" cols="80" rows="6" class="etiqueta12" id="reparo_obs"></textarea>
-        <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n�mero m�ximo de caracteres.</span></span></div></td>
+        <span class="rojopequeno" id="countsprytextarea2">&nbsp;</span><span class="textareaMaxCharsMsg">Se ha superado el n&uacute;mero m&aacute;ximo de caracteres.</span></span></div></td>
     </tr>
     <tr valign="baseline">
       <td colspan="4" align="center" valign="middle">
