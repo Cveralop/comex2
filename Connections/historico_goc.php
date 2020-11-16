@@ -2,6 +2,7 @@
 # FileName="Connection_php_mysql.htm"
 # Type="MYSQL"
 # HTTP="true"
+
 //Conexion base de datos en azure
 /*$hostname_historico_goc = 'comexdb.mysql.database.azure.com';
 $database_historico_goc = 'comex_historico'; 

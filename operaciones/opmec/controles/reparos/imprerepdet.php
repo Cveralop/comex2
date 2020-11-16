@@ -54,7 +54,7 @@ if (isset($_GET['reparo_obs'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $recordID = $_GET['recordID'];
-$query_DetailRS1 = sprintf("SELECT * FROM opmec  WHERE id = $recordID", $colname_cartareparo);
+$query_DetailRS1 = sprintf("SELECT * FROM opmec  WHERE id = $recordID",$colname_DetailRS1); //$colname_cartareparo
 $query_limit_DetailRS1 = sprintf("%s LIMIT %d, %d", $query_DetailRS1, $startRow_DetailRS1, $maxRows_DetailRS1);
 $DetailRS1 = mysqli_query($comercioexterior, $query_limit_DetailRS1) or die(mysqli_error($comercioexterior));
 $row_DetailRS1 = mysqli_fetch_assoc($DetailRS1);

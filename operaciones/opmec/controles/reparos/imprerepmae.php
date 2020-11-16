@@ -280,7 +280,7 @@ Registros del <strong><?php echo ($startRow_cartareparo + 1) ?></strong> al <str
 <br>
 <table width="95%"  border="0" align="center">
   <tr align="right" valign="middle">
-    <td align="right"><a href="../../visacion/principal.php"><img src="../../../../imagenes/Botones/visacion_1.jpg" width="80" height="25" border="0"></a>  <a href="../../visacion/principal.php"><img src="../../../../imagenes/Botones/visacion_1.jpg" width="80" height="25" border="0"></a></td>
+    <td align="right"><a href="../../visacion/principal.php"><img src="../../../../imagenes/Botones/visacion_1.jpg" width="80" height="25" border="0"></a></td>
   </tr>
 </table>
 </body>

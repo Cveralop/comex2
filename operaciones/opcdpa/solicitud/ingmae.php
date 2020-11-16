@@ -74,6 +74,13 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
   return $theValue;
 }
 }
+$currentPage = $_SERVER["PHP_SELF"];
+$maxRows_ingpre = 20;
+$pageNum_ingpre = 0;
+if (isset($_GET['pageNum_ingpre'])) {
+  $pageNum_ingpre = $_GET['pageNum_ingpre'];
+}
+$startRow_ingpre = $pageNum_ingpre * $maxRows_ingpre;
 
 $colname_ingpre = "zzz";
 if (isset($_GET['nro_operacion'])) {
@@ -85,9 +92,34 @@ if (isset($_GET['evento'])) {
 }
 mysqli_select_db($comercioexterior, $database_comercioexterior);
 $query_ingpre = sprintf("SELECT * FROM opcce nolock WHERE nro_operacion = %s and evento = %s ORDER BY rut_cliente ASC", GetSQLValueString($colname_ingpre, "text"),GetSQLValueString($colname1_ingpre, "text"));
-$ingpre = mysqli_query($comercioexterior, $query_ingpre) or die(mysqli_error());
+$query_limit_ingpre = sprintf("%s LIMIT %d, %d", $query_ingpre, $startRow_ingpre, $maxRows_ingpre);
+$ingpre = mysqli_query($comercioexterior, $query_limit_ingpre) or die(mysqli_error($comercioexterior));
 $row_ingpre = mysqli_fetch_assoc($ingpre);
 $totalRows_ingpre = mysqli_num_rows($ingpre);
+
+if (isset($_GET['totalRows_ingpre'])) {
+  $totalRows_ingpre = $_GET['totalRows_ingpre'];
+} else {
+  $all_ingpre = mysqli_query($comercioexterior, $query_ingpre);
+  $totalRows_ingpre = mysqli_num_rows($all_ingpre);
+}
+$totalPages_ingpre = ceil($totalRows_ingpre/$maxRows_ingpre)-1;
+
+$queryString_ingpre = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_ingpre") == false && 
+        stristr($param, "totalRows_ingpre") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_ingpre = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_ingpre = sprintf("&totalRows_ingpre=%d%s", $totalRows_ingpre, $queryString_ingpre);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -226,7 +258,6 @@ window.setTimeout("window.location.replace(direccion);",milisegundos);
 <br>
 Registros del <strong><?php echo ($startRow_ingpre + 1) ?></strong> al <strong><?php echo min($startRow_ingpre + $maxRows_ingpre, $totalRows_ingpre) ?></strong> de un total de <strong><?php echo $totalRows_ingpre ?></strong>
 <?php } // Show if recordset not empty ?> <br>
-<br>
 <table width="95%"  border="0" align="center">
   <tr>
     <td align="right" valign="middle"><a href="../cedeypaant.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image4','','../../../imagenes/Botones/boton_volver_2.jpg',1)"><img src="../../../imagenes/Botones/boton_volver_1.jpg" alt="Volver" name="Image4" width="80" height="25" border="0"></a></div></td>

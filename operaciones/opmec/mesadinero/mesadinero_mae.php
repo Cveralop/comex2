@@ -81,6 +81,8 @@ $query_mesadinero = sprintf("SELECT * FROM mesadinero WHERE impresion = %s ORDER
 $mesadinero = mysqli_query($comercioexterior, $query_mesadinero) or die(mysqli_error($comercioexterior));
 $row_mesadinero = mysqli_fetch_assoc($mesadinero);
 $totalRows_mesadinero = mysqli_num_rows($mesadinero);
+
+//var_dump($row_mesadinero); die();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

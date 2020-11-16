@@ -114,22 +114,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $queryString_ingape = "&" . htmlentities(implode("&", $newParams));
   }
 }
-$queryString_ingape = sprintf("&totalRows_ingape=%d%s", $totalRows_ingape, $queryString_ingape);
-$queryString_ingvarios = "";
-if (!empty($_SERVER['QUERY_STRING'])) {
-  $params = explode("&", $_SERVER['QUERY_STRING']);
-  $newParams = array();
-  foreach ($params as $param) {
-    if (stristr($param, "pageNum_ingvarios") == false && 
-        stristr($param, "totalRows_ingvarios") == false) {
-      array_push($newParams, $param);
-    }
-  }
-  if (count($newParams) != 0) {
-    $queryString_ingvarios = "&" . htmlentities(implode("&", $newParams));
-  }
-}
-$queryString_ingvarios = sprintf("&totalRows_ingvarios=%d%s", $totalRows_ingvarios, $queryString_ingvarios);
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
